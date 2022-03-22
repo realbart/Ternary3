@@ -1,4 +1,10 @@
 ﻿param([string]$DllName);
+
+# ugly hack to enable the creation of "const Trit up = 2"
+# does not work well with code within the same project.
+# Once we have one instance of a constant Trit (normally not allowed in c#)
+# the compiler will copy this value around.
+
 $Ildasm = """C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\x64\ildasm.exe"""
 $CilName = "$DllName.il"
 Start-Process $Ildasm -Argument "$DllName /OUT:$CilName"
