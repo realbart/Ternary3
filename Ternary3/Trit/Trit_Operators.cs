@@ -19,7 +19,17 @@ public readonly partial struct Trit
     /// <summary>
     /// Cycles the <see cref="Trit"/> value.
     /// </summary>
+    public static Trit operator +(Trit trit) => trit.Switch(Middle, Up, Down);
+
+    /// <summary>
+    /// Cycles the <see cref="Trit"/> value.
+    /// </summary>
     public static Trit operator ++(Trit trit) => trit.Switch(Middle, Up, Down);
+
+    /// <summary>
+    /// Anti-cycles the <see cref="Trit"/> value.
+    /// </summary>
+    public static Trit operator -(Trit trit) => trit.Switch(Up, Down, Middle);
 
     /// <summary>
     /// Anti-cycles the <see cref="Trit"/> value.
@@ -71,4 +81,19 @@ public readonly partial struct Trit
         if (trit2.value == middleValue) return trit1;
         return Middle;
     }
+
+    /// <summary>
+    /// Converts a nullable boolean to a trit
+    /// </summary>
+    public static implicit operator Trit(bool? boolean)
+    {
+        if (boolean.HasValue) return boolean.Value ? Up : Down;
+        return Middle;
+    }
+
+    /// <summary>
+    /// Converts a trit to a nullable boolean
+    /// </summary>
+    /// <param name="trit"></param>
+    public static implicit operator bool?(Trit trit) => trit.Switch(false, default(bool?), true);
 }

@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Tribble\Tribble_Operators.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Tribble_Operators.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 
@@ -24,6 +32,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Tribble\Tribble_Operators.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Tribble_Operators.cs</LastGenOutput>
+    </None>
     <None Update="Trit\Trit_Switch.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Trit_Switch.cs</LastGenOutput>

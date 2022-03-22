@@ -160,6 +160,32 @@ public class TritTests
         (down ^ up).Should().Be(middle);
         (down ^ middle).Should().Be(down);
         (down ^ down).Should().Be(middle);
+    }
 
+    [Fact]
+    public void CastFromBool()
+    {
+        trit trueTrit = true;
+        trueTrit.Should().Be(up);
+        
+        trit nullTrit = default(bool?);
+        nullTrit.Should().Be(middle);
+
+        trit falseTrit = false;
+        falseTrit.Should().Be(down);
+    }
+
+
+    [Fact]
+    public void CastToBool()
+    {
+        bool? upBool = up;
+        upBool.Should().Be(true);
+
+        bool? middleBool= middle;
+        middleBool.Should().BeNull();
+
+        bool? downBool= down;
+        downBool.Should().Be(false);
     }
 }

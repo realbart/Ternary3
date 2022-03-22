@@ -16,9 +16,9 @@ public readonly partial struct Trit
         public static readonly Trit up = Up;
     }
 
-    private const byte downValue = 0;
-    private const byte middleValue = 1;
-    private const byte upValue = 2;
+    private const sbyte downValue = -1;
+    private const sbyte middleValue = 0;
+    private const sbyte upValue = 1;
     internal static readonly Trit Down = new(downValue);
     internal static readonly Trit Middle = new(middleValue);
     internal static readonly Trit Up = new(upValue);
@@ -26,12 +26,9 @@ public readonly partial struct Trit
     /// <summary>
     /// A struct always uses a minimum of one byte.
     /// </summary>
-    private readonly byte value;
+    private readonly sbyte value;
 
-    private Trit(byte value)
-    {
-        this.value = value;
-    }
+    private Trit(sbyte value) => this.value = value;
 
     /// <summary>
     /// Represents the value for -5v
@@ -98,8 +95,8 @@ public readonly partial struct Trit
     /// <inheritdoc />
     public override string ToString() => value switch
     {
-        0 => DownString,
-        1 => MiddleString,
+        downValue=> DownString,
+        middleValue => MiddleString,
         _ => UpString
     };
 }
