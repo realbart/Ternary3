@@ -69,6 +69,6 @@ public readonly partial struct Trit
     {
         if (trit1.value == middleValue) return trit2;
         if (trit2.value == middleValue) return trit1;
-        return middle;
+        return Middle;
     }
 }
