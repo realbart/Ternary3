@@ -1,0 +1,54 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+using System;
+
+namespace Ternary3;
+
+public partial struct Trit
+{
+    /// <summary>
+    /// Performs on of three actions, based on the <see cref="Trit"/> value
+    /// </summary>
+    public void Switch(Action? delegateDown, Action? delegateMiddle, Action? delegateUp)
+    {
+        switch (value)
+        {
+            case downValue: delegateDown?.Invoke(); return;
+            case middleValue: delegateMiddle?.Invoke(); return;
+            default: delegateUp?.Invoke(); return;
+        }
+    }
+<#
+for (var i = 0; i<8; i++) { 
+    var p1 = (i&1)==1;
+    var p2 = (i&2)==2;
+    var p3 = (i&4)==4;
+
+    var parm1 = p1 ? "TOut valueDown" : "Func<TOut> delegateDown";
+    var parm2 = p2 ? "TOut valueMiddle" : "Func<TOut> delegateMiddle";
+    var parm3 = p3 ? "TOut valueUp" : "Func<TOut> delegateUp";
+
+    var out1 = p1 ? "valueDown" : "delegateDown()";
+    var out2 = p2 ? "valueMiddle" : "delegateMiddle()";
+    var out3 = p3 ? "valueUp" : "delegateUp()";
+
+
+#>
+    /// <summary>
+    /// Returns on of three values, based on the <see cref="Trit"/> value
+    /// </summary>
+    public TOut Switch<TOut>(<#=parm1#>, <#=parm2#>, <#=parm3#>)
+    {
+        return value switch
+        {
+            downValue => <#=out1#>,
+            middleValue => <#=out2#>,
+            _ => <#=out3#>
+        };
+    }
+<# } #>
+}
