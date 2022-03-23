@@ -9,7 +9,7 @@ public partial struct Trit
     /// </summary>
     public void Switch(Action? delegateDown, Action? delegateMiddle, Action? delegateUp)
     {
-        switch (value)
+        switch (value__)
         {
             case downValue: delegateDown?.Invoke(); return;
             case middleValue: delegateMiddle?.Invoke(); return;
@@ -21,7 +21,7 @@ public partial struct Trit
     /// </summary>
     public TOut Switch<TOut>(Func<TOut> delegateDown, Func<TOut> delegateMiddle, Func<TOut> delegateUp)
     {
-        return value switch
+        return value__ switch
         {
             downValue => delegateDown(),
             middleValue => delegateMiddle(),
@@ -33,7 +33,7 @@ public partial struct Trit
     /// </summary>
     public TOut Switch<TOut>(TOut valueDown, Func<TOut> delegateMiddle, Func<TOut> delegateUp)
     {
-        return value switch
+        return value__ switch
         {
             downValue => valueDown,
             middleValue => delegateMiddle(),
@@ -45,7 +45,7 @@ public partial struct Trit
     /// </summary>
     public TOut Switch<TOut>(Func<TOut> delegateDown, TOut valueMiddle, Func<TOut> delegateUp)
     {
-        return value switch
+        return value__ switch
         {
             downValue => delegateDown(),
             middleValue => valueMiddle,
@@ -57,7 +57,7 @@ public partial struct Trit
     /// </summary>
     public TOut Switch<TOut>(TOut valueDown, TOut valueMiddle, Func<TOut> delegateUp)
     {
-        return value switch
+        return value__ switch
         {
             downValue => valueDown,
             middleValue => valueMiddle,
@@ -69,7 +69,7 @@ public partial struct Trit
     /// </summary>
     public TOut Switch<TOut>(Func<TOut> delegateDown, Func<TOut> delegateMiddle, TOut valueUp)
     {
-        return value switch
+        return value__ switch
         {
             downValue => delegateDown(),
             middleValue => delegateMiddle(),
@@ -81,7 +81,7 @@ public partial struct Trit
     /// </summary>
     public TOut Switch<TOut>(TOut valueDown, Func<TOut> delegateMiddle, TOut valueUp)
     {
-        return value switch
+        return value__ switch
         {
             downValue => valueDown,
             middleValue => delegateMiddle(),
@@ -93,7 +93,7 @@ public partial struct Trit
     /// </summary>
     public TOut Switch<TOut>(Func<TOut> delegateDown, TOut valueMiddle, TOut valueUp)
     {
-        return value switch
+        return value__ switch
         {
             downValue => delegateDown(),
             middleValue => valueMiddle,
@@ -105,7 +105,7 @@ public partial struct Trit
     /// </summary>
     public TOut Switch<TOut>(TOut valueDown, TOut valueMiddle, TOut valueUp)
     {
-        return value switch
+        return value__ switch
         {
             downValue => valueDown,
             middleValue => valueMiddle,

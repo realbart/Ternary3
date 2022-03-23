@@ -47,8 +47,8 @@ public readonly partial struct Trit
     /// </summary>
     public static Trit operator >(Trit trit1, Trit trit2)
     {
-        if (trit1.value == trit2.value) return Middle;
-        return trit1.value > trit2.value ? Up : Down;
+        if (trit1.value__ == trit2.value__) return Middle;
+        return trit1.value__ > trit2.value__ ? Up : Down;
     }
 
     /// <summary>
@@ -57,19 +57,19 @@ public readonly partial struct Trit
     /// </summary>
     public static Trit operator <(Trit trit1, Trit trit2)
     {
-        if (trit1.value == trit2.value) return Middle;
-        return trit1.value < trit2.value ? Up : Down;
+        if (trit1.value__ == trit2.value__) return Middle;
+        return trit1.value__ < trit2.value__ ? Up : Down;
     }
 
     /// <summary>
     /// Determines the lowest of two trits
     /// </summary>
-    public static Trit operator &(Trit trit1, Trit trit2) => trit1.value > trit2.value ? trit2 : trit1;
+    public static Trit operator &(Trit trit1, Trit trit2) => trit1.value__ > trit2.value__ ? trit2 : trit1;
 
     /// <summary>
     /// Selects the highest of two trits
     /// </summary>
-    public static Trit operator |(Trit trit1, Trit trit2) => trit1.value < trit2.value ? trit2 : trit1;
+    public static Trit operator |(Trit trit1, Trit trit2) => trit1.value__ < trit2.value__ ? trit2 : trit1;
 
     /// <summary>
     /// Performs an exclusive or: only returns a value other than <see cref="Middle"/> 
@@ -77,8 +77,8 @@ public readonly partial struct Trit
     /// </summary>
     public static Trit operator ^(Trit trit1, Trit trit2)
     {
-        if (trit1.value == middleValue) return trit2;
-        if (trit2.value == middleValue) return trit1;
+        if (trit1.value__ == middleValue) return trit2;
+        if (trit2.value__ == middleValue) return trit1;
         return Middle;
     }
 

@@ -19,6 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Tribble\Tribble_Operators.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Tribble_Operators.tt</DependentUpon>
+    </Compile>
     <Compile Update="TritPartial.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

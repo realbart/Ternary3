@@ -1,6 +1,7 @@
 ﻿namespace Ternary3;
 
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 
 /// <summary>
 /// The smallest unit in a trinary system, either balanced (-1, 0, 1) or unbalanced (0, 1, 2)
@@ -11,9 +12,21 @@ public readonly partial struct Trit
 
     public readonly struct Values
     {
-        public static readonly Trit down = Down;
-        public static readonly Trit middle = Middle;
-        public static readonly Trit up = Up;
+        public static readonly Trit down
+#if DEBUG
+            = Down
+#endif
+        ;
+        public static readonly Trit middle
+#if DEBUG
+            = Middle
+#endif
+        ;
+        public static readonly Trit up
+#if DEBUG
+            = Up
+#endif
+        ;
     }
 
     private const sbyte downValue = -1;
@@ -26,9 +39,10 @@ public readonly partial struct Trit
     /// <summary>
     /// A struct always uses a minimum of one byte.
     /// </summary>
-    private readonly sbyte value;
+    [SpecialName]
+    private readonly sbyte value__;
 
-    private Trit(sbyte value) => this.value = value;
+    private Trit(sbyte value) => this.value__ = value;
 
     /// <summary>
     /// Represents the value for -5v
@@ -46,10 +60,10 @@ public readonly partial struct Trit
     public const string UpString = "Up";
 
     /// <inheritdoc/>
-    public override int GetHashCode() => value.GetHashCode();
+    public override int GetHashCode() => value__.GetHashCode();
 
     /// <inheritdoc/>
-    public override bool Equals([NotNullWhen(true)] object? obj) => obj is Trit trit && value == trit.value;
+    public override bool Equals([NotNullWhen(true)] object? obj) => obj is Trit trit && value__ == trit.value__;
 
     /// <summary>
     /// Parses a value into a <see cref="Trit"/>
@@ -93,7 +107,7 @@ public readonly partial struct Trit
     }
 
     /// <inheritdoc />
-    public override string ToString() => value switch
+    public override string ToString() => value__ switch
     {
         downValue=> DownString,
         middleValue => MiddleString,

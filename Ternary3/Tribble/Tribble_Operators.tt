@@ -4,3 +4,5 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
+
+// put everything in Int3, UInt3 and Tribble
