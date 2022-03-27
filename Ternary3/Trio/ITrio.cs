@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public interface ITrio<T> where T : struct
+    public interface ITrio<out T> where T : struct
     {
         T this[Trit key] { get; }
 

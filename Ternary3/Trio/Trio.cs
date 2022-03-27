@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public struct Trio<T> : IEnumerable<T>, ITrio<T> 
+public struct Trio<T> : IEnumerable<T>, ITrio<T>
     where T : struct
 {
     public Trio(T down, T middle, T up)
@@ -18,6 +18,7 @@ public struct Trio<T> : IEnumerable<T>, ITrio<T>
 
     public T this[Trit key] => key.Switch(Down, Middle, Up);
 
+    /// <inheritdoc/>
     public IEnumerator<T> GetEnumerator()
     {
         yield return Down;
@@ -25,5 +26,9 @@ public struct Trio<T> : IEnumerable<T>, ITrio<T>
         yield return Up;
     }
 
+    /// <inheritdoc/>
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+    /// <inheritdoc/>
+    public override string ToString() => $"{Down} - {Middle} - {Up}";
 }

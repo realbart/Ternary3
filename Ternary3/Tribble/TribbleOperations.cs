@@ -4,7 +4,7 @@ internal static class TribbleOperations
 {
 
     /// <summary>
-    /// Converts a signed value to three trits. (substract 13 first if you have an unsigned value)
+    /// Converts a signed value to a <see cref="Trio&lt;Trit&gt;"/>. (substract 13 first if you have an unsigned value)
     /// </summary>
     /// <remarks>
     /// Explicitly written out for performance reasons.
@@ -51,7 +51,7 @@ internal static class TribbleOperations
     /// explicitly written out for performance reasons.
     /// </remarks>
     internal static sbyte ToValue(Trit down, Trit middle, Trit up)
-        => (sbyte)(down.Switch(-1, 0, 1) | middle.Switch(-3, 0, 3) | up.Switch(-9, 0, 9));
+        => (sbyte)(down.Switch(-1, 0, 1) + middle.Switch(-3, 0, 3) + up.Switch(-9, 0, 9));
 
     internal static sbyte Rot(sbyte value)
     {

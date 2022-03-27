@@ -8,7 +8,6 @@ public partial struct Tribble
     /// </summary>
     internal readonly sbyte value;
     internal Tribble(sbyte value) => this.value = value;
-    public Tribble(Trit down, Trit middle, Trit up)
-        => value = TribbleOperations.ToValue(down, middle, up);
-    public Trio<Trit> Trits => TribbleOperations.ToTrits(value);
+
+    public override string ToString() => value.ToTrits().ToString();
 }
