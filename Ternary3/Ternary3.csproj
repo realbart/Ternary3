@@ -19,6 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="BuiltInTypes\Extensions_Switch.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Extensions_Switch.tt</DependentUpon>
+    </Compile>
     <Compile Update="Tribble\Tribble_Operators.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -37,6 +42,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="BuiltInTypes\Extensions_Switch.tt">
+      <LastGenOutput>Extensions_Switch.cs</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
     <None Update="Tribble\Tribble_Operators.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Tribble_Operators.cs</LastGenOutput>

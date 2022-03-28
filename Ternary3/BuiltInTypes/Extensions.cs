@@ -1,10 +1,8 @@
 ﻿namespace Ternary3;
 
-using System.Reflection;
-
-public static class Extensions
+public static partial class Extensions
 {
-    public static Trit[] GetTrits(this int value)
+    public static IEnumerable<Trit> GetTrits(this int value)
     {
         IEnumerable<Trit> GetTritsInner()
         {
@@ -43,7 +41,7 @@ public static class Extensions
 
         if (value == 0) return new[] { Trit.Middle };
         if (value == int.MinValue) return new[] { Trit.Up, Trit.Down, Trit.Down, Trit.Up, Trit.Down, Trit.Up, Trit.Down, Trit.Down, Trit.Down, Trit.Up, Trit.Up, Trit.Middle, Trit.Middle, Trit.Middle, Trit.Up, Trit.Middle, Trit.Up, Trit.Up, Trit.Middle, Trit.Up, Trit.Down };
-        return GetTritsInner().ToArray();
+        return GetTritsInner();
     }
 
     public static int ToInt32(this IEnumerable<Trit> trits)
@@ -56,5 +54,40 @@ public static class Extensions
             factor *= 3;
         }
         return total;
+    }
+
+    public static int PerformTrinaryOperation(this int operand, Func<Trit, Trit> operation)
+    {
+        return operand
+            .GetTrits()
+            .Select(operation)
+            .ToInt32();
+    }
+
+    public static int PerformTrinaryOperation(this int operand1, Func<Trit, Trit, Trit> operation, int operand2)
+    {
+        static IEnumerable<Trit> PerformTrinaryOperationInner(IEnumerator<Trit> enumerator1, IEnumerator<Trit> enumerator2, Func<Trit, Trit, Trit> operation)
+        {
+            var has1 = enumerator1.MoveNext();
+            var has2 = enumerator2.MoveNext();
+
+            while (has1 && has2)
+            {
+                yield return operation(enumerator1.Current, enumerator2.Current);
+                has1 = enumerator1.MoveNext();
+                has2 = enumerator2.MoveNext();
+            }
+            while (has1)
+            {
+                yield return operation(enumerator1.Current, Trit.Middle);
+                has1 = enumerator1.MoveNext();
+            }
+            while (has2)
+            {
+                yield return operation(Trit.Middle, enumerator2.Current);
+                has2 = enumerator1.MoveNext();
+            }
+        }
+        return PerformTrinaryOperationInner(operand1.GetTrits().GetEnumerator(), operand2.GetTrits().GetEnumerator(), operation).ToInt32();
     }
 }

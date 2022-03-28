@@ -2,7 +2,7 @@
 
 using Ternary3;
 
-public class Int32ExtensionsTests
+public class ExtensionsTests
 {
     [Fact]
     public void GetTrits()
@@ -29,5 +29,30 @@ public class Int32ExtensionsTests
         new[] { down, up, middle, down }.ToInt32().Should().Be(-25);
         new[] { up, middle, up, down, up, down, up, up, up, down, down, middle, middle, middle, down, middle, down, down, middle, down, up }.ToInt32().Should().Be(2147483647);
         new[] { up, down, down, up, down, up, down, down, down, up, up, middle, middle, middle, up, middle, up, up, middle, up, down }.ToInt32().Should().Be(-2147483648);
+    }
+
+    [Fact]
+    public void Switch()
+    {
+        bool? f = false;
+        bool? n = null;
+        bool? t = true;
+
+        f.Switch(1, 2, 3).Should().Be(1);
+        n.Switch(1, 2, 3).Should().Be(2);
+        t.Switch(1, 2, 3).Should().Be(3);
+
+        f.Switch(() => "a", "b", default(string)).Should().Be("a");
+        n.Switch(() => "a", "b", default(string)).Should().Be("b");
+        t.Switch(() => "a", "b", default(string)).Should().Be(null);
+
+        int count = 0;
+        f.Switch(() => count += 1, () => count += 2, () => count += 4);
+        count.Should().Be(1);
+        n.Switch(() => count += 1, () => count += 2, () => count += 4);
+        count.Should().Be(3);
+        t.Switch(() => count += 1, () => count += 2, () => count += 4);
+        count.Should().Be(7);
+
     }
 }
