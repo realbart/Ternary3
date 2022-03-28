@@ -57,7 +57,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="rem powershell -ExecutionPolicy Unrestricted $(ProjectDir)PostBuild.ps1 -DllName $(TargetPath)" />
+    <Exec Command="rem powershell -ExecutionPolicy Unrestricted $(ProjectDir)PostBuild.ps1 -DllName $(TargetPath) -SolutionDir $(SolutionDir) -Configuration $(Configuration)" />
   </Target>
 
 </Project>

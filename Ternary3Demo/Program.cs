@@ -1,10 +1,28 @@
-﻿// See https://aka.ms/new-console-template for more information
-using Ternary3;
+﻿using Ternary3;
 
-var val0 = (Int3)0;
-var val5 = (Int3)5;
-var valMinus5 = (Int3)(-5);
-var val13 = (Int3)13;
-var valMinus13 = (Int3)(-13);
+namespace Ternary3Demo;
 
-Console.WriteLine(val0+ val0);
+enum Values : sbyte
+{
+    d = 0, m = 1, u = 2
+}
+
+public class Ternary3Demo
+{
+    public const sbyte m1 = -1;
+    public const sbyte nul = 0;
+    public const sbyte een = 1;
+    public static void Main()
+    {
+        var foo = Values.m;
+        var bar = Values.u;
+        var baz = bar;
+        sbyte xxx = -1;
+        sbyte yyy = 0;
+        sbyte zzz = 1;
+        Console.Write(baz);
+        Console.Write(foo);
+        Console.Write(xxx + yyy + zzz);
+        Console.Write(m1 + nul + een);
+    }
+}

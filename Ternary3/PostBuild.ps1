@@ -1,4 +1,4 @@
-﻿param([string]$DllName);
+﻿param([string]$DllName,[string]$SolutionDir,[string]$Configuration);
 
 Write-Output "replace stuff"
 
@@ -9,22 +9,26 @@ Write-Output "replace stuff"
 
 $Ildasm = """C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\x64\ildasm.exe"""
 $CilName = "$DllName.il"
-Start-Process $Ildasm -Argument "$DllName /OUT:$CilName"
+Start-Process -wait $Ildasm -Argument "$DllName /OUT:$CilName"
 
-# replace 
-#.field public static initonly valuetype Ternary3.Trit down
-#.field public static initonly valuetype Ternary3.Trit middle
-#.field public static initonly valuetype Ternary3.Trit up
-# by
-#.field public static literal valuetype Ternary3.Trit down = uint8(0x00)
-#.field public static literal valuetype Ternary3.Trit middle = uint8(0x01)
-#.field public static literal valuetype Ternary3.Trit up = uint8(0x02)
-
+$cil = (Get-Content -path $CilName)
+#$cil = $cil.replace(".field public static initonly valuetype Ternary3.Trit down", ".field public static literal valuetype Ternary3.Trit down = int8(-1)")
+#$cil = $cil.replace(".field public static initonly valuetype Ternary3.Trit middle", ".field public static literal valuetype Ternary3.Trit middle = int8(0)")
+#$cil = $cil.replace(".field public static initonly valuetype Ternary3.Trit up", ".field public static literal valuetype Ternary3.Trit up = int8(1)")
+#$cil = $cil.replace("ldsfld valuetype Ternary3.Trit Ternary3.Trit::Down", "ldc_I4_M1");
+#$cil = $cil.replace("ldsfld valuetype Ternary3.Trit Ternary3.Trit::Middle", "ldc_I4_0");
+#$cil = $cil.replace("ldsfld valuetype Ternary3.Trit Ternary3.Trit::Up", "ldc_I4_1");
 $FixedCilName = "$DllName.fixed.il"
-(Get-Content $CilName).	replace(".field public static initonly valuetype Ternary3.Trit down", ".field public static literal valuetype Ternary3.Trit down = uint8(0x00)").replace(".field public static initonly valuetype Ternary3.Trit middle", ".field public static literal valuetype Ternary3.Trit middle = uint8(0x01)").	replace(".field public static initonly valuetype Ternary3.Trit up", ".field public static literal valuetype Ternary3.Trit up = uint8(0x02)") | Set-Content $FixedCilName
-#Remove-Item $CilName
+Set-Content $FixedCilName -value $cil
 
+Remove-Item $CilName
+Remove-Item $DllName
+
+Write-Output "compile"
 $Ilasm = """C:\Windows\Microsoft.NET\Framework64\v4.0.30319\ilasm.exe"""
-Start-Process $Ilasm -Argument "/DLL ""$FixedCilName"" /OUTPUT=""$DllName"""
+Start-Process -wait $Ilasm -Argument "/DLL ""$FixedCilName"" /OUTPUT=""$DllName"""
 
-#Remove-Item $FixedCilName
+Remove-Item $FixedCilName
+
+#Copy-Item -Force -Path $DllName -Destination $DllName/../../../../lib/Release/net6.0/
+#$(SolutionDir)Ternary3\lib\$(Configuration)\net6.0\Ternary3.dll

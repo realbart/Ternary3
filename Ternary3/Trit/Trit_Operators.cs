@@ -5,8 +5,8 @@ public readonly partial struct Trit
 {
     // Note:
     // You cannot add or substract trits without knowing if which state maps to zero.
-
-
+ 
+    
     /// <summary>
     /// Determines equality.
     /// </summary>
