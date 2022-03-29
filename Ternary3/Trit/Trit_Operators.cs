@@ -25,7 +25,7 @@ public static partial class TritHelper
     /// Compares two trits.
     /// Returns a <see cref="Trit"/> showing if the first value is bigger than, equal to or smaller than the second.
     /// </summary>
-    public static Trit CompareTrit(this Trit trit1, Trit trit2)
+    public static Trit Compare(this Trit trit1, Trit trit2)
     {
         if (trit1 == trit2) return Middle;
         return trit1 > trit2 ? Up : Down;

@@ -111,15 +111,15 @@ public class TritTests
     [Fact]
     public void BinaryOperators()
     {
-        (up.CompareTrit(up)).Should().Be(middle);
-        (up.CompareTrit(middle)).Should().Be(up);
-        (up.CompareTrit(down)).Should().Be(up);
-        (middle.CompareTrit(up)).Should().Be(down);
-        (middle.CompareTrit(middle)).Should().Be(middle);
-        (middle.CompareTrit(down)).Should().Be(up);
-        (down.CompareTrit(up)).Should().Be(down);
-        (down.CompareTrit(middle)).Should().Be(down);
-        (down.CompareTrit(down)).Should().Be(middle);
+        (up.Compare(up)).Should().Be(middle);
+        (up.Compare(middle)).Should().Be(up);
+        (up.Compare(down)).Should().Be(up);
+        (middle.Compare(up)).Should().Be(down);
+        (middle.Compare(middle)).Should().Be(middle);
+        (middle.Compare(down)).Should().Be(up);
+        (down.Compare(up)).Should().Be(down);
+        (down.Compare(middle)).Should().Be(down);
+        (down.Compare(down)).Should().Be(middle);
 
         (up.And(up)).Should().Be(up);
         (up.And(middle)).Should().Be(middle);

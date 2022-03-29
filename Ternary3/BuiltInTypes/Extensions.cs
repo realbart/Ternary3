@@ -64,7 +64,7 @@ public static partial class Extensions
             up = Trit.Up;
             down = Trit.Down;
         }
-        while (digits-->0)
+        while (digits-- > 0)
         {
             switch ((byte)(value % 3))
             {
@@ -114,9 +114,32 @@ public static partial class Extensions
             }
         }
         return PerformTrinaryOperationInner(
-            operand1.GetTrits(TritsPerInt32).GetEnumerator(), 
+            operand1.GetTrits(TritsPerInt32).GetEnumerator(),
             operand2.GetTrits(TritsPerInt32).GetEnumerator(),
             operation)
             .ToInt32();
+    }
+
+    public static int And(this int operand1, int operand2)
+        => PerformTrinaryOperation(operand1, TritHelper.And, operand2);
+
+    public static int Or(this int operand1, int operand2)
+        => PerformTrinaryOperation(operand1, TritHelper.Or, operand2);
+
+    public static int XOr(this int operand1, int operand2)
+        => PerformTrinaryOperation(operand1, TritHelper.XOr, operand2);
+
+    public static int Flip(this int operand) => -operand;
+
+    public static int Cycle(this int operand)
+        => PerformTrinaryOperation(operand, TritHelper.Cycle);
+
+    public static int AntiCycle(this int operand)
+        => PerformTrinaryOperation(operand, TritHelper.AntiCycle);
+
+    public static Trit Compare(this int operand1, int operand2)
+    {
+        if (operand1 == operand2) return Trit.Middle;
+        return operand1 > operand2 ? Trit.Up : Trit.Down;
     }
 }
