@@ -12,21 +12,9 @@ public readonly partial struct Trit
 
     public readonly struct Values
     {
-        public static readonly Trit down
-#if DEBUG
-            = Down
-#endif
-        ;
-        public static readonly Trit middle
-#if DEBUG
-            = Middle
-#endif
-        ;
-        public static readonly Trit up
-#if DEBUG
-            = Up
-#endif
-        ;
+        public static readonly Trit down = Down;
+        public static readonly Trit middle = Middle;
+        public static readonly Trit up = Up;
     }
 
     private const sbyte downValue = -1;
@@ -109,7 +97,7 @@ public readonly partial struct Trit
     /// <inheritdoc />
     public override string ToString() => value__ switch
     {
-        downValue=> DownString,
+        downValue => DownString,
         middleValue => MiddleString,
         _ => UpString
     };

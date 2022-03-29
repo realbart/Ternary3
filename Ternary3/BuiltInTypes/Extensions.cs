@@ -4,8 +4,11 @@ using System.Collections;
 
 public static partial class Extensions
 {
+    public const int TritsPerInt32 = 20;
+    public const int TritsPerInt64 = 40;
     public static IEnumerable<Trit> GetTrits(this int value)
     {
+
         IEnumerable<Trit> GetTritsInner()
         {
             Trit up;
@@ -46,9 +49,8 @@ public static partial class Extensions
         return GetTritsInner();
     }
 
-    private static IEnumerable<Trit> Get20Trits(this int value)
+    private static IEnumerable<Trit> GetTrits(this int value, int digits)
     {
-        int digits = 20;
         Trit up;
         Trit down;
         if (value < 0)
@@ -86,7 +88,7 @@ public static partial class Extensions
     {
         var factor = 1;
         var total = 0;
-        foreach (var t in trits.Take(20))
+        foreach (var t in trits.Take(TritsPerInt32))
         {
             total += t.Switch(-factor, 0, factor);
             factor *= 3;
@@ -97,7 +99,7 @@ public static partial class Extensions
     public static int PerformTrinaryOperation(this int operand, Func<Trit, Trit> operation)
     {
         return operand
-            .Get20Trits()
+            .GetTrits(TritsPerInt32)
             .Select(operation)
             .ToInt32();
     }
@@ -111,6 +113,10 @@ public static partial class Extensions
                 yield return operation(enumerator1.Current, enumerator2.Current);
             }
         }
-        return PerformTrinaryOperationInner(operand1.Get20Trits().GetEnumerator(), operand2.Get20Trits().GetEnumerator(), operation).ToInt32();
+        return PerformTrinaryOperationInner(
+            operand1.GetTrits(TritsPerInt32).GetEnumerator(), 
+            operand2.GetTrits(TritsPerInt32).GetEnumerator(),
+            operation)
+            .ToInt32();
     }
 }
