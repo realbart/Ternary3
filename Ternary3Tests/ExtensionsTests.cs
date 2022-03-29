@@ -53,6 +53,13 @@ public class ExtensionsTests
         count.Should().Be(3);
         t.Switch(() => count += 1, () => count += 2, () => count += 4);
         count.Should().Be(7);
+    }
 
+    [Fact]
+    public void PerformTrinaryOperation()
+    {
+        int i = 12345;
+        var result =i.PerformTrinaryOperation(trit => trit.Switch(up, middle, down));
+        result.Should().Be(-12345);
     }
 }
