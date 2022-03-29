@@ -6,4 +6,5 @@ global using System.Threading.Tasks;
 global using Xunit;
 global using FluentAssertions;
 global using trit = Ternary3.Trit;
-global using static Ternary3.Trit.Values;
+global using Ternary3;
+global using static Ternary3.TritValues;

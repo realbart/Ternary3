@@ -7,30 +7,43 @@ using System.Runtime.CompilerServices;
 /// The smallest unit in a trinary system, either balanced (-1, 0, 1) or unbalanced (0, 1, 2)
 /// The lowest value is always <see cref="Down"/>, het higest <see cref="Up"/>
 /// </summary>
-public readonly partial struct Trit
+public enum Trit : sbyte
 {
-
-    public readonly struct Values
-    {
-        public static readonly Trit down = Down;
-        public static readonly Trit middle = Middle;
-        public static readonly Trit up = Up;
-    }
-
-    private const sbyte downValue = -1;
-    private const sbyte middleValue = 0;
-    private const sbyte upValue = 1;
-    internal static readonly Trit Down = new(downValue);
-    internal static readonly Trit Middle = new(middleValue);
-    internal static readonly Trit Up = new(upValue);
-
     /// <summary>
-    /// A struct always uses a minimum of one byte.
+    /// The value representing a negative current
     /// </summary>
-    [SpecialName]
-    private readonly sbyte value__;
+    Down = -1,
+    /// <summary>
+    /// The value representing a neutral value
+    /// </summary>
+    Middle = 0,
+    /// <summary>
+    /// The value representing a positive current
+    /// </summary>
+    Up = 1
+}
 
-    private Trit(sbyte value) => this.value__ = value;
+public static class TritValues
+{
+    /// <summary>
+    /// The value representing a negative current
+    /// </summary>
+    public const Trit down = Trit.Down;
+    /// <summary>
+    /// The value representing a neutral value
+    /// </summary>
+    public const Trit middle = Trit.Middle;
+    /// <summary>
+    /// The value representing a positive current
+    /// </summary>
+    public const Trit up = Trit.Up;
+}
+
+public static partial class TritHelper
+{
+    private const Trit Down = Trit.Down;
+    private const Trit Middle = Trit.Middle;
+    private const Trit Up = Trit.Up;
 
     /// <summary>
     /// Represents the value for -5v
@@ -46,12 +59,6 @@ public readonly partial struct Trit
     /// Represents the value for 5v
     /// </summary>
     public const string UpString = "Up";
-
-    /// <inheritdoc/>
-    public override int GetHashCode() => value__.GetHashCode();
-
-    /// <inheritdoc/>
-    public override bool Equals([NotNullWhen(true)] object? obj) => obj is Trit trit && value__ == trit.value__;
 
     /// <summary>
     /// Parses a value into a <see cref="Trit"/>
@@ -93,12 +100,4 @@ public readonly partial struct Trit
         result = default;
         return false;
     }
-
-    /// <inheritdoc />
-    public override string ToString() => value__ switch
-    {
-        downValue => DownString,
-        middleValue => MiddleString,
-        _ => UpString
-    };
 }

@@ -2,113 +2,113 @@
 
 namespace Ternary3;
 
-public partial struct Trit
+public static partial class TritHelper
 {
     /// <summary>
     /// Performs on of three actions, based on the <see cref="Trit"/> value
     /// </summary>
-    public void Switch(Action? delegateDown, Action? delegateMiddle, Action? delegateUp)
+    public static void Switch(this Trit value, Action? delegateDown, Action? delegateMiddle, Action? delegateUp)
     {
-        switch (value__)
+        switch (value)
         {
-            case downValue: delegateDown?.Invoke(); return;
-            case middleValue: delegateMiddle?.Invoke(); return;
+            case Down: delegateDown?.Invoke(); return;
+            case Middle: delegateMiddle?.Invoke(); return;
             default: delegateUp?.Invoke(); return;
         }
     }
     /// <summary>
     /// Returns on of three values, based on the <see cref="Trit"/> value
     /// </summary>
-    public TOut Switch<TOut>(Func<TOut> delegateDown, Func<TOut> delegateMiddle, Func<TOut> delegateUp)
+    public static TOut Switch<TOut>(this Trit value, Func<TOut> delegateDown, Func<TOut> delegateMiddle, Func<TOut> delegateUp)
     {
-        return value__ switch
+        return value switch
         {
-            downValue => delegateDown(),
-            middleValue => delegateMiddle(),
+            Down => delegateDown(),
+            Middle => delegateMiddle(),
             _ => delegateUp()
         };
     }
     /// <summary>
     /// Returns on of three values, based on the <see cref="Trit"/> value
     /// </summary>
-    public TOut Switch<TOut>(TOut valueDown, Func<TOut> delegateMiddle, Func<TOut> delegateUp)
+    public static TOut Switch<TOut>(this Trit value, TOut valueDown, Func<TOut> delegateMiddle, Func<TOut> delegateUp)
     {
-        return value__ switch
+        return value switch
         {
-            downValue => valueDown,
-            middleValue => delegateMiddle(),
+            Down => valueDown,
+            Middle => delegateMiddle(),
             _ => delegateUp()
         };
     }
     /// <summary>
     /// Returns on of three values, based on the <see cref="Trit"/> value
     /// </summary>
-    public TOut Switch<TOut>(Func<TOut> delegateDown, TOut valueMiddle, Func<TOut> delegateUp)
+    public static TOut Switch<TOut>(this Trit value, Func<TOut> delegateDown, TOut valueMiddle, Func<TOut> delegateUp)
     {
-        return value__ switch
+        return value switch
         {
-            downValue => delegateDown(),
-            middleValue => valueMiddle,
+            Down => delegateDown(),
+            Middle => valueMiddle,
             _ => delegateUp()
         };
     }
     /// <summary>
     /// Returns on of three values, based on the <see cref="Trit"/> value
     /// </summary>
-    public TOut Switch<TOut>(TOut valueDown, TOut valueMiddle, Func<TOut> delegateUp)
+    public static TOut Switch<TOut>(this Trit value, TOut valueDown, TOut valueMiddle, Func<TOut> delegateUp)
     {
-        return value__ switch
+        return value switch
         {
-            downValue => valueDown,
-            middleValue => valueMiddle,
+            Down => valueDown,
+            Middle => valueMiddle,
             _ => delegateUp()
         };
     }
     /// <summary>
     /// Returns on of three values, based on the <see cref="Trit"/> value
     /// </summary>
-    public TOut Switch<TOut>(Func<TOut> delegateDown, Func<TOut> delegateMiddle, TOut valueUp)
+    public static TOut Switch<TOut>(this Trit value, Func<TOut> delegateDown, Func<TOut> delegateMiddle, TOut valueUp)
     {
-        return value__ switch
+        return value switch
         {
-            downValue => delegateDown(),
-            middleValue => delegateMiddle(),
+            Down => delegateDown(),
+            Middle => delegateMiddle(),
             _ => valueUp
         };
     }
     /// <summary>
     /// Returns on of three values, based on the <see cref="Trit"/> value
     /// </summary>
-    public TOut Switch<TOut>(TOut valueDown, Func<TOut> delegateMiddle, TOut valueUp)
+    public static TOut Switch<TOut>(this Trit value, TOut valueDown, Func<TOut> delegateMiddle, TOut valueUp)
     {
-        return value__ switch
+        return value switch
         {
-            downValue => valueDown,
-            middleValue => delegateMiddle(),
+            Down => valueDown,
+            Middle => delegateMiddle(),
             _ => valueUp
         };
     }
     /// <summary>
     /// Returns on of three values, based on the <see cref="Trit"/> value
     /// </summary>
-    public TOut Switch<TOut>(Func<TOut> delegateDown, TOut valueMiddle, TOut valueUp)
+    public static TOut Switch<TOut>(this Trit value, Func<TOut> delegateDown, TOut valueMiddle, TOut valueUp)
     {
-        return value__ switch
+        return value switch
         {
-            downValue => delegateDown(),
-            middleValue => valueMiddle,
+            Down => delegateDown(),
+            Middle => valueMiddle,
             _ => valueUp
         };
     }
     /// <summary>
     /// Returns on of three values, based on the <see cref="Trit"/> value
     /// </summary>
-    public TOut Switch<TOut>(TOut valueDown, TOut valueMiddle, TOut valueUp)
+    public static TOut Switch<TOut>(this Trit value, TOut valueDown, TOut valueMiddle, TOut valueUp)
     {
-        return value__ switch
+        return value switch
         {
-            downValue => valueDown,
-            middleValue => valueMiddle,
+            Down => valueDown,
+            Middle => valueMiddle,
             _ => valueUp
         };
     }

@@ -56,39 +56,39 @@ internal static class TribbleOperations
     internal static sbyte Rot(sbyte value)
     {
         var trits = value.ToTrits();
-        return ToValue(+trits.Down, +trits.Middle, +trits.Up);
+        return ToValue(trits.Down.Cycle(), trits.Middle.Cycle(), trits.Up.Cycle());
     }
 
     internal static sbyte AntiRot(sbyte value)
     {
         var trits = value.ToTrits();
-        return ToValue(-trits.Down, -trits.Middle, -trits.Up);
+        return ToValue(trits.Down.AntiCycle(), trits.Middle.AntiCycle(), trits.Up.AntiCycle());
     }
 
     internal static sbyte Not(sbyte value)
     {
         var trits = value.ToTrits();
-        return ToValue(!trits.Down, !trits.Middle, !trits.Up);
+        return ToValue(trits.Down.Flip(), trits.Middle.Flip(), trits.Up.Flip());
     }
 
     internal static sbyte Or(sbyte first, sbyte second)
     {
         var t1 = first.ToTrits();
         var t2 = second.ToTrits();
-        return ToValue(t1.Down | t2.Down, t1.Middle | t2.Middle, t1.Up | t2.Up);
+        return ToValue(t1.Down.Or(t2.Down), t1.Middle.Or(t2.Middle), t1.Up.Or(t2.Up));
     }
 
     internal static sbyte And(sbyte first, sbyte second)
     {
         var t1 = first.ToTrits();
         var t2 = second.ToTrits();
-        return ToValue(t1.Down & t2.Down, t1.Middle & t2.Middle, t1.Up & t2.Up);
+        return ToValue(t1.Down.And(t2.Down), t1.Middle.And(t2.Middle), t1.Up.And(t2.Up));
     }
 
     internal static sbyte XOr(sbyte first, sbyte second)
     {
         var t1 = first.ToTrits();
         var t2 = second.ToTrits();
-        return ToValue(t1.Down ^ t2.Down, t1.Middle ^ t2.Middle, t1.Up ^ t2.Up);
+        return ToValue(t1.Down.XOr(t2.Down), t1.Middle.XOr(t2.Middle), t1.Up.XOr(t2.Up));
     }
 }

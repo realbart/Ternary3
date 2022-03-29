@@ -8,17 +8,17 @@ using System;
 
 namespace Ternary3;
 
-public partial struct Trit
+public static partial class TritHelper
 {
     /// <summary>
     /// Performs on of three actions, based on the <see cref="Trit"/> value
     /// </summary>
-    public void Switch(Action? delegateDown, Action? delegateMiddle, Action? delegateUp)
+    public static void Switch(this Trit value, Action? delegateDown, Action? delegateMiddle, Action? delegateUp)
     {
         switch (value)
         {
-            case downValue: delegateDown?.Invoke(); return;
-            case middleValue: delegateMiddle?.Invoke(); return;
+            case Down: delegateDown?.Invoke(); return;
+            case Middle: delegateMiddle?.Invoke(); return;
             default: delegateUp?.Invoke(); return;
         }
     }
@@ -41,12 +41,12 @@ for (var i = 0; i<8; i++) {
     /// <summary>
     /// Returns on of three values, based on the <see cref="Trit"/> value
     /// </summary>
-    public TOut Switch<TOut>(<#=parm1#>, <#=parm2#>, <#=parm3#>)
+    public static TOut Switch<TOut>(this Trit value, <#=parm1#>, <#=parm2#>, <#=parm3#>)
     {
         return value switch
         {
-            downValue => <#=out1#>,
-            middleValue => <#=out2#>,
+            Down => <#=out1#>,
+            Middle => <#=out2#>,
             _ => <#=out3#>
         };
     }

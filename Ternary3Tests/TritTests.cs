@@ -50,26 +50,26 @@ public class TritTests
     [Fact]
     public void Parse_ReturnsTrit()
     {
-        trit.Parse("DoWn").Should().Be(down);
-        trit.Parse("MiDdLe").Should().Be(middle);
-        trit.Parse("uP").Should().Be(up);
+        TritHelper.Parse("DoWn").Should().Be(down);
+        TritHelper.Parse("MiDdLe").Should().Be(middle);
+        TritHelper.Parse("uP").Should().Be(up);
 
-        FluentActions.Invoking(() => trit.Parse(default)).Should().Throw<ArgumentNullException>();
-        FluentActions.Invoking(() => trit.Parse("True")).Should().Throw<FormatException>();
+        FluentActions.Invoking(() => TritHelper.Parse(default)).Should().Throw<ArgumentNullException>();
+        FluentActions.Invoking(() => TritHelper.Parse("True")).Should().Throw<FormatException>();
     }
 
     [Fact]
     public void TryParse_ReturnsTrit()
     {
-        trit.TryParse("DoWn", out var d).Should().BeTrue();
+        TritHelper.TryParse("DoWn", out var d).Should().BeTrue();
         d.Should().Be(down);
-        trit.TryParse("MiDdLe", out var m).Should().BeTrue();
+        TritHelper.TryParse("MiDdLe", out var m).Should().BeTrue();
         m.Should().Be(middle);
-        trit.TryParse("uP", out var u).Should().BeTrue();
+        TritHelper.TryParse("uP", out var u).Should().BeTrue();
         u.Should().Be(up);
 
-        trit.TryParse(null, out var n).Should().BeFalse();
-        trit.TryParse(null, out var t).Should().BeFalse();
+        TritHelper.TryParse(null, out var n).Should().BeFalse();
+        TritHelper.TryParse(null, out var t).Should().BeFalse();
     }
 
     [Fact]
@@ -95,15 +95,15 @@ public class TritTests
         var d = down;
         var m = middle;
         var u = up;
-        d++;m++;u++;
+        d = d.Cycle(); m = m.Cycle(); u = u.Cycle();
         d.Should().Be(middle);
         m.Should().Be(up);
         u.Should().Be(down);
-        d--;m--;u--;
+        d = d.AntiCycle(); m = m.AntiCycle(); u = u.AntiCycle();
         d.Should().Be(down);
         m.Should().Be(middle);
         u.Should().Be(up);
-        d = !d; m = !m; u = !u;
+        d = d.Flip(); m = m.Flip(); u = u.Flip();
         d.Should().Be(up);
         m.Should().Be(middle);
         u.Should().Be(down);
@@ -111,67 +111,57 @@ public class TritTests
     [Fact]
     public void BinaryOperators()
     {
-        (up > up).Should().Be(middle);
-        (up > middle).Should().Be(up);
-        (up > down).Should().Be(up);
-        (middle > up).Should().Be(down);
-        (middle > middle).Should().Be(middle);
-        (middle > down).Should().Be(up);
-        (down > up).Should().Be(down);
-        (down > middle).Should().Be(down);
-        (down > down).Should().Be(middle);
+        (up.CompareTrit(up)).Should().Be(middle);
+        (up.CompareTrit(middle)).Should().Be(up);
+        (up.CompareTrit(down)).Should().Be(up);
+        (middle.CompareTrit(up)).Should().Be(down);
+        (middle.CompareTrit(middle)).Should().Be(middle);
+        (middle.CompareTrit(down)).Should().Be(up);
+        (down.CompareTrit(up)).Should().Be(down);
+        (down.CompareTrit(middle)).Should().Be(down);
+        (down.CompareTrit(down)).Should().Be(middle);
 
-        (up < up).Should().Be(middle);
-        (up < middle).Should().Be(down);
-        (up < down).Should().Be(down);
-        (middle < up).Should().Be(up);
-        (middle < middle).Should().Be(middle);
-        (middle < down).Should().Be(down);
-        (down < up).Should().Be(up);
-        (down < middle).Should().Be(up);
-        (down < down).Should().Be(middle);
+        (up.And(up)).Should().Be(up);
+        (up.And(middle)).Should().Be(middle);
+        (up.And(down)).Should().Be(down);
+        (middle.And(up)).Should().Be(middle);
+        (middle.And(middle)).Should().Be(middle);
+        (middle.And(down)).Should().Be(down);
+        (down.And(up)).Should().Be(down);
+        (down.And(middle)).Should().Be(down);
+        (down.And(down)).Should().Be(down);
 
-        (up & up).Should().Be(up);
-        (up & middle).Should().Be(middle);
-        (up & down).Should().Be(down);
-        (middle & up).Should().Be(middle);
-        (middle & middle).Should().Be(middle);
-        (middle & down).Should().Be(down);
-        (down & up).Should().Be(down);
-        (down & middle).Should().Be(down);
-        (down & down).Should().Be(down);
+        (up.Or(up)).Should().Be(up);
+        (up.Or(middle)).Should().Be(up);
+        (up.Or(down)).Should().Be(up);
+        (middle.Or(up)).Should().Be(up);
+        (middle.Or(middle)).Should().Be(middle);
+        (middle.Or(down)).Should().Be(middle);
+        (down.Or(up)).Should().Be(up);
+        (down.Or(middle)).Should().Be(middle);
+        (down.Or(down)).Should().Be(down);
 
-        (up | up).Should().Be(up);
-        (up | middle).Should().Be(up);
-        (up | down).Should().Be(up);
-        (middle | up).Should().Be(up);
-        (middle | middle).Should().Be(middle);
-        (middle | down).Should().Be(middle);
-        (down | up).Should().Be(up);
-        (down | middle).Should().Be(middle);
-        (down | down).Should().Be(down);
-
-        (up ^ up).Should().Be(middle);
-        (up ^ middle).Should().Be(up);
-        (up ^ down).Should().Be(middle);
-        (middle ^ up).Should().Be(up);
-        (middle ^ middle).Should().Be(middle);
-        (middle ^ down).Should().Be(down);
-        (down ^ up).Should().Be(middle);
-        (down ^ middle).Should().Be(down);
-        (down ^ down).Should().Be(middle);
+        (up.XOr(up)).Should().Be(middle);
+        (up.XOr(middle)).Should().Be(up);
+        (up.XOr(down)).Should().Be(middle);
+        (middle.XOr(up)).Should().Be(up);
+        (middle.XOr(middle)).Should().Be(middle);
+        (middle.XOr(down)).Should().Be(down);
+        (down.XOr(up)).Should().Be(middle);
+        (down.XOr(middle)).Should().Be(down);
+        (down.XOr(down)).Should().Be(middle);
     }
 
     [Fact]
     public void CastFromBool()
     {
-        trit trueTrit = true;
+        trit trueTrit = true.ToTrit();
         trueTrit.Should().Be(up);
-        
-        trit nullTrit = default(bool?);
+
+        trit nullTrit = default(bool?).ToTrit();
         nullTrit.Should().Be(middle);
 
-        trit falseTrit = false;
+        trit falseTrit = false.ToTrit();
         falseTrit.Should().Be(down);
     }
 
@@ -179,13 +169,13 @@ public class TritTests
     [Fact]
     public void CastToBool()
     {
-        bool? upBool = up;
+        bool? upBool = up.ToNullableBoolean();
         upBool.Should().Be(true);
 
-        bool? middleBool= middle;
+        bool? middleBool = middle.ToNullableBoolean();
         middleBool.Should().BeNull();
 
-        bool? downBool= down;
+        bool? downBool = down.ToNullableBoolean();
         downBool.Should().Be(false);
     }
 }
