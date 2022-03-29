@@ -27,8 +27,8 @@ public class ExtensionsTests
         new[] { middle, middle, middle }.ToInt32().Should().Be(0);
         new[] { up, middle }.ToInt32().Should().Be(1);
         new[] { down, up, middle, down }.ToInt32().Should().Be(-25);
-        new[] { up, middle, up, down, up, down, up, up, up, down, down, middle, middle, middle, down, middle, down, down, middle, down, up }.ToInt32().Should().Be(2147483647);
-        new[] { up, down, down, up, down, up, down, down, down, up, up, middle, middle, middle, up, middle, up, up, middle, up, down }.ToInt32().Should().Be(-2147483648);
+        new[] { up, middle, up, down, up, down, up, up, up, down, down, middle, middle, middle, down, middle, down, down, middle, down, up }.ToInt32().Should().Be(-1339300754); // not int.MaxValue
+        new[] { up, down, down, up, down, up, down, down, down, up, up, middle, middle, middle, up, middle, up, up, middle, up, down }.ToInt32().Should().Be(1339300753); // not int.MinValue
     }
 
     [Fact]
@@ -61,5 +61,19 @@ public class ExtensionsTests
         int i = 12345;
         var result =i.PerformTrinaryOperation(trit => trit.Switch(up, middle, down));
         result.Should().Be(-12345);
+    }
+
+    [Fact]
+    public void Max()
+    {
+        new[] { up, up, up, up, up, up, up, up, up, up, up, up, up, up, up, up, up, up, up, up }
+            .ToInt32()
+            .Should().Be(1743392200);
+        new[] { up, up, up, up, up, up, up, up, up, up, up, up, up, up, up, up, up, up, up, up, up }
+            .ToInt32()
+            .Should().Be(1743392200);
+        new[] { down, down, down, down, down, down, down, down, down, down, down, down, down, down, down, down, down, down, down, down, up }
+            .ToInt32()
+            .Should().Be(-1743392200);
     }
 }
