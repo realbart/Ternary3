@@ -76,4 +76,13 @@ public class BuiltInTypeExtensionsTests
             .ToInt32()
             .Should().Be(-1743392200);
     }
+
+    [Fact]
+    public void Or()
+    {
+        224.Or(320).Should().Be(332);
+        320.Or(224).Should().Be(332);
+        332.Or(224).Should().Be(332);
+        320.Or(332).Should().Be(332);
+    }
 }

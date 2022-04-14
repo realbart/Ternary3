@@ -85,7 +85,7 @@ internal static partial class TribbleOperations
         if (first > -9842 && first < 9842 && second > -9842 && second < 9842)
         {
             const int fullMask = 0b111111111111_111111111111111;
-            const int neutralMask = 0b100100100100_10010010010010010;
+            const int neutralMask = 0b010010010010_010010010010010;
             const int upMask = 0b100100100100_100100100100100;
             var tritLong = first.ToTritInt32() | second.ToTritInt32();
             var ups = tritLong & upMask;

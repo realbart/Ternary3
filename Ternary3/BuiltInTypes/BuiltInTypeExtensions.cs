@@ -121,8 +121,14 @@ public static partial class BuiltInTypeExtensions
     public static int And(this int operand1, int operand2)
         => PerformTrinaryOperation(operand1, TritHelper.And, operand2);
 
+    /// <summary>
+    /// Calculates a logical or, expanded to the ternary system.
+    /// Each trit in the resulting value has the maximum value of corresponding trits
+    /// in the source value. Example:
+    /// UUNNDD (320) Or UNDUND (225) => UUNUND (332)
+    /// </summary>
     public static int Or(this int operand1, int operand2)
-        => PerformTrinaryOperation(operand1, TritHelper.Or, operand2);
+        => TribbleOperations.Or(operand1, operand2);
 
     public static int XOr(this int operand1, int operand2)
         => PerformTrinaryOperation(operand1, TritHelper.XOr, operand2);
