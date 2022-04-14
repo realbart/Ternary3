@@ -36,17 +36,17 @@ public partial struct UInt3
  
 
 
-public partial struct Tribble 
+public partial struct xTribble 
 {
-    /// <summary>
-    /// Instantiates an instance of Tribble.
-    /// </summary>    
-    public Tribble(Trit downTrit, Trit middleTrit, Trit upTrit)
-        => value = TribbleOperations.ToValue(downTrit, middleTrit, upTrit);
+    ///// <summary>
+    ///// Instantiates an instance of Tribble.
+    ///// </summary>    
+    //public Tribble(Trit downTrit, Trit middleTrit, Trit upTrit)
+    //    => value = TribbleOperations.ToValue(downTrit, middleTrit, upTrit);
 
-    /// <summary>
-    /// Returns the <see cref="Trio&lt;&gt;"/> of <see cref="Trit"/>s the  <see cref="Tribble"/>  is made up of.
-    /// </summary>
-    public Trio<Trit> Trits => TribbleOperations.ToTrits(value);
+    ///// <summary>
+    ///// Returns the <see cref="Trio&lt;&gt;"/> of <see cref="Trit"/>s the  <see cref="Tribble"/>  is made up of.
+    ///// </summary>
+    //public Trio<Trit> Trits => TribbleOperations.ToTrits(value);
 }
 

@@ -1,8 +1,6 @@
 ﻿namespace Ternary3;
 
-using System.Collections;
-
-public static partial class Extensions
+public static partial class BuiltInTypeExtensions
 {
     public const int TritsPerInt32 = 20;
     public const int TritsPerInt64 = 40;

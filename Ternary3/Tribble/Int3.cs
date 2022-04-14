@@ -15,9 +15,10 @@ public partial struct Int3
     public static implicit operator int(Int3 value) => value.value;
     public static implicit operator long(Int3 value) => value.value;
 
-    public static Int3 operator +(Int3 a, Int3 b) => new Int3((a.value + b.value).SignedModulo27());
-
-    public static Int3 operator -(Int3 a, Int3 b) => new Int3((a.value - b.value).SignedModulo27());
+    public static int operator +(Int3 a, Int3 b) => a.value + b.value;
+    public static int operator -(Int3 a, Int3 b) => a.value - b.value;
+    public static int operator *(Int3 a, Int3 b) => a.value * b.value;
+    public static int operator /(Int3 a, Int3 b) => a.value / b.value;
 
     public override string ToString() => value.ToString();
 }

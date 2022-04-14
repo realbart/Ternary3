@@ -76,11 +76,11 @@ public class TritTests
     public void Switch()
     {
         int i = 0;
-        int foo() => i++;
+        int foo() => ++i;
 
         down.Switch(1, 2, 3).Should().Be(1);
         middle.Switch("a", "b", "c").Should().Be("b");
-        up.Switch(foo, foo, foo).Should().Be(0);
+        up.Switch(foo, foo, foo).Should().Be(1);
         i.Should().Be(1);
         void x() => throw new Exception();
         void m() => i = 99;

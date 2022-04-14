@@ -2,7 +2,7 @@
 
 namespace Ternary3;
 
-public static partial class Extensions
+public static partial class BuiltInTypeExtensions
 {
     /// <summary>
     /// Performs on of three actions, based on the <see cref="Trit"/> value

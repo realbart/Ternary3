@@ -19,10 +19,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="BuiltInTypes\Extensions_Switch.cs">
+    <Compile Update="BuiltInTypes\BuiltInTypeExtensions_Switch.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Extensions_Switch.tt</DependentUpon>
+      <DependentUpon>BuiltInTypeExtensions_Switch.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Tribble\TribbleOperations_FromTritLong.cs">
+      <DependentUpon>TribbleOperations_FromTritLong.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Tribble\TribbleOperations_ToTritLong.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TribbleOperations_ToTritLong.tt</DependentUpon>
     </Compile>
     <Compile Update="Tribble\Tribble_Operators.cs">
       <DesignTime>True</DesignTime>
@@ -34,25 +44,33 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>TritPartial.tt</DependentUpon>
     </Compile>
-    <Compile Update="Trit\Trit_Switch.cs">
+    <Compile Update="Trit\TritHelper_Switch.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Trit_Switch.tt</DependentUpon>
+      <DependentUpon>TritHelper_Switch.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="BuiltInTypes\Extensions_Switch.tt">
-      <LastGenOutput>Extensions_Switch.cs</LastGenOutput>
+    <None Update="BuiltInTypes\BuiltInTypeExtensions_Switch.tt">
+      <LastGenOutput>BuiltInTypeExtensions_Switch.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+    <None Update="Tribble\TribbleOperations_FromTritLong.tt">
+      <LastGenOutput>TribbleOperations_FromTritLong.cs</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+    <None Update="Tribble\TribbleOperations_ToTritLong.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TribbleOperations_ToTritLong.cs</LastGenOutput>
     </None>
     <None Update="Tribble\Tribble_Operators.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Tribble_Operators.cs</LastGenOutput>
     </None>
-    <None Update="Trit\Trit_Switch.tt">
+    <None Update="Trit\TritHelper_Switch.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Trit_Switch.cs</LastGenOutput>
+      <LastGenOutput>TritHelper_Switch.cs</LastGenOutput>
     </None>
   </ItemGroup>
 

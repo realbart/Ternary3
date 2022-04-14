@@ -2,7 +2,7 @@
 
 using Ternary3;
 
-public class ExtensionsTests
+public class BuiltInTypeExtensionsTests
 {
     [Fact]
     public void GetTrits()

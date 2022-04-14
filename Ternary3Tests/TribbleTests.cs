@@ -60,11 +60,11 @@ public class Int3Tests
         var valMinus5 = (Int3)(-5);
         var val13 = (Int3)13;
         var valMinus13 = (Int3)(-13);
-        ((int)(val0 + val0)).Should().Be(0);
-        ((int)(val5 + val5)).Should().Be(10);
-        ((int)(valMinus5 + valMinus5)).Should().Be(-10);
-        ((int)(val13 + val13)).Should().Be(-1);
-        ((int)(valMinus13 + valMinus13)).Should().Be(1);
+        (val0 + val0).Should().Be(0);
+        (val5 + val5).Should().Be(10);
+        (valMinus5 + valMinus5).Should().Be(-10);
+        (val13 + val13).Should().Be(26);
+        (valMinus13 + valMinus13).Should().Be(-26);
     }
 
     [Fact]
@@ -75,11 +75,11 @@ public class Int3Tests
         var valMinus5 = (Int3)(-5);
         var val13 = (Int3)13;
         var valMinus13 = (Int3)(-13);
-        ((int)(val0 - val0)).Should().Be(0);
-        ((int)(val5 - valMinus5)).Should().Be(10);
-        ((int)(valMinus5 - val5)).Should().Be(-10);
-        ((int)(val13 - valMinus13)).Should().Be(-1);
-        ((int)(valMinus13 - val13)).Should().Be(1);
+        (val0 - val0).Should().Be(0);
+        (val5 - valMinus5).Should().Be(10);
+        (valMinus5 - val5).Should().Be(-10);
+        (val13 - valMinus13).Should().Be(26);
+        (valMinus13 - val13).Should().Be(-26);
     }
 }
 
