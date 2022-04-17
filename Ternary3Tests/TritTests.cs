@@ -141,7 +141,7 @@ public class TritTests
         (down.Or(middle)).Should().Be(middle);
         (down.Or(down)).Should().Be(down);
 
-        (up.XOr(up)).Should().Be(middle);
+        (up.XOr(up)).Should().Be(down);
         (up.XOr(middle)).Should().Be(up);
         (up.XOr(down)).Should().Be(middle);
         (middle.XOr(up)).Should().Be(up);
@@ -149,7 +149,7 @@ public class TritTests
         (middle.XOr(down)).Should().Be(down);
         (down.XOr(up)).Should().Be(middle);
         (down.XOr(middle)).Should().Be(down);
-        (down.XOr(down)).Should().Be(middle);
+        (down.XOr(down)).Should().Be(up);
     }
 
     [Fact]

@@ -32,24 +32,21 @@ public static partial class TritHelper
     }
 
     /// <summary>
-    /// Determines the lowest of two trits
+    /// Performs a trinary equivalent of and: selects the lowest of two trits
     /// </summary>
     public static Trit And(this Trit trit1, Trit trit2) => trit1 > trit2 ? trit2 : trit1;
 
     /// <summary>
-    /// Selects the highest of two trits
+    ///  Performs a trinary equivalent of or: selects the highest of two trits
     /// </summary>
     public static Trit Or(this Trit trit1, Trit trit2) => trit1 < trit2 ? trit2 : trit1;
 
     /// <summary>
-    /// Performs an exclusive or: only returns a value other than <see cref="Middle"/> 
-    /// if one of the values is <see cref="Middle"/> and the other isn't
+    /// Performs a trinary equivalent of xor: a tritwise addition without overflow
     /// </summary>
     public static Trit XOr(this Trit trit1, Trit trit2)
     {
-        if (trit1 == Middle) return trit2;
-        if (trit2 == Middle) return trit1;
-        return Middle;
+        return trit2.Switch(trit1.AntiCycle(), trit1, trit1.Cycle());
     }
 
     /// <summary>
