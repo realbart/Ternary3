@@ -11,60 +11,63 @@ public class TribbleOperationsTests
     [Fact]
     public void FromTritInt64()
     {
-        long zero = 0b010_010_010_010_010___010_010_010_010_010___010_010_010_010_010___010_010_010_010_010;
-        long one = 0b010_010_010_010_010___010_010_010_010_010___010_010_010_010_010___010_010_010_010_100;
-        long minusOne = 0b010_010_010_010_010___010_010_010_010_010___010_010_010_010_010___010_010_010_010_001;
-        long val320 = 0b010_010_010_010_010___010_010_010_010_010___010_010_010_010_100___100_010_010_001_001;
-        long val224 = 0b010_010_010_010_010___010_010_010_010_010___010_010_010_010_100___010_001_100_010_001;
-        long val332 = 0b010_010_010_010_010___010_010_010_010_010___010_010_010_010_100___100_010_100_010_001;
+        long zero = 0b00000000_00000000_00000000_00000000;
+        long one = 0b00000000_00000000_00000000_0000010;
+        long minusOne = 0b00000000_00000000_00000000_0000001;
+        long val320 = 0b00000000_00000000_00000010_1000000101;
+        long val224 = 0b00000000_00000000_00000010_0001100001;
+        long val332 = 0b00000000_00000000_00000010_1000100001;
+        long val212 = 0b00000000_00000000_00000010_0001000101;
+        long val43046720 = 0b00000000_00000000_00000000_00000010_00000000_00000000_00000000_00000001;
+        long val43046721 = 0b00000000_00000000_00000000_00000010_00000000_00000000_00000000_00000000;
         TribbleOperations.FromTritInt64(zero).Should().Be(0);
         TribbleOperations.FromTritInt64(one).Should().Be(1);
         TribbleOperations.FromTritInt64(minusOne).Should().Be(-1);
         TribbleOperations.FromTritInt64(val320).Should().Be(320);
         TribbleOperations.FromTritInt64(val224).Should().Be(224);
         TribbleOperations.FromTritInt64(val332).Should().Be(332);
+        TribbleOperations.FromTritInt64(val212).Should().Be(212);
+        TribbleOperations.FromTritInt64(val43046720).Should().Be(43046720);
+        TribbleOperations.FromTritInt64(val43046721).Should().Be(43046721);
     }
 
     [Fact]
     public void ToTritInt64()
     {
-        long zero = 0b010_010_010_010_010___010_010_010_010_010___010_010_010_010_010___010_010_010_010_010;
-        long one = 0b010_010_010_010_010___010_010_010_010_010___010_010_010_010_010___010_010_010_010_100;
-        long minusOne = 0b010_010_010_010_010___010_010_010_010_010___010_010_010_010_010___010_010_010_010_001;
-        long val320 = 0b010_010_010_010_010___010_010_010_010_010___010_010_010_010_100___100_010_010_001_001;
-        long val224 = 0b010_010_010_010_010___010_010_010_010_010___010_010_010_010_100___010_001_100_010_001;
-        long val332 = 0b010_010_010_010_010___010_010_010_010_010___010_010_010_010_100___100_010_100_010_001;
-        long val9841 = 0b010_010_010_010_010___010_010_010_010_010___010_100_100_100_100___100_100_100_100_100;
-        long minus9841 = 0b010_010_010_010_010___010_010_010_010_010___010_001_001_001_001___001_001_001_001_001;
+        int zero = 0b00000000_00000000_00000000_00000000;
+        int one = 0b00000000_00000000_00000000_0000010;
+        int minusOne = 0b00000000_00000000_00000000_0000001;
+        int val320 = 0b00000000_00000000_00000010_1000000101;
+        int val224 = 0b00000000_00000000_00000010_0001100001;
+        int val332 = 0b00000000_00000000_00000010_1000100001;
+        long val43046720 = 0b00000000_00000000_00000000_00000010_00000000_00000000_00000000_00000001;
+        long val43046721 = 0b00000000_00000000_00000000_00000010_00000000_00000000_00000000_00000000;
         TribbleOperations.ToTritInt64(0).Should().Be(zero);
         TribbleOperations.ToTritInt64(1).Should().Be(one);
         TribbleOperations.ToTritInt64(-1).Should().Be(minusOne);
         TribbleOperations.ToTritInt64(320).Should().Be(val320);
         TribbleOperations.ToTritInt64(224).Should().Be(val224);
         TribbleOperations.ToTritInt64(332).Should().Be(val332);
-        TribbleOperations.ToTritInt64(9841).Should().Be(val9841);
-        TribbleOperations.ToTritInt64(-9841).Should().Be(minus9841);
+        TribbleOperations.ToTritInt64(43046720).Should().Be(val43046720);
+        TribbleOperations.ToTritInt64(43046721).Should().Be(val43046721);
     }
 
     [Fact]
     public void ToTritInt32()
     {
-        int zero = 0b010_010_010_010___010_010_010_010_010;
-        int one = 0b010_010_010_010___010_010_010_010_100;
-        int minusOne = 0b010_010_010_010___010_010_010_010_001;
-        int val320 = 0b010_010_010_100___100_010_010_001_001;
-        int val224 = 0b010_010_010_100___010_001_100_010_001;
-        int val332 = 0b010_010_010_100___100_010_100_010_001;
-        int val9841 = 0b100_100_100_100___100_100_100_100_100;
-        int minus9841 = 0b001_001_001_001___001_001_001_001_001;
+        int zero = 0b00000000_00000000_00000000_00000000;
+        int one = 0b00000000_00000000_00000000_0000010;
+        int minusOne = 0b00000000_00000000_00000000_0000001;
+        int val320 = 0b00000000_00000000_00000010_1000000101;
+        int val224 = 0b00000000_00000000_00000010_0001100001;
+        int val332 = 0b00000000_00000000_00000010_1000100001;
+
         TribbleOperations.ToTritInt32(0).Should().Be(zero);
         TribbleOperations.ToTritInt32(1).Should().Be(one);
         TribbleOperations.ToTritInt32(-1).Should().Be(minusOne);
         TribbleOperations.ToTritInt32(320).Should().Be(val320);
         TribbleOperations.ToTritInt32(224).Should().Be(val224);
         TribbleOperations.ToTritInt32(332).Should().Be(val332);
-        TribbleOperations.ToTritInt32(9841).Should().Be(val9841);
-        TribbleOperations.ToTritInt32(-9841).Should().Be(minus9841);
     }
 
     [Fact]
@@ -72,5 +75,14 @@ public class TribbleOperationsTests
     {
         // UUNNDD (320) Or UNDUND (225) => UUNUND (332)
         TribbleOperations.Or(320, 224).Should().Be(332);
+        TribbleOperations.Or(43046720, 43046721).Should().Be(43046721);
+    }
+
+    [Fact]
+    public void And()
+    {
+        // UUNNDD (320) Or UNDUND (225) => UUNUND (332)
+        TribbleOperations.And(320, 224).Should().Be(212);
+        TribbleOperations.And(43046720, 43046721).Should().Be(43046720);
     }
 }

@@ -10,44 +10,44 @@ internal static partial class TribbleOperations
 {
     /// <summary>
     /// Very quickly converts an integer value from a long form that makes performing trit operations easy.
-    /// The longer form uses three bits form one trit: 001 = down, 010 is middle, 100 is up.
+    /// The longer form uses three bits form one trit: 01 = down, 00 is middle, 10 is up.
     /// This way, the actual value is limited to 20 trits.
     /// </summary>
     /// <param name="value">The value to convert. No check is done to ensure the correct format.</param>
     internal static int FromTritInt64(this long value)
     {
         return (int)(
-            ((value >> 2) & 1) - (value & 1)
+            ((value >> 1) & 1) - (value & 1)
 <# 
     var shift = 0;
     var factor = 1;
-    while (shift<60)
+    while (shift<62)
     {
-        shift+=3;
+        shift+=2;
         factor*=3;
 #>
-            + <#=factor#> * (((value >> <#=(shift+2)#>) & 1) - ((value >> <#=shift#>) & 1))
+            + <#=factor#> * (((value >> <#=(shift+1)#>) & 1) - ((value >> <#=shift#>) & 1))
 <# } #>
         );
     }
 
         /// <summary>
     /// Very quickly converts an integer value from a long form that makes performing trit operations easy.
-    /// The longer form uses three bits form one trit: 001 = down, 010 is middle, 100 is up.
+    /// The longer form uses three bits form one trit: 01 = down, 00 is middle, 10 is up.
     /// This way, the actual value is limited to 9 trits.
     /// </summary>
     /// <param name="value">The value to convert. No check is done to ensure the correct format.</param>
     internal static int FromTritInt32(this int value)
     {
-        return ((value >> 2) & 1) - (value & 1)<# 
+        return ((value >> 1) & 1) - (value & 1)<# 
     shift = 0;
     factor = 1;
-    while (shift<27)
+    while (shift<30)
     {
-        shift+=3;
+        shift+=2;
         factor*=3;
 #>
 
-            + <#=factor#> * (((value >> <#=(shift+2)#>) & 1) - ((value >> <#=shift#>) & 1))<# } #>;
+            + <#=factor#> * (((value >> <#=(shift+1)#>) & 1) - ((value >> <#=shift#>) & 1))<# } #>;
     }
 }

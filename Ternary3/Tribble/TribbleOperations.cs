@@ -68,6 +68,12 @@ internal static partial class TribbleOperations
 
     internal static int Not(sbyte value) => -value;
 
+    /// <summary>
+    /// Calculates a logical or, expanded to the ternary system.
+    /// Each trit in the resulting value has the maximum value of corresponding trits
+    /// in the source value. Example:
+    /// UUNNDD (320) Or UNDUND (225) => UUNUND (332)
+    /// </summary>
     internal static int Or(IConvertible first, IConvertible second)
     {
         return Or((int)first, (int)second);
@@ -84,14 +90,8 @@ internal static partial class TribbleOperations
         // small numbers work faster
         if (first > -9842 && first < 9842 && second > -9842 && second < 9842)
         {
-            const int fullMask = 0b111111111111_111111111111111;
-            const int neutralMask = 0b010010010010_010010010010010;
-            const int upMask = 0b100100100100_100100100100100;
-            var tritLong = first.ToTritInt32() | second.ToTritInt32();
-            var ups = tritLong & upMask;
-            var neutrals = tritLong & neutralMask;
-            tritLong &= fullMask ^ ups >> 1 ^ (neutrals >> 1 | ups >> 2);
-            return tritLong.FromTritInt32();
+            const int downMask = 0b01010101_01010101_01010101_01010101;
+            return (((first.ToTritInt32() ^ downMask) | (second.ToTritInt32() ^ downMask)) ^ downMask).FromTritInt32();
         }
         else
         {
@@ -101,24 +101,51 @@ internal static partial class TribbleOperations
             else if (first < -1743392200) first -= 808182895;
             if (second > 1743392200) second += 808182895;
             else if (second < -1743392200) second -= 808182895;
-            const long fullMask = 0b111111111111111_111111111111111_111111111111111_111111111111111;
-            const long neutralMask = 0b0100100100100_100100100100100_100100100100100_10010010010010010;
-            const long upMask = 0b100100100100100_100100100100100_100100100100100_100100100100100;
-            var tritLong = first.ToTritInt64() | second.ToTritInt64();
-            var ups = tritLong & upMask;
-            var neutrals = tritLong & neutralMask;
-            tritLong &= fullMask ^ ups >> 1 ^ (neutrals >> 1 | ups >> 2);
-            return tritLong.FromTritInt64();
+            const long downMask = 0b0101010101010101_0101010101010101_0101010101010101_0101010101010101;
+            return (((first.ToTritInt64() ^ downMask) | (second.ToTritInt64() ^ downMask)) ^ downMask).FromTritInt64();
         }
     }
 
-    internal static sbyte And(sbyte first, sbyte second)
+    /// <summary>
+    /// Calculates a logical and, expanded to the ternary system.
+    /// Each trit in the resulting value has the minimum value of corresponding trits
+    /// in the source value. Example:
+    /// UUNNDD (320) And UNDUND (225) => UNDNDD
+    /// </summary>
+    internal static int And(IConvertible first, IConvertible second)
     {
-        var t1 = first.ToTrits();
-        var t2 = second.ToTrits();
-        return ToValue(t1.Down.And(t2.Down), t1.Middle.And(t2.Middle), t1.Up.And(t2.Up));
+        return And((int)first, (int)second);
     }
 
+    /// <summary>
+    /// Calculates a logical and, expanded to the ternary system.
+    /// Each trit in the resulting value has the minimum value of corresponding trits
+    /// in the source value. Example:
+    /// UUNNDD (320) And UNDUND (225) => UNDNDD
+    /// </summary>
+    internal static int And(int first, int second)
+    {
+        // small numbers work faster
+        if (first > -9842 && first < 9842 && second > -9842 && second < 9842)
+        {
+            const int downMask = 0b01010101_01010101_01010101_01010101;
+            return (((first.ToTritInt32() ^ downMask) & (second.ToTritInt32() ^ downMask)) ^ downMask).FromTritInt32();
+        }
+        else
+        {
+            // Overflow. Throws out of bounds in checked context.
+            // 2^32 - 3^20 = 808182895
+            if (first > 1743392200) first += 808182895;
+            else if (first < -1743392200) first -= 808182895;
+            if (second > 1743392200) second += 808182895;
+            else if (second < -1743392200) second -= 808182895;
+            const long downMask = 0b0101010101010101_0101010101010101_0101010101010101_0101010101010101;
+            return (((first.ToTritInt64() ^ downMask) & (second.ToTritInt64() ^ downMask)) ^ downMask).FromTritInt64();
+        }
+    }
+
+
+    //Performs a tritwise minus
     internal static sbyte XOr(sbyte first, sbyte second)
     {
         var t1 = first.ToTrits();

@@ -9,13 +9,14 @@ namespace Ternary3;
 internal static partial class TribbleOperations
 {
 <# 
-// uu_uuu_uuu_uuu_uuu_uuu_uuu
-var ups = 1743392200;
-var factor = 1152921504606846976;
+// Pow(3,19)/2
+var ups = 1_743_392_200;
+// Pow(4,19)
+var factor = 1_099_511_627_776;
 #>
     /// <summary>
     /// Very quickly converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses three bits form one trit: 001 = down, 010 is middle, 100 is up.
+    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
     /// This way, the actual value is limited to 20 trits, between -<#=ups#> and <#=ups#>.
     /// </summary>
     /// <param name="value">The value to convert. Make sure this is between -<#=ups#> and <#=ups#></param>
@@ -23,54 +24,47 @@ var factor = 1152921504606846976;
     {
 <# // performance critical: caller should check limits #>
 <# // if (value > \<#=ups\#> || value <  -\<#=ups\#>) throw new ArgumentException($"Int32 {value} has more than 20 trits"); #>
-        if (value > -9842 && value < 9842) return ToTritInt32(value) + 329406144135036928;
+        //if (value > -7174453 && value < 7174453) return ToTritInt32(value) + ...;
         long target = 0;
 <#
 while (ups>2)
 {
     ups/=3;
-    factor/=8;
+    factor/=4;
 #>
 
         if (value > <#=ups#>)
         {
             value -= <#=2*ups+1#>;
-            target |= <#=factor*4#>;
+            target |= <#=factor*2#>;
         }
         else if (value < <#=-ups#>)
         {
             value += <#=2*ups+1#>;
             target |= <#=(factor)#>;
-        }
-        else
-        {
-            target |= <#=factor*2#>;
         }<# } #>
 
         if (value > 0)
         {
-            target |= 4;
+            target |= 2;
         }
         else if (value < 0)
         {
             target |= 1;
         }
-        else
-        {
-            target |= 2;
-        }
 
         return target;
     }
 <# 
-// uuu_uuu_uuu
-ups = 9841;
-factor = 134217728;
+// Pow(3,15)/2
+ups = 7_174_453;
+// Pow(4,15)
+factor = 1_073_741_824;
 #>
     /// <summary>
     /// Very quickly converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses three bits form one trit: 001 = down, 010 is middle, 100 is up.
-    /// This way, the actual value is limited to 9 trits, between -<#=ups#> and <#=ups#>.
+    /// The longer form uses three bits form one trit: 01 = down, 00 is middle, 10 is up.
+    /// This way, the actual value is limited to 15 trits, between -<#=ups#> and <#=ups#>.
     /// </summary>
     /// <param name="value">The value to convert. Make sure this is between -<#=ups#> and <#=ups#></param>
     internal static int ToTritInt32(this int value)
@@ -82,37 +76,28 @@ factor = 134217728;
 while (ups>2)
 {
     ups/=3;
-    factor/=8;
+    factor/=4;
 #>
 
         if (value > <#=ups#>)
         {
             value -= <#=2*ups+1#>;
-            target |= <#=factor*4#>;
+            target |= <#=factor*2#>;
         }
         else if (value < <#=-ups#>)
         {
             value += <#=2*ups+1#>;
             target |= <#=(factor)#>;
-        }
-        else
-        {
-            target |= <#=factor*2#>;
         }<# } #>
 
         if (value > 0)
         {
-            target |= 4;
+            target |= 2;
         }
         else if (value < 0)
         {
             target |= 1;
         }
-        else
-        {
-            target |= 2;
-        }
-
         return target;
     }
 }
