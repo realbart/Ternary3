@@ -18,6 +18,7 @@ public class TribbleOperationsTests
         long val224 = 0b00000000_00000000_00000010_0001100001;
         long val332 = 0b00000000_00000000_00000010_1000100001;
         long val212 = 0b00000000_00000000_00000010_0001000101;
+        long minus182 = 0b00000000_00000000_00000001_1001100110;
         long val43046720 = 0b00000000_00000000_00000000_00000010_00000000_00000000_00000000_00000001;
         long val43046721 = 0b00000000_00000000_00000000_00000010_00000000_00000000_00000000_00000000;
         TribbleOperations.FromTritInt64(zero).Should().Be(0);
@@ -26,7 +27,10 @@ public class TribbleOperationsTests
         TribbleOperations.FromTritInt64(val320).Should().Be(320);
         TribbleOperations.FromTritInt64(val224).Should().Be(224);
         TribbleOperations.FromTritInt64(val332).Should().Be(332);
+
         TribbleOperations.FromTritInt64(val212).Should().Be(212);
+        TribbleOperations.FromTritInt64(minus182).Should().Be(-182);
+
         TribbleOperations.FromTritInt64(val43046720).Should().Be(43046720);
         TribbleOperations.FromTritInt64(val43046721).Should().Be(43046721);
     }
@@ -73,7 +77,6 @@ public class TribbleOperationsTests
     [Fact]
     public void Or()
     {
-        // UUNNDD (320) Or UNDUND (225) => UUNUND (332)
         TribbleOperations.Or(320, 224).Should().Be(332);
         TribbleOperations.Or(43046720, 43046721).Should().Be(43046721);
     }
@@ -81,8 +84,16 @@ public class TribbleOperationsTests
     [Fact]
     public void And()
     {
-        // UUNNDD (320) Or UNDUND (225) => UUNUND (332)
         TribbleOperations.And(320, 224).Should().Be(212);
         TribbleOperations.And(43046720, 43046721).Should().Be(43046720);
+    }
+
+    [Fact]
+    public void Xor()
+    {
+        TribbleOperations.Xor(320, 224).Should().Be(-182);
+        TribbleOperations.Xor(224, 320).Should().Be(-182);
+        TribbleOperations.Xor(224, 182).Should().Be(-320);
+        TribbleOperations.Xor(182, 224).Should().Be(-320);
     }
 }

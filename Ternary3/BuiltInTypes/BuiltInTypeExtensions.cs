@@ -118,8 +118,32 @@ public static partial class BuiltInTypeExtensions
             .ToInt32();
     }
 
+    /// <summary>
+    /// Calculates a logical and, expanded to the ternary system.
+    /// Each trit in the resulting value has the minimum value of corresponding trits
+    /// in the source value. Example:
+    /// UUNNDD (320) And UNDUND (225) => UNDNDD
+    /// </summary>
     public static int And(this int operand1, int operand2)
-        => PerformTrinaryOperation(operand1, TritHelper.And, operand2);
+    {
+        // small numbers work faster
+        if (operand1 > -9842 && operand1 < 9842 && operand2 > -9842 && operand2 < 9842)
+        {
+            const int downMask = 0b01010101_01010101_01010101_01010101;
+            return (((operand1.ToTritInt32() ^ downMask) & (operand2.ToTritInt32() ^ downMask)) ^ downMask).FromTritInt32();
+        }
+        else
+        {
+            // Overflow. Throws out of bounds in checked context.
+            // 2^32 - 3^20 = 808182895
+            if (operand1 > 1743392200) operand1 += 808182895;
+            else if (operand1 < -1743392200) operand1 -= 808182895;
+            if (operand2 > 1743392200) operand2 += 808182895;
+            else if (operand2 < -1743392200) operand2 -= 808182895;
+            const long downMask = 0b0101010101010101_0101010101010101_0101010101010101_0101010101010101;
+            return (((operand1.ToTritInt64() ^ downMask) & (operand2.ToTritInt64() ^ downMask)) ^ downMask).FromTritInt64();
+        }
+    }
 
     /// <summary>
     /// Calculates a logical or, expanded to the ternary system.
@@ -128,10 +152,68 @@ public static partial class BuiltInTypeExtensions
     /// UUNNDD (320) Or UNDUND (225) => UUNUND (332)
     /// </summary>
     public static int Or(this int operand1, int operand2)
-        => TribbleOperations.Or(operand1, operand2);
+    {
+        // small numbers work faster
+        if (operand1 < 7174453 && operand2 < 7174453 && operand1 > -7174453 && operand2 > -7174453)
+        {
+            const int downMask = 0b01010101_01010101_01010101_01010101;
+            return (((operand1.ToTritInt32() ^ downMask) | (operand2.ToTritInt32() ^ downMask)) ^ downMask).FromTritInt32();
+        }
+        else
+        {
+            // Overflow. Throws out of bounds in checked context.
+            // 2^32 - 3^20 = 808182895
+            if (operand1 > 1743392200) operand1 += 808182895;
+            else if (operand1 < -1743392200) operand1 -= 808182895;
+            if (operand2 > 1743392200) operand2 += 808182895;
+            else if (operand2 < -1743392200) operand2 -= 808182895;
+            const long downMask = 0b0101010101010101_0101010101010101_0101010101010101_0101010101010101;
+            return (((operand1.ToTritInt64() ^ downMask) | (operand2.ToTritInt64() ^ downMask)) ^ downMask).FromTritInt64();
+        }
+    }
 
-    public static int XOr(this int operand1, int operand2)
-        => PerformTrinaryOperation(operand1, TritHelper.XOr, operand2);
+    /// <summary>
+    /// Calculates a logical xor, expanded to the ternary system.
+    /// Each trit in the resulting value has the sum of the two source trits.
+    /// Example:
+    /// UUNNDD (320) XOR UNDUND (225) => DUDUDU
+    /// </summary>
+    public static int Xor(this int operand1, int operand2)
+    {
+        // small numbers work faster
+        if (operand1 < 7174453 && operand2 < 7174453 && operand1 > -7174453 && operand2 > -7174453)
+        {
+            var a = operand1.ToTritInt32();
+            var b = operand2.ToTritInt32();
+            const int downMask = 0b01010101_01010101_01010101_01010101;
+            var a_up = (a >> 1) & downMask;
+            var a_down = a & downMask;
+            var a_neutral = a_up ^ a_down ^ downMask;
+            var b_up = (b >> 1) & downMask;
+            var b_down = b & downMask;
+            var b_neutral = b_up ^ b_down ^ downMask;
+            var c_up = (a_up & b_neutral) | (a_neutral & b_up) | (a_down & b_down);
+            var c_down = (a_down & b_neutral) | (a_neutral & b_down) | (a_up & b_up);
+            var c = c_up << 1 | c_down;
+            return c.FromTritInt32();
+        }
+        else
+        {
+            var a = operand1.ToTritInt64();
+            var b = operand2.ToTritInt64();
+            const long downMask = 0b0101010101010101_0101010101010101_0101010101010101_0101010101010101;
+            var a_up = (a >> 1) & downMask;
+            var a_down = a & downMask;
+            var a_neutral = a_up ^ a_down ^ downMask;
+            var b_up = (b >> 1) & downMask;
+            var b_down = b & downMask;
+            var b_neutral = b_up ^ b_down ^ downMask;
+            var c_up = (a_up & b_neutral) | (a_neutral & b_up) | (a_down & b_down);
+            var c_down = (a_down & b_neutral) | (a_neutral & b_down) | (a_up & b_up);
+            var c = c_up << 1 | c_down;
+            return c.FromTritInt64();
+        }
+    }
 
     public static int Flip(this int operand) => -operand;
 

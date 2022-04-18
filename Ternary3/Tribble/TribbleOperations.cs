@@ -144,12 +144,51 @@ internal static partial class TribbleOperations
         }
     }
 
+    /// <summary>
+    /// Calculates a logical xor, expanded to the ternary system.
+    /// Each trit in the resulting value has the sum of the two source trits.
+    /// Example:
+    /// UUNNDD (320) XOR UNDUND (225) => DUDUDU
+    /// </summary>
+    internal static int Xor(int first, int second)
+    {
+        if (first > -9842 && first < 9842 && second > -9842 && second < 9842)
+        {
+            var a = first.ToTritInt32();
+            var b = second.ToTritInt32();
+            const int downMask = 0b01010101_01010101_01010101_01010101;
+            var a_up = (a >> 1) & downMask;
+            var a_down = a & downMask;
+            var a_neutral = a_up ^ a_down ^ downMask;
+            var b_up = (b >> 1) & downMask;
+            var b_down = b & downMask;
+            var b_neutral = b_up ^ b_down ^ downMask;
+            var c_up = (a_up & b_neutral) | (a_neutral & b_up) | (a_down & b_down);
+            var c_down = (a_down & b_neutral) | (a_neutral & b_down) | (a_up & b_up);
+            var c = c_up << 1 | c_down;
+            return c.FromTritInt32();
+        }
+        else
+        {
+            var a = first.ToTritInt64();
+            var b = second.ToTritInt64();
+            const long downMask = 0b0101010101010101_0101010101010101_0101010101010101_0101010101010101;
+            var a_up = (a >> 1) & downMask;
+            var a_down = a & downMask;
+            var a_neutral = a_up ^ a_down ^ downMask;
+            var b_up = (b >> 1) & downMask;
+            var b_down = b & downMask;
+            var b_neutral = b_up ^ b_down ^ downMask;
+            var c_up = (a_up & b_neutral) | (a_neutral & b_up) | (a_down & b_down);
+            var c_down = (a_down & b_neutral) | (a_neutral & b_down) | (a_up & b_up);
+            var c = c_up << 1 | c_down;
+            return c.FromTritInt64();
+        }
+    }
 
     //Performs a tritwise minus
-    internal static sbyte XOr(sbyte first, sbyte second)
+    internal static int XOr(IConvertible first, IConvertible second)
     {
-        var t1 = first.ToTrits();
-        var t2 = second.ToTrits();
-        return ToValue(t1.Down.XOr(t2.Down), t1.Middle.XOr(t2.Middle), t1.Up.XOr(t2.Up));
+        return Xor((int)first, (int)second);
     }
 }

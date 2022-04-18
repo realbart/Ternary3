@@ -10,7 +10,7 @@ internal static partial class TribbleOperations
 {
 <# 
 // Pow(3,19)/2
-var ups = 1_743_392_200;
+long ups = 1_743_392_200;
 // Pow(4,19)
 var factor = 1_099_511_627_776;
 #>
@@ -23,8 +23,6 @@ var factor = 1_099_511_627_776;
     internal static long ToTritInt64(this int value)
     {
 <# // performance critical: caller should check limits #>
-<# // if (value > \<#=ups\#> || value <  -\<#=ups\#>) throw new ArgumentException($"Int32 {value} has more than 20 trits"); #>
-        //if (value > -7174453 && value < 7174453) return ToTritInt32(value) + ...;
         long target = 0;
 <#
 while (ups>2)
@@ -56,23 +54,37 @@ while (ups>2)
         return target;
     }
 <# 
-// Pow(3,15)/2
-ups = 7_174_453;
+// Pow(3,21/2)
+ups = 5230176601;
 // Pow(4,15)
-factor = 1_073_741_824;
+factor = 4294967296;
 #>
     /// <summary>
     /// Very quickly converts an integer value to a long form that makes performing trit operations easy.
     /// The longer form uses three bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 15 trits, between -<#=ups#> and <#=ups#>.
+    /// This way, the actual value is limited to 16 trits, between -<#=ups#> and <#=ups#>.
     /// </summary>
     /// <param name="value">The value to convert. Make sure this is between -<#=ups#> and <#=ups#></param>
     internal static int ToTritInt32(this int value)
     {
 <# // performance critical: caller should check limits #>
-<# // if (value > \<#=ups\#> || value <  -\<#=ups\#>) throw new ArgumentException($"Int32 {value} has more than 20 trits"); #>
         var target = 0;
 <#
+while(ups > 21523360)
+{
+    ups/=3;
+    var v = 4294967295 - 2*ups;
+#>
+
+        if (value > <#=ups#>)
+        {
+            value = value + <#=v > int.MaxValue ? $"{v - int.MaxValue} + int.MaxValue": $"{v}"#>;
+        }
+        else if (value < <#=-ups#>)
+        {
+            value = value - <#=v > int.MaxValue ? $"{v - int.MaxValue} - int.MaxValue": $"{v}"#>;
+        }<# 
+}
 while (ups>2)
 {
     ups/=3;
@@ -82,7 +94,7 @@ while (ups>2)
         if (value > <#=ups#>)
         {
             value -= <#=2*ups+1#>;
-            target |= <#=factor*2#>;
+            target |= <#=unchecked((int)factor*2)#>;
         }
         else if (value < <#=-ups#>)
         {
