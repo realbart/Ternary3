@@ -37,9 +37,9 @@ internal static partial class TribbleOperations
     /// This way, the actual value is limited to 9 trits.
     /// </summary>
     /// <param name="value">The value to convert. No check is done to ensure the correct format.</param>
-    internal static int FromTritInt32(this int value)
+    internal static int FromTritUInt32(this uint value)
     {
-        return ((value >> 1) & 1) - (value & 1)<# 
+        return (int)((value >> 1) & 1) - (int)(value & 1)<# 
     shift = 0;
     factor = 1;
     while (shift<30)
@@ -48,6 +48,6 @@ internal static partial class TribbleOperations
         factor*=3;
 #>
 
-            + <#=factor#> * (((value >> <#=(shift+1)#>) & 1) - ((value >> <#=shift#>) & 1))<# } #>;
+            + <#=factor#> * (int)(((value >> <#=(shift+1)#>) & 1) - (int)((value >> <#=shift#>) & 1))<# } #>;
     }
 }

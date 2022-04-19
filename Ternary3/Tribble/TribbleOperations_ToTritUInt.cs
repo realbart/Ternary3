@@ -219,9 +219,9 @@ internal static partial class TribbleOperations
     /// This way, the actual value is limited to 16 trits, between -5230176601 and 5230176601.
     /// </summary>
     /// <param name="value">The value to convert. Make sure this is between -5230176601 and 5230176601</param>
-    internal static int ToTritInt32(this int value)
+    internal static uint ToTritUInt32(this int value)
     {
-        var target = 0;
+        uint target = 0;
 
         if (value > 1743392200)
         {
@@ -266,7 +266,7 @@ internal static partial class TribbleOperations
         if (value > 7174453)
         {
             value -= 14348907;
-            target |= -2147483648;
+            target |= 2147483648;
         }
         else if (value < -7174453)
         {

@@ -52,23 +52,23 @@ internal static partial class TribbleOperations
     /// This way, the actual value is limited to 9 trits.
     /// </summary>
     /// <param name="value">The value to convert. No check is done to ensure the correct format.</param>
-    internal static int FromTritInt32(this int value)
+    internal static int FromTritUInt32(this uint value)
     {
-        return ((value >> 1) & 1) - (value & 1)
-            + 3 * (((value >> 3) & 1) - ((value >> 2) & 1))
-            + 9 * (((value >> 5) & 1) - ((value >> 4) & 1))
-            + 27 * (((value >> 7) & 1) - ((value >> 6) & 1))
-            + 81 * (((value >> 9) & 1) - ((value >> 8) & 1))
-            + 243 * (((value >> 11) & 1) - ((value >> 10) & 1))
-            + 729 * (((value >> 13) & 1) - ((value >> 12) & 1))
-            + 2187 * (((value >> 15) & 1) - ((value >> 14) & 1))
-            + 6561 * (((value >> 17) & 1) - ((value >> 16) & 1))
-            + 19683 * (((value >> 19) & 1) - ((value >> 18) & 1))
-            + 59049 * (((value >> 21) & 1) - ((value >> 20) & 1))
-            + 177147 * (((value >> 23) & 1) - ((value >> 22) & 1))
-            + 531441 * (((value >> 25) & 1) - ((value >> 24) & 1))
-            + 1594323 * (((value >> 27) & 1) - ((value >> 26) & 1))
-            + 4782969 * (((value >> 29) & 1) - ((value >> 28) & 1))
-            + 14348907 * (((value >> 31) & 1) - ((value >> 30) & 1));
+        return (int)((value >> 1) & 1) - (int)(value & 1)
+            + 3 * (int)(((value >> 3) & 1) - (int)((value >> 2) & 1))
+            + 9 * (int)(((value >> 5) & 1) - (int)((value >> 4) & 1))
+            + 27 * (int)(((value >> 7) & 1) - (int)((value >> 6) & 1))
+            + 81 * (int)(((value >> 9) & 1) - (int)((value >> 8) & 1))
+            + 243 * (int)(((value >> 11) & 1) - (int)((value >> 10) & 1))
+            + 729 * (int)(((value >> 13) & 1) - (int)((value >> 12) & 1))
+            + 2187 * (int)(((value >> 15) & 1) - (int)((value >> 14) & 1))
+            + 6561 * (int)(((value >> 17) & 1) - (int)((value >> 16) & 1))
+            + 19683 * (int)(((value >> 19) & 1) - (int)((value >> 18) & 1))
+            + 59049 * (int)(((value >> 21) & 1) - (int)((value >> 20) & 1))
+            + 177147 * (int)(((value >> 23) & 1) - (int)((value >> 22) & 1))
+            + 531441 * (int)(((value >> 25) & 1) - (int)((value >> 24) & 1))
+            + 1594323 * (int)(((value >> 27) & 1) - (int)((value >> 26) & 1))
+            + 4782969 * (int)(((value >> 29) & 1) - (int)((value >> 28) & 1))
+            + 14348907 * (int)(((value >> 31) & 1) - (int)((value >> 30) & 1));
     }
 }

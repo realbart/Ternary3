@@ -29,10 +29,10 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="Tribble\TribbleOperations_ToTritLong.cs">
+    <Compile Update="Tribble\TribbleOperations_ToTritUInt.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>TribbleOperations_ToTritLong.tt</DependentUpon>
+      <DependentUpon>TribbleOperations_ToTritUInt.tt</DependentUpon>
     </Compile>
     <Compile Update="Tribble\Tribble_Operators.cs">
       <DesignTime>True</DesignTime>
@@ -60,9 +60,9 @@
       <LastGenOutput>TribbleOperations_FromTritLong.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
     </None>
-    <None Update="Tribble\TribbleOperations_ToTritLong.tt">
+    <None Update="Tribble\TribbleOperations_ToTritUInt.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TribbleOperations_ToTritLong.cs</LastGenOutput>
+      <LastGenOutput>TribbleOperations_ToTritUInt.cs</LastGenOutput>
     </None>
     <None Update="Tribble\Tribble_Operators.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

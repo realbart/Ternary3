@@ -91,7 +91,7 @@ internal static partial class TribbleOperations
         if (first > -9842 && first < 9842 && second > -9842 && second < 9842)
         {
             const int downMask = 0b01010101_01010101_01010101_01010101;
-            return (((first.ToTritInt32() ^ downMask) | (second.ToTritInt32() ^ downMask)) ^ downMask).FromTritInt32();
+            return (((first.ToTritUInt32() ^ downMask) | (second.ToTritUInt32() ^ downMask)) ^ downMask).FromTritUInt32();
         }
         else
         {
@@ -129,7 +129,7 @@ internal static partial class TribbleOperations
         if (first > -9842 && first < 9842 && second > -9842 && second < 9842)
         {
             const int downMask = 0b01010101_01010101_01010101_01010101;
-            return (((first.ToTritInt32() ^ downMask) & (second.ToTritInt32() ^ downMask)) ^ downMask).FromTritInt32();
+            return (((first.ToTritUInt32() ^ downMask) & (second.ToTritUInt32() ^ downMask)) ^ downMask).FromTritUInt32();
         }
         else
         {
@@ -154,8 +154,8 @@ internal static partial class TribbleOperations
     {
         if (first > -9842 && first < 9842 && second > -9842 && second < 9842)
         {
-            var a = first.ToTritInt32();
-            var b = second.ToTritInt32();
+            var a = first.ToTritUInt32();
+            var b = second.ToTritUInt32();
             const int downMask = 0b01010101_01010101_01010101_01010101;
             var a_up = (a >> 1) & downMask;
             var a_down = a & downMask;
@@ -166,7 +166,7 @@ internal static partial class TribbleOperations
             var c_up = (a_up & b_neutral) | (a_neutral & b_up) | (a_down & b_down);
             var c_down = (a_down & b_neutral) | (a_neutral & b_down) | (a_up & b_up);
             var c = c_up << 1 | c_down;
-            return c.FromTritInt32();
+            return c.FromTritUInt32();
         }
         else
         {

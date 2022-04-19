@@ -65,10 +65,10 @@ factor = 4294967296;
     /// This way, the actual value is limited to 16 trits, between -<#=ups#> and <#=ups#>.
     /// </summary>
     /// <param name="value">The value to convert. Make sure this is between -<#=ups#> and <#=ups#></param>
-    internal static int ToTritInt32(this int value)
+    internal static uint ToTritUInt32(this int value)
     {
 <# // performance critical: caller should check limits #>
-        var target = 0;
+        uint target = 0;
 <#
 while(ups > 21523360)
 {
@@ -94,7 +94,7 @@ while (ups>2)
         if (value > <#=ups#>)
         {
             value -= <#=2*ups+1#>;
-            target |= <#=unchecked((int)factor*2)#>;
+            target |= <#=(factor*2)#>;
         }
         else if (value < <#=-ups#>)
         {

@@ -130,7 +130,7 @@ public static partial class BuiltInTypeExtensions
         if (operand1 > -9842 && operand1 < 9842 && operand2 > -9842 && operand2 < 9842)
         {
             const int downMask = 0b01010101_01010101_01010101_01010101;
-            return (((operand1.ToTritInt32() ^ downMask) & (operand2.ToTritInt32() ^ downMask)) ^ downMask).FromTritInt32();
+            return (((operand1.ToTritUInt32() ^ downMask) & (operand2.ToTritUInt32() ^ downMask)) ^ downMask).FromTritUInt32();
         }
         else
         {
@@ -157,7 +157,7 @@ public static partial class BuiltInTypeExtensions
         if (operand1 < 7174453 && operand2 < 7174453 && operand1 > -7174453 && operand2 > -7174453)
         {
             const int downMask = 0b01010101_01010101_01010101_01010101;
-            return (((operand1.ToTritInt32() ^ downMask) | (operand2.ToTritInt32() ^ downMask)) ^ downMask).FromTritInt32();
+            return (((operand1.ToTritUInt32() ^ downMask) | (operand2.ToTritUInt32() ^ downMask)) ^ downMask).FromTritUInt32();
         }
         else
         {
@@ -183,8 +183,8 @@ public static partial class BuiltInTypeExtensions
         // small numbers work faster
         if (operand1 < 7174453 && operand2 < 7174453 && operand1 > -7174453 && operand2 > -7174453)
         {
-            var a = operand1.ToTritInt32();
-            var b = operand2.ToTritInt32();
+            var a = operand1.ToTritUInt32();
+            var b = operand2.ToTritUInt32();
             const int downMask = 0b01010101_01010101_01010101_01010101;
             var a_up = (a >> 1) & downMask;
             var a_down = a & downMask;
@@ -195,7 +195,7 @@ public static partial class BuiltInTypeExtensions
             var c_up = (a_up & b_neutral) | (a_neutral & b_up) | (a_down & b_down);
             var c_down = (a_down & b_neutral) | (a_neutral & b_down) | (a_up & b_up);
             var c = c_up << 1 | c_down;
-            return c.FromTritInt32();
+            return c.FromTritUInt32();
         }
         else
         {

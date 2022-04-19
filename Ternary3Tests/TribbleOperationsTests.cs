@@ -57,21 +57,21 @@ public class TribbleOperationsTests
     }
 
     [Fact]
-    public void ToTritInt32()
+    public void ToTritUInt32()
     {
-        int zero = 0b00000000_00000000_00000000_00000000;
-        int one = 0b00000000_00000000_00000000_0000010;
-        int minusOne = 0b00000000_00000000_00000000_0000001;
-        int val320 = 0b00000000_00000000_00000010_1000000101;
-        int val224 = 0b00000000_00000000_00000010_0001100001;
-        int val332 = 0b00000000_00000000_00000010_1000100001;
+        uint zero = 0b00000000_00000000_00000000_00000000;
+        uint one = 0b00000000_00000000_00000000_0000010;
+        uint minusOne = 0b00000000_00000000_00000000_0000001;
+        uint val320 = 0b00000000_00000000_00000010_1000000101;
+        uint val224 = 0b00000000_00000000_00000010_0001100001;
+        uint val332 = 0b00000000_00000000_00000010_1000100001;
 
-        TribbleOperations.ToTritInt32(0).Should().Be(zero);
-        TribbleOperations.ToTritInt32(1).Should().Be(one);
-        TribbleOperations.ToTritInt32(-1).Should().Be(minusOne);
-        TribbleOperations.ToTritInt32(320).Should().Be(val320);
-        TribbleOperations.ToTritInt32(224).Should().Be(val224);
-        TribbleOperations.ToTritInt32(332).Should().Be(val332);
+        TribbleOperations.ToTritUInt32(0).Should().Be(zero);
+        TribbleOperations.ToTritUInt32(1).Should().Be(one);
+        TribbleOperations.ToTritUInt32(-1).Should().Be(minusOne);
+        TribbleOperations.ToTritUInt32(320).Should().Be(val320);
+        TribbleOperations.ToTritUInt32(224).Should().Be(val224);
+        TribbleOperations.ToTritUInt32(332).Should().Be(val332);
     }
 
     [Fact]
