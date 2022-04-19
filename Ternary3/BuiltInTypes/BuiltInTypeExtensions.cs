@@ -1,5 +1,7 @@
 ﻿namespace Ternary3;
 
+using Ternary3.Internal;
+
 public static partial class BuiltInTypeExtensions
 {
     public const int TritsPerInt32 = 20;

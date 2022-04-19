@@ -1,72 +1,21 @@
-﻿namespace Ternary3;
+﻿namespace Ternary3.Internal;
 
 using System.Collections.Generic;
+using Ternary3.Internal;
 
-internal static partial class TribbleOperations
+internal static partial class Operations
 {
-    /// <summary>
-    /// Converts a signed value to a <see cref="Trio&lt;Trit&gt;"/>. (substract 13 first if you have an unsigned value)
-    /// </summary>
-    /// <remarks>
-    /// Explicitly written out for performance reasons.
-    /// The value is assumed to always be between -13 and 13.
-    /// </remarks>
-    internal static Trio<Trit> ToTrits(this sbyte value)
-    {
-        var m = Trit.Down;
-        var u = Trit.Down;
+    public static int RoundTo19Trits(int value) => 0;
+    public static int RoundTo20Trits(int value) => 0;
+    public static int RoundTo16Trits(int value) => 0;
 
-        if (value >= 5)
-        {
-            value -= 5;
-            u = Trit.Up;
-        }
-        else if (value >= -4)
-        {
-            value -= -4;
-            u = Trit.Middle;
-        }
-        if (value >= -7)
-        {
-            value -= -7;
-            m = Trit.Up;
-        }
-        else if (value >= -10)
-        {
-            value -= -10;
-            m = Trit.Middle;
-        }
-        var d = value switch
-        {
-            -11 => Trit.Up,
-            -12 => Trit.Middle,
-            _ => Trit.Down
-        };
-        return new Trio<Trit>(d, m, u);
-    }
 
-    /// <summary>
-    /// Convert three trits to the signed value. (substract 13 to get the signed value)
-    /// </summary>
-    /// <remarks>
-    /// explicitly written out for performance reasons.
-    /// </remarks>
-    internal static sbyte ToValue(Trit down, Trit middle, Trit up)
-        => (sbyte)(down.Switch(-1, 0, 1) + middle.Switch(-3, 0, 3) + up.Switch(-9, 0, 9));
-
-    internal static sbyte Rot(sbyte value)
-    {
-        var trits = value.ToTrits();
-        return ToValue(trits.Down.Cycle(), trits.Middle.Cycle(), trits.Up.Cycle());
-    }
-
-    internal static sbyte AntiRot(sbyte value)
-    {
-        var trits = value.ToTrits();
-        return ToValue(trits.Down.AntiCycle(), trits.Middle.AntiCycle(), trits.Up.AntiCycle());
-    }
-
-    internal static int Not(sbyte value) => -value;
+    internal static int Rot(IConvertible value) => Rot((int)value);
+    internal static int Rot(int value) => value / 3;
+    internal static int AntiRot(IConvertible value) => AntiRot((int)value);
+    internal static int AntiRot(int value) => value * 3;
+    internal static int Not(IConvertible value) => Not((int)value);
+    internal static int Not(int value) => -value;
 
     /// <summary>
     /// Calculates a logical or, expanded to the ternary system.

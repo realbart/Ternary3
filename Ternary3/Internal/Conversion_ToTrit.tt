@@ -4,9 +4,9 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
-namespace Ternary3;
+namespace Ternary3.Internal;
 
-internal static partial class TribbleOperations
+internal static partial class Conversion
 {
 <# 
 // Pow(3,19)/2
@@ -20,10 +20,10 @@ var factor = 1_099_511_627_776;
     /// This way, the actual value is limited to 20 trits, between -<#=ups#> and <#=ups#>.
     /// </summary>
     /// <param name="value">The value to convert. Make sure this is between -<#=ups#> and <#=ups#></param>
-    internal static long ToTritInt64(this int value)
+    internal static ulong ToTritInt64(this int value)
     {
 <# // performance critical: caller should check limits #>
-        long target = 0;
+        ulong target = 0;
 <#
 while (ups>2)
 {
@@ -51,6 +51,50 @@ while (ups>2)
             target |= 1;
         }
 
+        return target;
+    }
+<# 
+// Pow(3,16/2)
+ups = 21523360;
+// Pow(4,15)
+factor = 4294967296;
+#>
+    /// <summary>
+    /// Very quickly converts an integer value to a long form that makes performing trit operations easy.
+    /// The longer form uses three bits form one trit: 01 = down, 00 is middle, 10 is up.
+    /// This way, the actual value is limited to 16 trits, between -<#=ups#> and <#=ups#>.
+    /// </summary>
+    /// <param name="value">The value to convert. Make sure this is between -<#=ups#> and <#=ups#></param>
+    internal static uint ToTritUInt32Unchecked(this int value)
+    {
+<# // performance critical: caller should check limits #>
+        uint target = 0;
+<#
+while (ups>2)
+{
+    ups/=3;
+    factor/=4;
+#>
+
+        if (value > <#=ups#>)
+        {
+            value -= <#=2*ups+1#>;
+            target |= <#=(factor*2)#>;
+        }
+        else if (value < <#=-ups#>)
+        {
+            value += <#=2*ups+1#>;
+            target |= <#=(factor)#>;
+        }<# } #>
+
+        if (value > 0)
+        {
+            target |= 2;
+        }
+        else if (value < 0)
+        {
+            target |= 1;
+        }
         return target;
     }
 <# 

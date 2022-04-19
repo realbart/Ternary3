@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public struct Trio<T> : IEnumerable<T>, ITrio<T>
-    where T : struct
 {
     public Trio(T down, T middle, T up)
     {

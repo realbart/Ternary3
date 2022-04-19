@@ -7,14 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="Tribble\Tribble_Operators.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Tribble_Operators.tt</DependentUpon>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 
@@ -24,20 +16,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>BuiltInTypeExtensions_Switch.tt</DependentUpon>
     </Compile>
-    <Compile Update="Tribble\TribbleOperations_FromTritLong.cs">
-      <DependentUpon>TribbleOperations_FromTritLong.tt</DependentUpon>
+    <Compile Update="Internal\Conversion_FromTrit.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DependentUpon>Conversion_FromTrit.tt</DependentUpon>
     </Compile>
-    <Compile Update="Tribble\TribbleOperations_ToTritUInt.cs">
+    <Compile Update="Internal\Conversion_ToTrit.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>TribbleOperations_ToTritUInt.tt</DependentUpon>
-    </Compile>
-    <Compile Update="Tribble\Tribble_Operators.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Tribble_Operators.tt</DependentUpon>
+      <DependentUpon>Conversion_ToTrit.tt</DependentUpon>
     </Compile>
     <Compile Update="TritPartial.cs">
       <DesignTime>True</DesignTime>
@@ -56,17 +43,13 @@
       <LastGenOutput>BuiltInTypeExtensions_Switch.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
     </None>
-    <None Update="Tribble\TribbleOperations_FromTritLong.tt">
-      <LastGenOutput>TribbleOperations_FromTritLong.cs</LastGenOutput>
+    <None Update="Internal\Conversion_FromTrit.tt">
+      <LastGenOutput>Conversion_FromTrit.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
     </None>
-    <None Update="Tribble\TribbleOperations_ToTritUInt.tt">
+    <None Update="Internal\Conversion_ToTrit.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TribbleOperations_ToTritUInt.cs</LastGenOutput>
-    </None>
-    <None Update="Tribble\Tribble_Operators.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Tribble_Operators.cs</LastGenOutput>
+      <LastGenOutput>Conversion_ToTrit.cs</LastGenOutput>
     </None>
     <None Update="Trit\TritHelper_Switch.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

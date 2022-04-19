@@ -4,9 +4,9 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
-namespace Ternary3;
+namespace Ternary3.Internal;
 
-internal static partial class TribbleOperations
+internal static partial class Conversion
 {
     /// <summary>
     /// Very quickly converts an integer value from a long form that makes performing trit operations easy.
@@ -14,10 +14,10 @@ internal static partial class TribbleOperations
     /// This way, the actual value is limited to 20 trits.
     /// </summary>
     /// <param name="value">The value to convert. No check is done to ensure the correct format.</param>
-    internal static int FromTritInt64(this long value)
+    internal static int FromTritInt64(this ulong value)
     {
         return (int)(
-            ((value >> 1) & 1) - (value & 1)
+            (int)((value >> 1) & 1) - (int)(value & 1)
 <# 
     var shift = 0;
     var factor = 1;
@@ -26,7 +26,7 @@ internal static partial class TribbleOperations
         shift+=2;
         factor*=3;
 #>
-            + <#=factor#> * (((value >> <#=(shift+1)#>) & 1) - ((value >> <#=shift#>) & 1))
+            + <#=factor#> * ((int)((value >> <#=(shift+1)#>) & 1) - (int)((value >> <#=shift#>) & 1))
 <# } #>
         );
     }
@@ -48,6 +48,6 @@ internal static partial class TribbleOperations
         factor*=3;
 #>
 
-            + <#=factor#> * (int)(((value >> <#=(shift+1)#>) & 1) - (int)((value >> <#=shift#>) & 1))<# } #>;
+            + <#=factor#> * ((int)((value >> <#=(shift+1)#>) & 1) - (int)((value >> <#=shift#>) & 1))<# } #>;
     }
 }
