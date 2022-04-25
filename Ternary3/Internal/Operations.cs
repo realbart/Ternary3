@@ -44,12 +44,8 @@ internal static partial class Operations
         }
         else
         {
-            // Overflow. Throws out of bounds in checked context.
-            // 2^32 - 3^20 = 808182895
-            if (first > 1743392200) first += 808182895;
-            else if (first < -1743392200) first -= 808182895;
-            if (second > 1743392200) second += 808182895;
-            else if (second < -1743392200) second -= 808182895;
+            first = CheckOverflowTrit20(first);
+            second = CheckOverflowTrit20(second);
             const long downMask = 0b0101010101010101_0101010101010101_0101010101010101_0101010101010101;
             return (((first.ToTritInt64() ^ downMask) | (second.ToTritInt64() ^ downMask)) ^ downMask).FromTritInt64();
         }
@@ -77,20 +73,48 @@ internal static partial class Operations
         // small numbers work faster
         if (first > -9842 && first < 9842 && second > -9842 && second < 9842)
         {
-            const int downMask = 0b01010101_01010101_01010101_01010101;
-            return (((first.ToTritUInt32() ^ downMask) & (second.ToTritUInt32() ^ downMask)) ^ downMask).FromTritUInt32();
+            return AndTrits(first.ToTritUInt32(), second.ToTritUInt32()).FromTritUInt32();
         }
         else
         {
-            // Overflow. Throws out of bounds in checked context.
-            // 2^32 - 3^20 = 808182895
-            if (first > 1743392200) first += 808182895;
-            else if (first < -1743392200) first -= 808182895;
-            if (second > 1743392200) second += 808182895;
-            else if (second < -1743392200) second -= 808182895;
-            const long downMask = 0b0101010101010101_0101010101010101_0101010101010101_0101010101010101;
-            return (((first.ToTritInt64() ^ downMask) & (second.ToTritInt64() ^ downMask)) ^ downMask).FromTritInt64();
+
+            first = CheckOverflowTrit20(first);
+            second = CheckOverflowTrit20(second);
+            return AndTrits(first.ToTritInt64(), second.ToTritInt64()).FromTritInt64();
         }
+    }
+
+    internal static ulong AndTrits(ulong a, ulong b)
+    {
+        const ulong downMask = 0b0101010101010101_0101010101010101_0101010101010101_0101010101010101u;
+        return ((a ^ downMask) & (b ^ downMask)) ^ downMask;
+    }
+
+    internal static uint FlipTrits(uint trits)
+    {
+        const uint downMask = 0b01010101_01010101_01010101_01010101u;
+        return ((trits & downMask) << 1) | ((trits >> 1) & downMask);
+    }
+
+    internal static ulong FlipTrits(ulong trits)
+    {
+        const ulong downMask = 0b0101010101010101_0101010101010101_0101010101010101_0101010101010101u;
+        return ((trits & downMask) << 1) | ((trits >> 1) & downMask);
+    }
+
+    internal static uint AndTrits(uint a, uint b)
+    {
+        const uint downMask = 0b01010101_01010101_01010101_01010101u;
+        return ((a ^ downMask) & (b ^ downMask)) ^ downMask;
+    }
+
+    internal static int CheckOverflowTrit20(int value)
+    {
+        // Overflow. Throws out of bounds in checked context.
+        // 2^32 - 3^20 = 808182895
+        if (value > 1743392200) value += 808182895;
+        else if (value < -1743392200) value -= 808182895;
+        return value;
     }
 
     /// <summary>
@@ -105,34 +129,56 @@ internal static partial class Operations
         {
             var a = first.ToTritUInt32();
             var b = second.ToTritUInt32();
-            const int downMask = 0b01010101_01010101_01010101_01010101;
-            var a_up = (a >> 1) & downMask;
-            var a_down = a & downMask;
-            var a_neutral = a_up ^ a_down ^ downMask;
-            var b_up = (b >> 1) & downMask;
-            var b_down = b & downMask;
-            var b_neutral = b_up ^ b_down ^ downMask;
-            var c_up = (a_up & b_neutral) | (a_neutral & b_up) | (a_down & b_down);
-            var c_down = (a_down & b_neutral) | (a_neutral & b_down) | (a_up & b_up);
-            var c = c_up << 1 | c_down;
+            uint c = XorTrits(a, b);
             return c.FromTritUInt32();
         }
         else
         {
             var a = first.ToTritInt64();
             var b = second.ToTritInt64();
-            const long downMask = 0b0101010101010101_0101010101010101_0101010101010101_0101010101010101;
-            var a_up = (a >> 1) & downMask;
-            var a_down = a & downMask;
-            var a_neutral = a_up ^ a_down ^ downMask;
-            var b_up = (b >> 1) & downMask;
-            var b_down = b & downMask;
-            var b_neutral = b_up ^ b_down ^ downMask;
-            var c_up = (a_up & b_neutral) | (a_neutral & b_up) | (a_down & b_down);
-            var c_down = (a_down & b_neutral) | (a_neutral & b_down) | (a_up & b_up);
-            var c = c_up << 1 | c_down;
+            ulong c = XorTrits(a, b);
             return c.FromTritInt64();
         }
+    }
+
+    /// <summary>
+    /// Performs an Xor (<see cref="Trit"/>wise addition) on two 16-<see cref="Trit"/> values
+    /// </summary>
+    /// <param name="a">The first trit-value (2 bits per trit)</param>
+    /// <param name="b">The second trit-value (2 bits per trit)</param>
+    internal static ulong XorTrits(ulong a, ulong b)
+    {
+        const long downMask = 0b0101010101010101_0101010101010101_0101010101010101_0101010101010101;
+        var a_up = (a >> 1) & downMask;
+        var a_down = a & downMask;
+        var a_neutral = a_up ^ a_down ^ downMask;
+        var b_up = (b >> 1) & downMask;
+        var b_down = b & downMask;
+        var b_neutral = b_up ^ b_down ^ downMask;
+        var c_up = (a_up & b_neutral) | (a_neutral & b_up) | (a_down & b_down);
+        var c_down = (a_down & b_neutral) | (a_neutral & b_down) | (a_up & b_up);
+        var c = c_up << 1 | c_down;
+        return c;
+    }
+
+    /// <summary>
+    /// Performs an Xor (<see cref="Trit"/>wise addition) on two 16-<see cref="Trit"/> values
+    /// </summary>
+    /// <param name="a">The first trit-value (2 bits per trit)</param>
+    /// <param name="b">The second trit-value (2 bits per trit)</param>
+    internal static uint XorTrits(uint a, uint b)
+    {
+        const int downMask = 0b01010101_01010101_01010101_01010101;
+        var a_up = (a >> 1) & downMask;
+        var a_down = a & downMask;
+        var a_neutral = a_up ^ a_down ^ downMask;
+        var b_up = (b >> 1) & downMask;
+        var b_down = b & downMask;
+        var b_neutral = b_up ^ b_down ^ downMask;
+        var c_up = (a_up & b_neutral) | (a_neutral & b_up) | (a_down & b_down);
+        var c_down = (a_down & b_neutral) | (a_neutral & b_down) | (a_up & b_up);
+        var c = c_up << 1 | c_down;
+        return c;
     }
 
     //Performs a tritwise minus

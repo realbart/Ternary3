@@ -56,5 +56,4 @@ internal static class Formatter
 
         return format.Pad ? builder.ToString() : builder.ToString().TrimStart(format.Middle);
     }
-
 }
