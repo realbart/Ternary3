@@ -81,13 +81,13 @@ public class BuiltInTypeExtensionsTests
     [Fact]
     public void Or()
     {
-        224.TrinaryOr(320).Should().Be(332);
-        320.TrinaryOr(224).Should().Be(332);
-        332.TrinaryOr(224).Should().Be(332);
-        320.TrinaryOr(332).Should().Be(332);
+        BuiltInTypeExtensions.TrinaryOr(224, 320).Should().Be(332);
         BuiltInTypeExtensions.TrinaryOr(320, 224).Should().Be(332);
+        BuiltInTypeExtensions.TrinaryOr(332, 224).Should().Be(332);
+        BuiltInTypeExtensions.TrinaryOr(320, 332).Should().Be(332);
         BuiltInTypeExtensions.TrinaryOr(43046720, 43046721).Should().Be(43046721);
     }
+
 
     [Fact]
     public void And()
@@ -103,5 +103,14 @@ public class BuiltInTypeExtensionsTests
         BuiltInTypeExtensions.TrinaryXor(224, 320).Should().Be(-182);
         BuiltInTypeExtensions.TrinaryXor(224, 182).Should().Be(-320);
         BuiltInTypeExtensions.TrinaryXor(182, 224).Should().Be(-320);
+    }
+
+    [Fact]
+    public void Flip()
+    {
+        BuiltInTypeExtensions.TrinaryNot(320).Should().Be(-320);
+        BuiltInTypeExtensions.TrinaryNot(1743392200).Should().Be(-1743392200);
+        BuiltInTypeExtensions.TrinaryNot(1743392201).Should().Be(1743392200);
+        BuiltInTypeExtensions.TrinaryNot(1743392202).Should().Be(1743392199);
     }
 }

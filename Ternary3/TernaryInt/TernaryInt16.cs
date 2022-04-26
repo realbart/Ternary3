@@ -30,8 +30,25 @@ public partial struct TernaryInt16
     /// Formats the <see cref="TernaryInt16"/> one character per Trit using the default formatter.
     /// </summary>
     public override string ToString() => Formatter.FormatTrits(trits, 16);
+
     /// <summary>
     /// Formats the <see cref="TernaryInt16"/> one character per Trit using a custom formatter.
     /// </summary>
     public string ToString(ITernaryFormat format) => Formatter.FormatTrits(trits, format, 16);
+
+    /// <summary>
+    /// Gets the nth <see cref="Trit"/>, starting with the least significant <see cref="Trit"/>.
+    /// </summary>
+    /// <param name="index">The index of the <see cref="Trit"/> to return, starting with the least significant</param>
+    public Trit this[Index index] => Operations.GetTrit(trits, index);
+
+
+    public uint this[Range range] => Operations.GetTrits(trits, range);
+
+    public static TernaryInt16 operator !(TernaryInt16 target) => new TernaryInt16(Operations.NotTrits(target.trits));
+    public static TernaryInt16 operator &(TernaryInt16 a, TernaryInt16 b) => new TernaryInt16(Operations.AndTrits(a.trits, b.trits));
+    public static TernaryInt16 operator |(TernaryInt16 a, TernaryInt16 b) => new TernaryInt16(Operations.OrTrits(a.trits, b.trits));
+    public static TernaryInt16 operator ^(TernaryInt16 a, TernaryInt16 b) => new TernaryInt16(Operations.XorTrits(a.trits, b.trits));
+    public static TernaryInt16 operator <<(TernaryInt16 a, int b) => new TernaryInt16(a.trits << (b << 1));
+    public static TernaryInt16 operator >>(TernaryInt16 a, int b) => new TernaryInt16(a.trits >> (b << 1));
 }

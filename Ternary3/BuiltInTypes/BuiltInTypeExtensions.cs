@@ -89,7 +89,13 @@ public static partial class BuiltInTypeExtensions
         }
     }
 
-    public static int Flip(this int operand) => -Operations.RoundTo20Trits(operand);
+    /// <summary>
+    /// Calculates a logical not, expanded to the ternary system.
+    /// Each trit in the resulting value is the opposite of the source trit
+    /// Example:
+    /// NOT UUNNDD (320) => DDNNUU (-320)
+    /// </summary>
+    public static int TrinaryNot(this int operand) => -Operations.RoundTo20Trits(operand);
 
 
     public static Trit Compare(this int operand1, int operand2)

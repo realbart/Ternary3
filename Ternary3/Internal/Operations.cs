@@ -35,14 +35,14 @@ internal static partial class Operations
     internal static ulong OrTrits(ulong a, ulong b)
         => ((a ^ DownMask64) | (b ^ DownMask64)) ^ DownMask64;
 
-    internal static uint FlipTrits(uint trits)
-        => ((trits & DownMask32) << 1) | ((trits >> 1) & DownMask32);
+    internal static uint NotTrits(uint trits)
+        => ((trits & DownMask32) << 1) | ((trits & UpMask32) >> 1);
 
-    internal static ulong FlipTrits(ulong trits)
-        => ((trits & DownMask64) << 1) | ((trits >> 1) & DownMask64);
+    internal static ulong NotTrits(ulong trits)
+        => ((trits & DownMask64) << 1) | ((trits & UpMask64) >> 1);
 
 
-        /// <summary>
+    /// <summary>
     /// Performs an Xor (<see cref="Trit"/>wise addition) on two 16-<see cref="Trit"/> values
     /// </summary>
     /// <param name="a">The first trit-value (2 bits per trit)</param>
@@ -78,5 +78,25 @@ internal static partial class Operations
         var c_down = (a_down & b_neutral) | (a_neutral & b_down) | (a_up & b_up);
         var c = c_up << 1 | c_down;
         return c;
+    }
+
+    internal static Trit GetTrit(uint a, Index index)
+        => (Trit)((((a >> (index.GetOffset(16) << 1)) & 3) ^ 1) - 1);
+
+    internal static Trit GetTrit(ulong a, Index index)
+        => (Trit)((((a >> (index.GetOffset(32) << 1)) & 3) ^ 1) - 1);
+
+    internal static uint GetTrits(uint a, Range range)
+    {
+        var start = range.Start.GetOffset(16) << 1;
+        var end = range.End.GetOffset(16) << 1;
+        return (a << (32 - end)) >> (start + end);
+    }
+
+    internal static ulong GetTrits(ulong a, Range range)
+    {
+        var start = range.Start.GetOffset(32) << 1;
+        var end = range.End.GetOffset(32) << 1;
+        return (a << (64 - end)) >> (start + end);
     }
 }

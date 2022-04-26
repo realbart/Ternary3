@@ -25,4 +25,8 @@
     <ProjectReference Include="..\Ternary3\Ternary3.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="TernaryInt\" />
+  </ItemGroup>
+
 </Project>

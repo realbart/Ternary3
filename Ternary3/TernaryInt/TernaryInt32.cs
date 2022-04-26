@@ -31,8 +31,24 @@ public partial struct TernaryInt32
     /// Formats the <see cref="TernaryInt16"/> one character per Trit using the default formatter.
     /// </summary>
     public override string ToString() => Formatter.FormatTrits(trits, 32);
+
     /// <summary>
     /// Formats the <see cref="TernaryInt16"/> one character per Trit using a custom formatter.
     /// </summary>
     public string ToString(ITernaryFormat format) => Formatter.FormatTrits(trits, format, 32);
+
+    /// <summary>
+    /// Gets the nth <see cref="Trit"/>, starting with the least significant <see cref="Trit"/>.
+    /// </summary>
+    /// <param name="index">The index of the <see cref="Trit"/> to return, starting with the least significant</param>
+    public Trit this[Index index] => Operations.GetTrit(trits, index);
+    public ulong this[Range range] => Operations.GetTrits(trits, range);
+
+    public static TernaryInt32 operator !(TernaryInt32 target) => new TernaryInt32(Operations.NotTrits(target.trits));
+    public static TernaryInt32 operator &(TernaryInt32 a, TernaryInt32 b) => new TernaryInt32(Operations.AndTrits(a.trits, b.trits));
+    public static TernaryInt32 operator |(TernaryInt32 a, TernaryInt32 b) => new TernaryInt32(Operations.OrTrits(a.trits, b.trits));
+    public static TernaryInt32 operator ^(TernaryInt32 a, TernaryInt32 b) => new TernaryInt32(Operations.XorTrits(a.trits, b.trits));
+    public static TernaryInt32 operator <<(TernaryInt32 a, int b) => new TernaryInt32(a.trits << (b << 1));
+    public static TernaryInt32 operator >>(TernaryInt32 a, int b) => new TernaryInt32(a.trits >> (b << 1));
+
 }
