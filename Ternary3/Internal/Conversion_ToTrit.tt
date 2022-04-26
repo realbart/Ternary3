@@ -20,7 +20,7 @@ var factor = 1_099_511_627_776;
     /// This way, the actual value is limited to 20 trits, between -<#=ups#> and <#=ups#>.
     /// </summary>
     /// <param name="value">The value to convert. Make sure this is between -<#=ups#> and <#=ups#></param>
-    internal static ulong ToTritInt64(this int value)
+    internal static ulong ToTritUInt64(this int value)
     {
 <# // performance critical: caller should check limits #>
         ulong target = 0;

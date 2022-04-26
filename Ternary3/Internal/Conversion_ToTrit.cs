@@ -8,7 +8,7 @@ internal static partial class Conversion
     /// This way, the actual value is limited to 20 trits, between -1743392200 and 1743392200.
     /// </summary>
     /// <param name="value">The value to convert. Make sure this is between -1743392200 and 1743392200</param>
-    internal static ulong ToTritInt64(this int value)
+    internal static ulong ToTritUInt64(this int value)
     {
         ulong target = 0;
 
