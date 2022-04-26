@@ -143,7 +143,7 @@ public static partial class BuiltInTypeExtensions
             if (operand2 > 1743392200) operand2 += 808182895;
             else if (operand2 < -1743392200) operand2 -= 808182895;
             const long downMask = 0b0101010101010101_0101010101010101_0101010101010101_0101010101010101;
-            return (((operand1.ToTritInt64() ^ downMask) & (operand2.ToTritInt64() ^ downMask)) ^ downMask).FromTritInt64();
+            return (((operand1.ToTritUInt64() ^ downMask) & (operand2.ToTritUInt64() ^ downMask)) ^ downMask).FromTritInt64();
         }
     }
 
@@ -170,7 +170,7 @@ public static partial class BuiltInTypeExtensions
             if (operand2 > 1743392200) operand2 += 808182895;
             else if (operand2 < -1743392200) operand2 -= 808182895;
             const long downMask = 0b0101010101010101_0101010101010101_0101010101010101_0101010101010101;
-            return (((operand1.ToTritInt64() ^ downMask) | (operand2.ToTritInt64() ^ downMask)) ^ downMask).FromTritInt64();
+            return (((operand1.ToTritUInt64() ^ downMask) | (operand2.ToTritUInt64() ^ downMask)) ^ downMask).FromTritInt64();
         }
     }
 
@@ -201,8 +201,8 @@ public static partial class BuiltInTypeExtensions
         }
         else
         {
-            var a = operand1.ToTritInt64();
-            var b = operand2.ToTritInt64();
+            var a = operand1.ToTritUInt64();
+            var b = operand2.ToTritUInt64();
             const long downMask = 0b0101010101010101_0101010101010101_0101010101010101_0101010101010101;
             var a_up = (a >> 1) & downMask;
             var a_down = a & downMask;
