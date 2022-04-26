@@ -1,10 +1,4 @@
 ﻿namespace Ternary3;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Ternary3.Formatting;
 using Ternary3.Internal;
 
@@ -24,13 +18,13 @@ public partial struct TernaryInt16
     /// Represents the largest possible value of an <see cref="TernaryInt16"/>:
     /// U_UUU_UUU_UUU_UUU_UUU  This field is constant.
     /// </summary>
-    public const int MinValue = -21523360; // -Pow(3,16)/2
+    public const int MinValue = -MaxTrit16;
 
     /// <summary>
     /// Represents the smallest possible value of an <see cref="TernaryInt16"/>:
     /// D_DDD_DDD_DDD_DDD_DDD  This field is constant.
     /// </summary>
-    public const int MaxValue = 21523360; // Pow(3,16)/2
+    public const int MaxValue = MaxTrit16;
 
     /// <summary>
     /// Formats the <see cref="TernaryInt16"/> one character per Trit using the default formatter.

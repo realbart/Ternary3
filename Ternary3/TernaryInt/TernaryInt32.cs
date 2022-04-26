@@ -19,13 +19,13 @@ public partial struct TernaryInt32
     /// Represents the largest possible value of an <see cref="TernaryInt16"/>:
     /// U_UUU_UUU_UUU_UUU_UUU  This field is constant.
     /// </summary>
-    public const long MinValue = -926510094425920; // -Pow(3,32)/2
+    public const long MinValue = -MaxTrit32;
 
     /// <summary>
     /// Represents the smallest possible value of an <see cref="TernaryInt16"/>:
     /// D_DDD_DDD_DDD_DDD_DDD  This field is constant.
     /// </summary>
-    public const long MaxValue = 926510094425920; // Pow(3,32)/2
+    public const long MaxValue = MaxTrit32;
 
     /// <summary>
     /// Formats the <see cref="TernaryInt16"/> one character per Trit using the default formatter.
