@@ -1,4 +1,6 @@
 ﻿namespace Ternary3;
+
+using Ternary3.Formatting;
 using Ternary3.Internal;
 
 /// <summary>
@@ -24,4 +26,13 @@ public partial struct TernaryInt32
     /// D_DDD_DDD_DDD_DDD_DDD  This field is constant.
     /// </summary>
     public const long MaxValue = 926510094425920; // Pow(3,32)/2
+
+    /// <summary>
+    /// Formats the <see cref="TernaryInt16"/> one character per Trit using the default formatter.
+    /// </summary>
+    public override string ToString() => Formatter.FormatTrits(trits, 32);
+    /// <summary>
+    /// Formats the <see cref="TernaryInt16"/> one character per Trit using a custom formatter.
+    /// </summary>
+    public string ToString(ITernaryFormat format) => Formatter.FormatTrits(trits, format, 32);
 }

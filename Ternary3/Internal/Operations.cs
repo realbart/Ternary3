@@ -5,9 +5,9 @@ using Ternary3.Internal;
 
 internal static partial class Operations
 {
-    public static int RoundTo19Trits(int value) => 0;
-    public static int RoundTo20Trits(int value) => 0;
-    public static int RoundTo16Trits(int value) => 0;
+    public static int Modulo16Trits(int value) => 0;
+    public static int Modulo19Trits(int value) => 0;
+    public static int Modulo20Trits(int value) => 0;
 
 
     internal static int Rot(IConvertible value) => Rot((int)value);
