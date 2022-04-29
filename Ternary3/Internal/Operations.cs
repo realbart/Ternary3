@@ -5,24 +5,6 @@ using Ternary3.Internal;
 
 internal static partial class Operations
 {
-    internal static int RoundTo20Trits(int value)
-    {
-        // Overflow. Throws out of bounds in checked context.
-        // 2^32 - 3^20 = 808182895
-        if (value > MaxTrit20) value += 808182895;
-        else if (value < -MaxTrit20) value -= 808182895;
-        return value;
-    }
-
-    internal static long RoundTo40Trits(long value)
-    {
-        // Overflow. Throws out of bounds in checked context.
-        // 2^64 - 3^40 = 6289078614652622815
-        if (value > MaxTrit40) value += 6289078614652622815;
-        else if (value < -MaxTrit40) value -= 6289078614652622815;
-        return value;
-    }
-
     internal static uint AndTrits(uint a, uint b)
         => ((a ^ DownMask32) & (b ^ DownMask32)) ^ DownMask32;
 

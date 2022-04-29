@@ -1,0 +1,120 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+namespace Ternary3.Internal;
+using Ternary3.BuiltInTypes;
+
+internal static partial class Conversion
+{
+<# for (var i = 1; i <= 4; i++) { #>
+    /// <summary>
+    /// Converts an integer value to a long form that makes performing trit operations easy.
+    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
+    /// This way, the actual value is limited to <#=i#> trits, with 
+    /// a value between -<#=Math.Pow(3,i)*.5-.5#> and <#=Math.Pow(3,i)*.5-.5#>.
+    /// </summary>
+    public static byte ToTrits<#=i#>(this int value) 
+        => (byte)SetTrit<#=i#>(value.ModThreePow<#=i#>(), 0u);
+
+<# } #>
+<# for (var i = 5; i <= 8; i++) { #>
+    /// <summary>
+    /// Converts an integer value to a long form that makes performing trit operations easy.
+    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
+    /// This way, the actual value is limited to <#=i#> trits, with 
+    /// a value between -<#=Math.Pow(3,i)*.5-.5#> and <#=Math.Pow(3,i)*.5-.5#>.
+    /// </summary>
+    public static ushort ToTrits<#=i#>(this int value) 
+        => (ushort)SetTrit<#=i#>(value.ModThreePow<#=i#>(), 0u);
+
+<# } #>
+<# for (var i = 9; i <= 16; i++) { #>
+    /// <summary>
+    /// Converts an integer value to a long form that makes performing trit operations easy.
+    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
+    /// This way, the actual value is limited to <#=i#> trits, with 
+    /// a value between -<#=Math.Pow(3,i)*.5-.5#> and <#=Math.Pow(3,i)*.5-.5#>.
+    /// </summary>
+    public static uint ToTrits<#=i#>(this int value) 
+        => SetTrit<#=i#>(value.ModThreePow<#=i#>(), 0u);
+
+<# } #>
+<# for (var i = 17; i <= 20; i++) { #>
+    /// <summary>
+    /// Converts an integer value to a long form that makes performing trit operations easy.
+    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
+    /// This way, the actual value is limited to <%=i%> trits, between -<#=Math.Pow(3,i)*.5-.5#> and <#=Math.Pow(3,i)*.5-.5#>.
+    /// </summary>
+    public static ulong ToTrits<#=i#>(this int value) 
+        => SetTrit<#=i#>(value.ModThreePow<#=i#>(), 0ul);
+
+<# } #>
+<# for (var i = 21; i <= 32; i++) { #>
+    /// <summary>
+    /// Converts an integer value to a long form that makes performing trit operations easy.
+    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
+    /// This way, the actual value is limited to <%=i%> trits, between -<#=Math.Pow(3,i)*.5-.5#> and <#=Math.Pow(3,i)*.5-.5#>.
+    /// </summary>
+    public static ulong ToTrits<#=i#>(this long value) 
+        => SetTrit<#=i#>(value.ModThreePow<#=i#>(), 0ul);
+
+<# } #>
+
+    private static uint SetTrit1(int value, uint target)
+        => value switch
+        {
+            -MaxTrit1 => target | (Trit1Mask & DownMask32),
+            MaxTrit1 => target | (Trit1Mask & UpMask32),
+            _ => target
+        };
+
+<# for (var i = 2; i <= 16; i++) { #>
+    private static uint SetTrit<#=i#>(int value, uint target)
+        => value switch
+        {
+            (< -MaxTrit<#=i-1#>) => SetTrit<#=i-1#>(value + ThreePow<#=i-1#>, target) | (Trit<#=i#>Mask & DownMask32),
+            (> MaxTrit<#=i-1#>) => SetTrit<#=i-1#>(value - ThreePow<#=i-1#>, target) | (Trit<#=i#>Mask & UpMask32),
+            _ => SetTrit<#=i-1#>(value, target)
+        };
+
+<# } #>
+    private static ulong SetTrit17(int value, ulong target)
+        => value switch
+        {
+            (< -MaxTrit16) => SetTrit16(value + ThreePow16, (uint)target) | (Trit17Mask & DownMask64),
+            (> MaxTrit16) => SetTrit16(value - ThreePow16, (uint)target) | (Trit17Mask & UpMask64),
+            _ => SetTrit16(value, (uint)target)
+        };
+
+<# for (var i = 18; i <= 20; i++) { #>
+    private static ulong SetTrit<#=i#>(int value, ulong target)
+        => value switch
+        {
+            (< -MaxTrit<#=i-1#>) => SetTrit<#=i-1#>(value + ThreePow<#=i-1#>, target) | (Trit<#=i#>Mask & DownMask64),
+            (> MaxTrit<#=i-1#>) => SetTrit<#=i-1#>(value - ThreePow<#=i-1#>, target) | (Trit<#=i#>Mask & UpMask64),
+            _ => SetTrit<#=i-1#>(value, target)
+        };
+
+<# } #>
+    private static ulong SetTrit21(long value, ulong target)
+        => value switch
+        {
+            (< -MaxTrit20) => SetTrit20((int)(value + ThreePow20), target) | (Trit21Mask & DownMask64),
+            (> MaxTrit20) => SetTrit20((int)(value - ThreePow20), target) | (Trit21Mask & UpMask64),
+            _ => SetTrit20((int)value, target)
+        };
+
+<# for (var i = 22; i <= 32; i++) { #>
+    private static ulong SetTrit<#=i#>(long value, ulong target)
+        => value switch
+        {
+            (< -MaxTrit<#=i-1#>) => SetTrit<#=i-1#>(value + ThreePow<#=i-1#>, target) | (Trit<#=i#>Mask & DownMask64),
+            (> MaxTrit<#=i-1#>) => SetTrit<#=i-1#>(value - ThreePow<#=i-1#>, target) | (Trit<#=i#>Mask & UpMask64),
+            _ => SetTrit<#=i-1#>(value, target)
+        };
+
+<# } #>
+}

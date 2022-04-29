@@ -12,8 +12,8 @@ public partial struct TernaryInt32
 
     internal TernaryInt32(ulong trits) => this.trits = trits;
 
-    public static explicit operator TernaryInt32(int value) => new TernaryInt32(value.ToTritUInt32());
-    public static implicit operator int(TernaryInt32 value) => value.trits.FromTritInt64();
+    public static explicit operator TernaryInt32(int value) => new TernaryInt32(value.ToTrits20());
+    public static implicit operator int(TernaryInt32 value) => value.trits.ToInt32();
 
     /// <summary>
     /// Represents the largest possible value of an <see cref="TernaryInt16"/>:

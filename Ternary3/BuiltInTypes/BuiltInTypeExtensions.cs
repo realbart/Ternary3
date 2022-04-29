@@ -1,5 +1,6 @@
 ﻿namespace Ternary3;
 
+using Ternary3.BuiltInTypes;
 using Ternary3.Internal;
 
 public static partial class BuiltInTypeExtensions
@@ -23,13 +24,13 @@ public static partial class BuiltInTypeExtensions
     {
         if (first > -MaxTrit16 && first < MaxTrit16 && second > -MaxTrit16 && second < MaxTrit16)
         {
-            return Operations.AndTrits(first.ToTritUInt32(), second.ToTritUInt32()).FromTritUInt32();
+            return Operations.AndTrits(first.ToTrits16(), second.ToTrits16()).ToInt32();
         }
         else
         {
-            first = Operations.RoundTo20Trits(first);
-            second = Operations.RoundTo20Trits(second);
-            return Operations.AndTrits(first.ToTritUInt64(), second.ToTritUInt64()).FromTritInt64();
+            first = first.ModThreePow20();
+            second = second.ModThreePow20();
+            return Operations.AndTrits(first.ToTrits20(), second.ToTrits20()).ToInt32();
         }
     }
 
@@ -51,13 +52,13 @@ public static partial class BuiltInTypeExtensions
     {
         if (first > -MaxTrit16 && first < MaxTrit16 && second > -MaxTrit16 && second < MaxTrit16)
         {
-            return Operations.OrTrits(first.ToTritUInt32(), second.ToTritUInt32()).FromTritUInt32();
+            return Operations.OrTrits(first.ToTrits16(), second.ToTrits16()).ToInt32();
         }
         else
         {
-            first = Operations.RoundTo20Trits(first);
-            second = Operations.RoundTo20Trits(second);
-            return Operations.OrTrits(first.ToTritUInt64(), second.ToTritUInt64()).FromTritInt64();
+            first = first.ModThreePow20();
+            second = second.ModThreePow20();
+            return Operations.OrTrits(first.ToTrits20(), second.ToTrits20()).ToInt32();
         }
     }
 
@@ -79,17 +80,17 @@ public static partial class BuiltInTypeExtensions
     {
         if (first > -MaxTrit16 && first < MaxTrit16 && second > -MaxTrit16 && second < MaxTrit16)
         {
-            return Operations.XorTrits(first.ToTritUInt32(), second.ToTritUInt32()).FromTritUInt32();
+            return Operations.XorTrits(first.ToTrits16(), second.ToTrits16()).ToInt32();
         }
         else
         {
-            first = Operations.RoundTo20Trits(first);
-            second = Operations.RoundTo20Trits(second);
-            return Operations.XorTrits(first.ToTritUInt64(), second.ToTritUInt64()).FromTritInt64();
+            first = first.ModThreePow20();
+            second = second.ModThreePow20();
+            return Operations.XorTrits(first.ToTrits20(), second.ToTrits20()).ToInt32();
         }
     }
 
-    public static int Flip(this int operand) => -Operations.RoundTo20Trits(operand);
+    public static int Flip(this int operand) => -operand.ModThreePow20();
 
 
     public static Trit Compare(this int operand1, int operand2)

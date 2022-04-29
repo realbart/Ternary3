@@ -22,16 +22,16 @@ public class ConversionTests
         ulong minus182 = 0b00000000_00000000_00000001_1001100110;
         ulong val43046720 = 0b00000000_00000000_00000000_00000010_00000000_00000000_00000000_00000001;
         ulong val43046721 = 0b00000000_00000000_00000000_00000010_00000000_00000000_00000000_00000000;
-        Conversion.FromTritInt64(zero).Should().Be(0);
-        Conversion.FromTritInt64(one).Should().Be(1);
-        Conversion.FromTritInt64(minusOne).Should().Be(-1);
-        Conversion.FromTritInt64(val320).Should().Be(320);
-        Conversion.FromTritInt64(val224).Should().Be(224);
-        Conversion.FromTritInt64(val332).Should().Be(332);
-        Conversion.FromTritInt64(val212).Should().Be(212);
-        Conversion.FromTritInt64(minus182).Should().Be(-182);
-        Conversion.FromTritInt64(val43046720).Should().Be(43046720);
-        Conversion.FromTritInt64(val43046721).Should().Be(43046721);
+        Conversion.ToInt32(zero).Should().Be(0);
+        Conversion.ToInt32(one).Should().Be(1);
+        Conversion.ToInt32(minusOne).Should().Be(-1);
+        Conversion.ToInt32(val320).Should().Be(320);
+        Conversion.ToInt32(val224).Should().Be(224);
+        Conversion.ToInt32(val332).Should().Be(332);
+        Conversion.ToInt32(val212).Should().Be(212);
+        Conversion.ToInt32(minus182).Should().Be(-182);
+        Conversion.ToInt32(val43046720).Should().Be(43046720);
+        Conversion.ToInt32(val43046721).Should().Be(43046721);
     }
 
     [Fact]
@@ -45,14 +45,14 @@ public class ConversionTests
         uint val332 = 0b00000000_00000000_00000010_1000100001;
         ulong val43046720 = 0b00000000_00000000_00000000_00000010_00000000_00000000_00000000_00000001;
         ulong val43046721 = 0b00000000_00000000_00000000_00000010_00000000_00000000_00000000_00000000;
-        Conversion.ToTritUInt64(0).Should().Be(zero);
-        Conversion.ToTritUInt64(1).Should().Be(one);
-        Conversion.ToTritUInt64(-1).Should().Be(minusOne);
-        Conversion.ToTritUInt64(320).Should().Be(val320);
-        Conversion.ToTritUInt64(224).Should().Be(val224);
-        Conversion.ToTritUInt64(332).Should().Be(val332);
-        Conversion.ToTritUInt64(43046720).Should().Be(val43046720);
-        Conversion.ToTritUInt64(43046721).Should().Be(val43046721);
+        Conversion.ToTrits20(0).Should().Be(zero);
+        Conversion.ToTrits20(1).Should().Be(one);
+        Conversion.ToTrits20(-1).Should().Be(minusOne);
+        Conversion.ToTrits20(320).Should().Be(val320);
+        Conversion.ToTrits20(224).Should().Be(val224);
+        Conversion.ToTrits20(332).Should().Be(val332);
+        Conversion.ToTrits20(43046720).Should().Be(val43046720);
+        Conversion.ToTrits20(43046721).Should().Be(val43046721);
     }
 
     [Fact]
@@ -65,13 +65,11 @@ public class ConversionTests
         uint val224 = 0b00000000_00000000_00000010_0001100001;
         uint val332 = 0b00000000_00000000_00000010_1000100001;
 
-        Conversion.ToTritUInt32(0).Should().Be(zero);
-        Conversion.ToTritUInt32(1).Should().Be(one);
-        Conversion.ToTritUInt32(-1).Should().Be(minusOne);
-        Conversion.ToTritUInt32(320).Should().Be(val320);
-        Conversion.ToTritUInt32(224).Should().Be(val224);
-        Conversion.ToTritUInt32(332).Should().Be(val332);
+        Conversion.ToTrits16(0).Should().Be(zero);
+        Conversion.ToTrits16(1).Should().Be(one);
+        Conversion.ToTrits16(-1).Should().Be(minusOne);
+        Conversion.ToTrits16(320).Should().Be(val320);
+        Conversion.ToTrits16(224).Should().Be(val224);
+        Conversion.ToTrits16(332).Should().Be(val332);
     }
-
-
 }
