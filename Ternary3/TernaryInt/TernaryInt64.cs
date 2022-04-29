@@ -9,11 +9,11 @@ using Ternary3.Internal;
 
     internal class TernaryInt64
     {
-        private readonly (ulong, ulong) trits;
+        private readonly (ulong high, ulong low) trits;
 
-        public TernaryInt64((ulong, ulong) trits) => this.trits = trits;
+        public TernaryInt64((ulong high, ulong low) trits) => this.trits = trits;
 
-        //public static explicit operator TernaryInt64(long value) => new TernaryInt32(value.ToUInt64s())
+        public static explicit operator TernaryInt64(long value) => new TernaryInt64(value.ToTrits40());
         public static implicit operator long(TernaryInt64 value) => value.trits.ToInt64();
     }
 }

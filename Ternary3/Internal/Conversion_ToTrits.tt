@@ -4,8 +4,9 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
-namespace Ternary3.Internal;
 using Ternary3.BuiltInTypes;
+
+namespace Ternary3.Internal;
 
 internal static partial class Conversion
 {
@@ -16,29 +17,29 @@ internal static partial class Conversion
     /// This way, the actual value is limited to <#=i#> trits, with 
     /// a value between -<#=Math.Pow(3,i)*.5-.5#> and <#=Math.Pow(3,i)*.5-.5#>.
     /// </summary>
-    public static byte ToTrits<#=i#>(this int value) 
+    internal static byte ToTrits<#=i#>UInt8(this int value) 
         => (byte)SetTrit<#=i#>(value.ModThreePow<#=i#>(), 0u);
 
 <# } #>
-<# for (var i = 5; i <= 8; i++) { #>
+<# for (var i = 1; i <= 8; i++) { #>
     /// <summary>
     /// Converts an integer value to a long form that makes performing trit operations easy.
     /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
     /// This way, the actual value is limited to <#=i#> trits, with 
     /// a value between -<#=Math.Pow(3,i)*.5-.5#> and <#=Math.Pow(3,i)*.5-.5#>.
     /// </summary>
-    public static ushort ToTrits<#=i#>(this int value) 
+    internal static ushort ToTrits<#=i#>UInt16(this int value) 
         => (ushort)SetTrit<#=i#>(value.ModThreePow<#=i#>(), 0u);
 
 <# } #>
-<# for (var i = 9; i <= 16; i++) { #>
+<# for (var i = 1; i <= 16; i++) { #>
     /// <summary>
     /// Converts an integer value to a long form that makes performing trit operations easy.
     /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
     /// This way, the actual value is limited to <#=i#> trits, with 
     /// a value between -<#=Math.Pow(3,i)*.5-.5#> and <#=Math.Pow(3,i)*.5-.5#>.
     /// </summary>
-    public static uint ToTrits<#=i#>(this int value) 
+    internal static uint ToTrits<#=i#>(this int value) 
         => SetTrit<#=i#>(value.ModThreePow<#=i#>(), 0u);
 
 <# } #>
@@ -48,7 +49,7 @@ internal static partial class Conversion
     /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
     /// This way, the actual value is limited to <%=i%> trits, between -<#=Math.Pow(3,i)*.5-.5#> and <#=Math.Pow(3,i)*.5-.5#>.
     /// </summary>
-    public static ulong ToTrits<#=i#>(this int value) 
+    internal static ulong ToTrits<#=i#>(this int value) 
         => SetTrit<#=i#>(value.ModThreePow<#=i#>(), 0ul);
 
 <# } #>
@@ -58,10 +59,31 @@ internal static partial class Conversion
     /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
     /// This way, the actual value is limited to <%=i%> trits, between -<#=Math.Pow(3,i)*.5-.5#> and <#=Math.Pow(3,i)*.5-.5#>.
     /// </summary>
-    public static ulong ToTrits<#=i#>(this long value) 
+    internal static ulong ToTrits<#=i#>(this long value) 
         => SetTrit<#=i#>(value.ModThreePow<#=i#>(), 0ul);
 
 <# } #>
+    /// <summary>
+    /// Converts an integer value to a long form that makes performing trit operations easy.
+    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
+    /// This way, the actual value is limited to 64 trits, between -1716841910146256242328924544640 and 1716841910146256242328924544640.
+    /// </summary>
+    internal static (ulong high, ulong low) ToTrits64(this long value) => 
+        (
+            SetTrit32(value.ModThreePow32(), 0ul),
+            SetTrit32(value / MaxTrit32, 0ul)
+        );
+
+    /// <summary>
+    /// Converts an integer value to a long form that makes performing trit operations easy.
+    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
+    /// This way, the actual value is limited to 40 trits, between -6078832729528464400 and 6078832729528464400.
+    /// </summary>
+    internal static (ulong high, ulong low) ToTrits40(this long value) => 
+        (
+            SetTrit32(value.ModThreePow32(), 0ul),
+            SetTrit8((value / MaxTrit32).ModThreePow8(), 0u)
+        );
 
     private static uint SetTrit1(int value, uint target)
         => value switch

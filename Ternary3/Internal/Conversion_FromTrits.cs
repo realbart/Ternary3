@@ -1,5 +1,8 @@
-﻿namespace Ternary3.Internal;
+﻿using System.CodeDom.Compiler;
 
+namespace Ternary3.Internal;
+
+[GeneratedCode("t4","1.0,0,0")]
 internal static partial class Conversion
 {
     /// <summary>
