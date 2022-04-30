@@ -21,11 +21,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>BuiltInTypeExtensions_Switch.tt</DependentUpon>
     </Compile>
-    <Compile Update="Internal\Conversion_FromTrits.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Conversion_FromTrits.tt</DependentUpon>
-    </Compile>
     <Compile Update="Internal\Conversion_ToTrits.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -46,10 +41,6 @@
   <ItemGroup>
     <None Update="BuiltInTypes\BuiltInTypeExtensions_Switch.tt">
       <LastGenOutput>BuiltInTypeExtensions_Switch.cs</LastGenOutput>
-      <Generator>TextTemplatingFileGenerator</Generator>
-    </None>
-    <None Update="Internal\Conversion_FromTrits.tt">
-      <LastGenOutput>Conversion_FromTrits.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
     </None>
     <None Update="Internal\Conversion_ToTrits.tt">

@@ -22,16 +22,16 @@ public class ConversionTests
         ulong minus182 = 0b00000000_00000000_00000001_1001100110;
         ulong val43046720 = 0b00000000_00000000_00000000_00000010_00000000_00000000_00000000_00000001;
         ulong val43046721 = 0b00000000_00000000_00000000_00000010_00000000_00000000_00000000_00000000;
-        Conversion.ToInt32(zero).Should().Be(0);
-        Conversion.ToInt32(one).Should().Be(1);
-        Conversion.ToInt32(minusOne).Should().Be(-1);
-        Conversion.ToInt32(val320).Should().Be(320);
-        Conversion.ToInt32(val224).Should().Be(224);
-        Conversion.ToInt32(val332).Should().Be(332);
-        Conversion.ToInt32(val212).Should().Be(212);
-        Conversion.ToInt32(minus182).Should().Be(-182);
-        Conversion.ToInt32(val43046720).Should().Be(43046720);
-        Conversion.ToInt32(val43046721).Should().Be(43046721);
+        Conversion.From32Trits(zero).Should().Be(0);
+        Conversion.From32Trits(one).Should().Be(1);
+        Conversion.From32Trits(minusOne).Should().Be(-1);
+        Conversion.From32Trits(minus182).Should().Be(-182);
+        Conversion.From32Trits(val212).Should().Be(212);
+        Conversion.From32Trits(val224).Should().Be(224);
+        Conversion.From32Trits(val320).Should().Be(320);
+        Conversion.From32Trits(val332).Should().Be(332);
+        Conversion.From32Trits(val43046720).Should().Be(43046720);
+        Conversion.From32Trits(val43046721).Should().Be(43046721);
     }
 
     [Fact]

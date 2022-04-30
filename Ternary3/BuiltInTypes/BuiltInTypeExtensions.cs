@@ -24,13 +24,13 @@ public static partial class BuiltInTypeExtensions
     {
         if (first > -MaxTrit16 && first < MaxTrit16 && second > -MaxTrit16 && second < MaxTrit16)
         {
-            return Operations.AndTrits(first.ToTrits16(), second.ToTrits16()).ToInt32();
+            return Operations.AndTrits(first.ToTrits16(), second.ToTrits16()).From16Trits();
         }
         else
         {
             first = first.ModThreePow20();
             second = second.ModThreePow20();
-            return Operations.AndTrits(first.ToTrits20(), second.ToTrits20()).ToInt32();
+            return Operations.AndTrits(first.ToTrits20(), second.ToTrits20()).From20Trits();
         }
     }
 
@@ -52,13 +52,13 @@ public static partial class BuiltInTypeExtensions
     {
         if (first > -MaxTrit16 && first < MaxTrit16 && second > -MaxTrit16 && second < MaxTrit16)
         {
-            return Operations.OrTrits(first.ToTrits16(), second.ToTrits16()).ToInt32();
+            return Operations.OrTrits(first.ToTrits16(), second.ToTrits16()).From16Trits();
         }
         else
         {
             first = first.ModThreePow20();
             second = second.ModThreePow20();
-            return Operations.OrTrits(first.ToTrits20(), second.ToTrits20()).ToInt32();
+            return Operations.OrTrits(first.ToTrits20(), second.ToTrits20()).From20Trits();
         }
     }
 
@@ -80,13 +80,13 @@ public static partial class BuiltInTypeExtensions
     {
         if (first > -MaxTrit16 && first < MaxTrit16 && second > -MaxTrit16 && second < MaxTrit16)
         {
-            return Operations.XorTrits(first.ToTrits16(), second.ToTrits16()).ToInt32();
+            return Operations.XorTrits(first.ToTrits16(), second.ToTrits16()).From16Trits();
         }
         else
         {
             first = first.ModThreePow20();
             second = second.ModThreePow20();
-            return Operations.XorTrits(first.ToTrits20(), second.ToTrits20()).ToInt32();
+            return Operations.XorTrits(first.ToTrits20(), second.ToTrits20()).From20Trits();
         }
     }
 

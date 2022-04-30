@@ -4,7 +4,7 @@ using Ternary3.Formatting;
 using Ternary3.Internal;
 
 /// <summary>
-/// Represents a 32 trit signed integer
+/// Represents a 32-trit signed integer
 /// </summary>
 public partial struct TernaryInt32
 {
@@ -13,7 +13,7 @@ public partial struct TernaryInt32
     internal TernaryInt32(ulong trits) => this.trits = trits;
 
     public static explicit operator TernaryInt32(int value) => new TernaryInt32(value.ToTrits20());
-    public static implicit operator int(TernaryInt32 value) => value.trits.ToInt32();
+    public static implicit operator int(TernaryInt32 value) => value.trits.From20Trits();
 
     /// <summary>
     /// Represents the largest possible value of an <see cref="TernaryInt16"/>:
