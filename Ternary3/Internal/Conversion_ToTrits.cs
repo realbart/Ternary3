@@ -4,402 +4,144 @@ namespace Ternary3.Internal;
 
 internal static partial class Conversion
 {
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 1 trits, with 
-    /// a value between -1 and 1.
-    /// </summary>
     internal static byte ToTrits1UInt8(this int value) 
         => (byte)SetTrit1(value.ModThreePow1(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 2 trits, with 
-    /// a value between -4 and 4.
-    /// </summary>
     internal static byte ToTrits2UInt8(this int value) 
         => (byte)SetTrit2(value.ModThreePow2(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 3 trits, with 
-    /// a value between -13 and 13.
-    /// </summary>
     internal static byte ToTrits3UInt8(this int value) 
         => (byte)SetTrit3(value.ModThreePow3(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 4 trits, with 
-    /// a value between -40 and 40.
-    /// </summary>
     internal static byte ToTrits4UInt8(this int value) 
         => (byte)SetTrit4(value.ModThreePow4(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 1 trits, with 
-    /// a value between -1 and 1.
-    /// </summary>
     internal static ushort ToTrits1UInt16(this int value) 
         => (ushort)SetTrit1(value.ModThreePow1(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 2 trits, with 
-    /// a value between -4 and 4.
-    /// </summary>
     internal static ushort ToTrits2UInt16(this int value) 
         => (ushort)SetTrit2(value.ModThreePow2(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 3 trits, with 
-    /// a value between -13 and 13.
-    /// </summary>
     internal static ushort ToTrits3UInt16(this int value) 
         => (ushort)SetTrit3(value.ModThreePow3(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 4 trits, with 
-    /// a value between -40 and 40.
-    /// </summary>
     internal static ushort ToTrits4UInt16(this int value) 
         => (ushort)SetTrit4(value.ModThreePow4(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 5 trits, with 
-    /// a value between -121 and 121.
-    /// </summary>
     internal static ushort ToTrits5UInt16(this int value) 
         => (ushort)SetTrit5(value.ModThreePow5(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 6 trits, with 
-    /// a value between -364 and 364.
-    /// </summary>
     internal static ushort ToTrits6UInt16(this int value) 
         => (ushort)SetTrit6(value.ModThreePow6(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 7 trits, with 
-    /// a value between -1093 and 1093.
-    /// </summary>
     internal static ushort ToTrits7UInt16(this int value) 
         => (ushort)SetTrit7(value.ModThreePow7(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 8 trits, with 
-    /// a value between -3280 and 3280.
-    /// </summary>
     internal static ushort ToTrits8UInt16(this int value) 
         => (ushort)SetTrit8(value.ModThreePow8(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 1 trits, with 
-    /// a value between -1 and 1.
-    /// </summary>
     internal static uint ToTrits1(this int value) 
         => SetTrit1(value.ModThreePow1(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 2 trits, with 
-    /// a value between -4 and 4.
-    /// </summary>
     internal static uint ToTrits2(this int value) 
         => SetTrit2(value.ModThreePow2(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 3 trits, with 
-    /// a value between -13 and 13.
-    /// </summary>
     internal static uint ToTrits3(this int value) 
         => SetTrit3(value.ModThreePow3(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 4 trits, with 
-    /// a value between -40 and 40.
-    /// </summary>
     internal static uint ToTrits4(this int value) 
         => SetTrit4(value.ModThreePow4(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 5 trits, with 
-    /// a value between -121 and 121.
-    /// </summary>
     internal static uint ToTrits5(this int value) 
         => SetTrit5(value.ModThreePow5(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 6 trits, with 
-    /// a value between -364 and 364.
-    /// </summary>
     internal static uint ToTrits6(this int value) 
         => SetTrit6(value.ModThreePow6(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 7 trits, with 
-    /// a value between -1093 and 1093.
-    /// </summary>
     internal static uint ToTrits7(this int value) 
         => SetTrit7(value.ModThreePow7(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 8 trits, with 
-    /// a value between -3280 and 3280.
-    /// </summary>
     internal static uint ToTrits8(this int value) 
         => SetTrit8(value.ModThreePow8(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 9 trits, with 
-    /// a value between -9841 and 9841.
-    /// </summary>
     internal static uint ToTrits9(this int value) 
         => SetTrit9(value.ModThreePow9(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 10 trits, with 
-    /// a value between -29524 and 29524.
-    /// </summary>
     internal static uint ToTrits10(this int value) 
         => SetTrit10(value.ModThreePow10(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 11 trits, with 
-    /// a value between -88573 and 88573.
-    /// </summary>
     internal static uint ToTrits11(this int value) 
         => SetTrit11(value.ModThreePow11(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 12 trits, with 
-    /// a value between -265720 and 265720.
-    /// </summary>
     internal static uint ToTrits12(this int value) 
         => SetTrit12(value.ModThreePow12(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 13 trits, with 
-    /// a value between -797161 and 797161.
-    /// </summary>
     internal static uint ToTrits13(this int value) 
         => SetTrit13(value.ModThreePow13(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 14 trits, with 
-    /// a value between -2391484 and 2391484.
-    /// </summary>
     internal static uint ToTrits14(this int value) 
         => SetTrit14(value.ModThreePow14(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 15 trits, with 
-    /// a value between -7174453 and 7174453.
-    /// </summary>
     internal static uint ToTrits15(this int value) 
         => SetTrit15(value.ModThreePow15(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 16 trits, with 
-    /// a value between -21523360 and 21523360.
-    /// </summary>
     internal static uint ToTrits16(this int value) 
         => SetTrit16(value.ModThreePow16(), 0u);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to <%=i%> trits, between -64570081 and 64570081.
-    /// </summary>
     internal static ulong ToTrits17(this int value) 
         => SetTrit17(value.ModThreePow17(), 0ul);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to <%=i%> trits, between -193710244 and 193710244.
-    /// </summary>
     internal static ulong ToTrits18(this int value) 
         => SetTrit18(value.ModThreePow18(), 0ul);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to <%=i%> trits, between -581130733 and 581130733.
-    /// </summary>
     internal static ulong ToTrits19(this int value) 
         => SetTrit19(value.ModThreePow19(), 0ul);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to <%=i%> trits, between -1743392200 and 1743392200.
-    /// </summary>
     internal static ulong ToTrits20(this int value) 
         => SetTrit20(value.ModThreePow20(), 0ul);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to <%=i%> trits, between -5230176601 and 5230176601.
-    /// </summary>
     internal static ulong ToTrits21(this long value) 
         => SetTrit21(value.ModThreePow21(), 0ul);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to <%=i%> trits, between -15690529804 and 15690529804.
-    /// </summary>
     internal static ulong ToTrits22(this long value) 
         => SetTrit22(value.ModThreePow22(), 0ul);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to <%=i%> trits, between -47071589413 and 47071589413.
-    /// </summary>
     internal static ulong ToTrits23(this long value) 
         => SetTrit23(value.ModThreePow23(), 0ul);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to <%=i%> trits, between -141214768240 and 141214768240.
-    /// </summary>
     internal static ulong ToTrits24(this long value) 
         => SetTrit24(value.ModThreePow24(), 0ul);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to <%=i%> trits, between -423644304721 and 423644304721.
-    /// </summary>
     internal static ulong ToTrits25(this long value) 
         => SetTrit25(value.ModThreePow25(), 0ul);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to <%=i%> trits, between -1270932914164 and 1270932914164.
-    /// </summary>
     internal static ulong ToTrits26(this long value) 
         => SetTrit26(value.ModThreePow26(), 0ul);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to <%=i%> trits, between -3812798742493 and 3812798742493.
-    /// </summary>
     internal static ulong ToTrits27(this long value) 
         => SetTrit27(value.ModThreePow27(), 0ul);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to <%=i%> trits, between -11438396227480 and 11438396227480.
-    /// </summary>
     internal static ulong ToTrits28(this long value) 
         => SetTrit28(value.ModThreePow28(), 0ul);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to <%=i%> trits, between -34315188682441 and 34315188682441.
-    /// </summary>
     internal static ulong ToTrits29(this long value) 
         => SetTrit29(value.ModThreePow29(), 0ul);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to <%=i%> trits, between -102945566047324 and 102945566047324.
-    /// </summary>
     internal static ulong ToTrits30(this long value) 
         => SetTrit30(value.ModThreePow30(), 0ul);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to <%=i%> trits, between -308836698141973 and 308836698141973.
-    /// </summary>
     internal static ulong ToTrits31(this long value) 
         => SetTrit31(value.ModThreePow31(), 0ul);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to <%=i%> trits, between -926510094425920 and 926510094425920.
-    /// </summary>
     internal static ulong ToTrits32(this long value) 
         => SetTrit32(value.ModThreePow32(), 0ul);
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 64 trits, between -1716841910146256242328924544640 and 1716841910146256242328924544640.
-    /// </summary>
     internal static (ulong high, ulong low) ToTrits64(this long value) => 
         (
             SetTrit32(value.ModThreePow32(), 0ul),
             SetTrit32(value / MaxTrit32, 0ul)
         );
 
-    /// <summary>
-    /// Converts an integer value to a long form that makes performing trit operations easy.
-    /// The longer form uses two bits form one trit: 01 = down, 00 is middle, 10 is up.
-    /// This way, the actual value is limited to 40 trits, between -6078832729528464400 and 6078832729528464400.
-    /// </summary>
     internal static (ulong high, ulong low) ToTrits40(this long value) => 
         (
             SetTrit32(value.ModThreePow32(), 0ul),
