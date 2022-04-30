@@ -50,3 +50,18 @@ if (TritHelper.TryParse(myTrit, out var tVal))
     WriteLine($"This value is sometimes written as {tVal.Switch("-", "0", "+")}");
 }
 ```
+
+## Ternary3.BuiltInTypes
+
+The Ternary3.BuiltInTypes namespace contains various methods and extension methods that can be used to perform ternary operations on built in integer types.
+
+## Ternary integer types
+
+The Ternary integer types use an in-memory trit representation that uses two bits per trit. This representation makes it possible to perform trit-operations extremely fast. In a true ternary system you'd expect types consisting of 3, 9, 27 or even 81 trits, but since the actual values get stored in integer values, these types would waste more memory than neccesary.
+
+At this time, the available types are:
+
+* Ternary3.TernaryInt16 with values from -21,523,360 to 21,523,360
+* Ternary3.TernaryInt32 with values from -926,510,094,425,920 to 926,510,094,425,920
+* Ternary3.TernaryInt64 with values from  -1,716,841,910,146,256,242,328,924,544,640 and 1,716,841,910,146,256,242,328,924,544,640
+
