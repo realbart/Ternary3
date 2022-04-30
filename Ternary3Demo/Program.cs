@@ -25,10 +25,10 @@ public class Ternary3Demo
         Console.Write(foo);
         Console.Write(xxx + yyy + zzz);
         Console.Write(m1 + nul + een);
-        Foo(sv);
+        Write(sv);
     }
 
-    private static void Foo(SomeValue x)
+    private static void Write(SomeValue x)
     {
         Console.Write(x.ToString());
     }
