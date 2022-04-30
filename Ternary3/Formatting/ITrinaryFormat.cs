@@ -1,6 +1,6 @@
 ﻿namespace Ternary3.Formatting;
 
-public interface ITernaryFormat
+public interface ITrinaryFormat
 {
     char Down { get; }
     char Middle { get; }

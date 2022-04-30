@@ -103,7 +103,7 @@ public class TritTests
         d.Should().Be(down);
         m.Should().Be(middle);
         u.Should().Be(up);
-        d = d.Flip(); m = m.Flip(); u = u.Flip();
+        d = d.Not(); m = m.Not(); u = u.Not();
         d.Should().Be(up);
         m.Should().Be(middle);
         u.Should().Be(down);
@@ -141,15 +141,15 @@ public class TritTests
         (down.Or(middle)).Should().Be(middle);
         (down.Or(down)).Should().Be(down);
 
-        (up.XOr(up)).Should().Be(down);
-        (up.XOr(middle)).Should().Be(up);
-        (up.XOr(down)).Should().Be(middle);
-        (middle.XOr(up)).Should().Be(up);
-        (middle.XOr(middle)).Should().Be(middle);
-        (middle.XOr(down)).Should().Be(down);
-        (down.XOr(up)).Should().Be(middle);
-        (down.XOr(middle)).Should().Be(down);
-        (down.XOr(down)).Should().Be(up);
+        (up.Xor(up)).Should().Be(down);
+        (up.Xor(middle)).Should().Be(up);
+        (up.Xor(down)).Should().Be(middle);
+        (middle.Xor(up)).Should().Be(up);
+        (middle.Xor(middle)).Should().Be(middle);
+        (middle.Xor(down)).Should().Be(down);
+        (down.Xor(up)).Should().Be(middle);
+        (down.Xor(middle)).Should().Be(down);
+        (down.Xor(down)).Should().Be(up);
     }
 
     [Fact]

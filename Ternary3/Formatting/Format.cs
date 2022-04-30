@@ -1,6 +1,6 @@
 ﻿namespace Ternary3.Formatting;
 
-public class Format : ITernaryFormat
+public class Format : ITrinaryFormat
 {
     private Format(char down, char middle, char up, bool pad)
     {
@@ -16,8 +16,8 @@ public class Format : ITernaryFormat
     public bool Pad { get; set; }
 
     public static Format LetterFormat { get; } = new Format('D', 'M', 'U', true);
-    public static Format SignFormat { get; } = new Format('-', '0', '+', false);
-    public static Format NumberFormat { get; } = new Format('T', '0', '1', false);
+    public static Format SignFormat { get; } = new Format('-', '0', '+', true);
+    public static Format NumberFormat { get; } = new Format('T', '0', '1', true);
     public static Format Create(char down, char middle, char up, bool pad) => new Format(down, middle, up, pad);
 
 }

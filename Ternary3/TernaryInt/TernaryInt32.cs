@@ -34,5 +34,5 @@ public partial struct TernaryInt32
     /// <summary>
     /// Formats the <see cref="TernaryInt16"/> one character per Trit using a custom formatter.
     /// </summary>
-    public string ToString(ITernaryFormat format) => Formatter.FormatTrits(trits, format, 32);
+    public string ToString(ITrinaryFormat format) => Formatter.FormatTrits(trits, format, 32);
 }
