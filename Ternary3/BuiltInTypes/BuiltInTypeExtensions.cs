@@ -13,7 +13,7 @@ public static partial class BuiltInTypeExtensions
     /// in the source value. Example:
     /// UUNNDD (320) And UNDUND (225) => UNDNDD
     /// </summary>
-    public static int TrinaryAnd(IConvertible first, IConvertible second) => TrinaryAnd((int)first, (int)second);
+    public static int TernaryAnd(IConvertible first, IConvertible second) => TernaryAnd((int)first, (int)second);
 
     /// <summary>
     /// Calculates a logical and, expanded to the ternary system.
@@ -21,7 +21,7 @@ public static partial class BuiltInTypeExtensions
     /// in the source value. Example:
     /// UUNNDD (320) And UNDUND (225) => UNDNDD
     /// </summary>
-    public static int TrinaryAnd(this int first, int second)
+    public static int TernaryAnd(this int first, int second)
     {
         if (first > -MaxTrit16 && first < MaxTrit16 && second > -MaxTrit16 && second < MaxTrit16)
         {
@@ -41,7 +41,7 @@ public static partial class BuiltInTypeExtensions
     /// in the source value. Example:
     /// UUNNDD (320) Or UNDUND (225) => UUNUND (332)
     /// </summary>
-    public static int TrinaryOr(this IConvertible first, IConvertible second) => TrinaryOr((int)first, (int)second);
+    public static int TernaryOr(this IConvertible first, IConvertible second) => TernaryOr((int)first, (int)second);
 
     /// <summary>
     /// Calculates a logical or, expanded to the ternary system.
@@ -49,7 +49,7 @@ public static partial class BuiltInTypeExtensions
     /// in the source value. Example:
     /// UUNNDD (320) Or UNDUND (225) => UUNUND (332)
     /// </summary>
-    public static int TrinaryOr(this int first, int second)
+    public static int TernaryOr(this int first, int second)
     {
         if (first > -MaxTrit16 && first < MaxTrit16 && second > -MaxTrit16 && second < MaxTrit16)
         {
@@ -69,7 +69,7 @@ public static partial class BuiltInTypeExtensions
     /// Example:
     /// UUNNDD (320) XOR UNDUND (225) => DUDUDU
     /// </summary>
-    public static int TrinaryXor(this IConvertible first, IConvertible second) => TrinaryXor((int)first, (int)second);
+    public static int TernaryXor(this IConvertible first, IConvertible second) => TernaryXor((int)first, (int)second);
 
     /// <summary>
     /// Calculates a logical xor, expanded to the ternary system.
@@ -77,7 +77,7 @@ public static partial class BuiltInTypeExtensions
     /// Example:
     /// UUNNDD (320) XOR UNDUND (225) => DUDUDU
     /// </summary>
-    public static int TrinaryXor(this int first, int second)
+    public static int TernaryXor(this int first, int second)
     {
         if (first > -MaxTrit16 && first < MaxTrit16 && second > -MaxTrit16 && second < MaxTrit16)
         {
@@ -98,18 +98,18 @@ public static partial class BuiltInTypeExtensions
     /// </summary>
     /// <param name="operand"></param>
     /// <returns></returns>
-    public static int TrinaryNot(this int operand) => -operand.ModThreePow20();
+    public static int TernaryNot(this int operand) => -operand.ModThreePow20();
 
 
     /// <summary>
     /// Compares two values and returns neutral if they are equal, up if the first is bigger, down if the second is bigger.
     /// </summary>
-    public static Trit TrinaryCompare(this int operand1, int operand2)
+    public static Trit TernaryCompare(this int operand1, int operand2)
     {
         if (operand1 == operand2) return Trit.Middle;
         return operand1 > operand2 ? Trit.Up : Trit.Down;
     }
 
-    public static string TrinaryToString(this int target) => Formatter.FormatTrits(target.ToTrits20(), 20);
-    public static string TrinaryToString(this int target, ITrinaryFormat format, int trits = 20) => Formatter.FormatTrits(target.ToTrits20(), format, trits);
+    public static string TernaryToString(this int target) => Formatter.FormatTrits(target.ToTrits20(), 20);
+    public static string TernaryToString(this int target, ITernaryFormat format, int trits = 20) => Formatter.FormatTrits(target.ToTrits20(), format, trits);
 }

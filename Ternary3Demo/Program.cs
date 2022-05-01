@@ -17,12 +17,12 @@ public class Ternary3Demo
         int thirteen = 11; // 9 + 3 - 1
         int thirtyseven = 37; // 27 + 9 + 1
 
-        WriteLine($"{thirtyseven} t| {thirteen} = {thirtyseven.TrinaryOr(thirteen)} (t| calculates the maximum of each trit)");
-        WriteLine($"{thirtyseven.TrinaryToString()} t| {thirteen.TrinaryToString()} = {thirtyseven.TrinaryOr(thirteen).TrinaryToString()}");
-        WriteLine($"{thirtyseven} t& {thirteen} = {thirtyseven.TrinaryAnd(thirteen)} (t& calculates the minimum of each trit)");
-        WriteLine($"{thirtyseven.TrinaryToString(Format.NumberFormat, 0)} t& {thirteen.TrinaryToString(Format.NumberFormat, 0)} = {thirtyseven.TrinaryAnd(thirteen).TrinaryToString(Format.NumberFormat, 0)}");
-        WriteLine($"{thirtyseven} t^ {thirteen} = {thirtyseven.TrinaryXor(thirteen)} (t^ adds every trit, but up + up = down and down + down = up)");
-        WriteLine($"{thirtyseven.TrinaryToString(Format.SignFormat, 6)} t^ {thirteen.TrinaryToString(Format.SignFormat, 6)} = {thirtyseven.TrinaryXor(thirteen).TrinaryToString(Format.SignFormat, 6)}");
+        WriteLine($"{thirtyseven} t| {thirteen} = {thirtyseven.TernaryOr(thirteen)} (t| calculates the maximum of each trit)");
+        WriteLine($"{thirtyseven.TernaryToString()} t| {thirteen.TernaryToString()} = {thirtyseven.TernaryOr(thirteen).TernaryToString()}");
+        WriteLine($"{thirtyseven} t& {thirteen} = {thirtyseven.TernaryAnd(thirteen)} (t& calculates the minimum of each trit)");
+        WriteLine($"{thirtyseven.TernaryToString(TernaryFormat.NumberFormat, 0)} t& {thirteen.TernaryToString(TernaryFormat.NumberFormat, 0)} = {thirtyseven.TernaryAnd(thirteen).TernaryToString(TernaryFormat.NumberFormat, 0)}");
+        WriteLine($"{thirtyseven} t^ {thirteen} = {thirtyseven.TernaryXor(thirteen)} (t^ adds every trit, but up + up = down and down + down = up)");
+        WriteLine($"{thirtyseven.TernaryToString(TernaryFormat.SignFormat, 6)} t^ {thirteen.TernaryToString(TernaryFormat.SignFormat, 6)} = {thirtyseven.TernaryXor(thirteen).TernaryToString(TernaryFormat.SignFormat, 6)}");
     }
 
     private static void TritDemos()
@@ -50,5 +50,4 @@ public class Ternary3Demo
             WriteLine($"This value is sometimes written as {tVal.Switch("-", "0", "+")}");
         }
     }
-
 }

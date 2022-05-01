@@ -9,52 +9,55 @@ internal static class Formatter
         return FormatTrits(trits, defaultFormat, digits);
     }
 
-    internal static string FormatTrits(ulong trits, ITrinaryFormat format, int digits)
+    internal static string FormatTrits(ulong trits, ITernaryFormat format, int numberOfDigits)
     {
-        const ulong mask = 0b1100000000000000_0000000000000000_0000000000000000_0000000000000000ul;
-        const ulong up = 0b1000000000000000_0000000000000000_0000000000000000_0000000000000000ul;
-        const ulong down = 0b0100000000000000_0000000000000000_0000000000000000_0000000000000000ul;
-        var pad = format.Pad && digits > 0;
-        if (digits <= 0) digits = 32;
-        var builder = new StringBuilder();
-
-        trits <<= (64 - (digits << 1));
-
-        for (var i = 0; i < digits; i++)
+        var trim = numberOfDigits == 0;
+        if (numberOfDigits <= 0) numberOfDigits = 32;
+        var digits = format.Digits;
+        Span<char> buffer = stackalloc char[numberOfDigits];
+        if (trim)
         {
-            builder.Append((trits & mask) switch
+            for (var i = numberOfDigits - 1; i >= 0; i--)
             {
-                up => format.Up,
-                down => format.Down,
-                _ => format.Middle
-            });
-            trits <<= 2;
+                buffer[i] = digits[(int)(trits & 0b11)];
+                trits >>= 2;
+                if (trits == 0) return new string(buffer[i..]);
+            }
         }
-
-        return pad ? builder.ToString() : builder.ToString().TrimStart(format.Middle);
+        else
+        {
+            for (var i = numberOfDigits - 1; i >= 0; i--)
+            {
+                buffer[i] = digits[(int)(trits & 0b11)];
+                trits >>= 2;
+            }
+        }
+        return new string(buffer);
     }
 
-    internal static string FormatTrits(uint trits, ITrinaryFormat format, int digits = 16)
+    internal static string FormatTrits(uint trits, ITernaryFormat format, int numberOfDigits)
     {
-        const ulong mask = 0b11000000_00000000_00000000_00000000u;
-        const ulong up = 0b10000000_00000000_00000000_00000000u;
-        const ulong down = 0b01000000_00000000_00000000_00000000u;
-
-        var builder = new StringBuilder();
-
-        trits <<= (16 - (digits << 1));
-
-        for (var i = 0; i < digits; i++)
+        var trim = numberOfDigits == 0;
+        if (numberOfDigits <= 0) numberOfDigits = 16;
+        var digits = format.Digits;
+        Span<char> buffer = stackalloc char[numberOfDigits];
+        if (trim)
         {
-            builder.Append((trits & mask) switch
+            for (var i = numberOfDigits - 1; i >= 0; i--)
             {
-                up => format.Up,
-                down => format.Down,
-                _ => format.Middle
-            });
-            trits <<= 2;
+                buffer[i] = digits[(int)(trits & 0b11)];
+                trits >>= 2;
+                if (trits == 0) return new string(buffer[i..]);
+            }
         }
-
-        return format.Pad ? builder.ToString() : builder.ToString().TrimStart(format.Middle);
+        else
+        {
+            for (var i = numberOfDigits - 1; i >= 0; i--)
+            {
+                buffer[i] = digits[(int)(trits & 0b11)];
+                trits >>= 2;
+            }
+        }
+        return new string(buffer);
     }
 }

@@ -57,10 +57,10 @@ public class BuiltInTypeExtensionsTests
     }
 
     [Fact]
-    public void PerformTrinaryOperation()
+    public void PerformTernaryOperation()
     {
         //int i = 12345;
-        //var result =i.PerformTrinaryOperation(trit => trit.Switch(up, middle, down));
+        //var result =i.PerformTernaryOperation(trit => trit.Switch(up, middle, down));
         //result.Should().Be(-12345);
     }
 
@@ -81,27 +81,27 @@ public class BuiltInTypeExtensionsTests
     [Fact]
     public void Or()
     {
-        224.TrinaryOr(320).Should().Be(332);
-        320.TrinaryOr(224).Should().Be(332);
-        332.TrinaryOr(224).Should().Be(332);
-        320.TrinaryOr(332).Should().Be(332);
-        BuiltInTypeExtensions.TrinaryOr(320, 224).Should().Be(332);
-        BuiltInTypeExtensions.TrinaryOr(43046720, 43046721).Should().Be(43046721);
+        224.TernaryOr(320).Should().Be(332);
+        320.TernaryOr(224).Should().Be(332);
+        332.TernaryOr(224).Should().Be(332);
+        320.TernaryOr(332).Should().Be(332);
+        BuiltInTypeExtensions.TernaryOr(320, 224).Should().Be(332);
+        BuiltInTypeExtensions.TernaryOr(43046720, 43046721).Should().Be(43046721);
     }
 
     [Fact]
     public void And()
     {
-        BuiltInTypeExtensions.TrinaryAnd(320, 224).Should().Be(212);
-        BuiltInTypeExtensions.TrinaryAnd(43046720, 43046721).Should().Be(43046720);
+        BuiltInTypeExtensions.TernaryAnd(320, 224).Should().Be(212);
+        BuiltInTypeExtensions.TernaryAnd(43046720, 43046721).Should().Be(43046720);
     }
 
     [Fact]
     public void Xor()
     {
-        BuiltInTypeExtensions.TrinaryXor(320, 224).Should().Be(-182);
-        BuiltInTypeExtensions.TrinaryXor(224, 320).Should().Be(-182);
-        BuiltInTypeExtensions.TrinaryXor(224, 182).Should().Be(-320);
-        BuiltInTypeExtensions.TrinaryXor(182, 224).Should().Be(-320);
+        BuiltInTypeExtensions.TernaryXor(320, 224).Should().Be(-182);
+        BuiltInTypeExtensions.TernaryXor(224, 320).Should().Be(-182);
+        BuiltInTypeExtensions.TernaryXor(224, 182).Should().Be(-320);
+        BuiltInTypeExtensions.TernaryXor(182, 224).Should().Be(-320);
     }
 }
