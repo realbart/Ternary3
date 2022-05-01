@@ -20,10 +20,10 @@ public class Ternary3Demo
         WriteLine($"{thirtyseven} t| {thirteen} = {thirtyseven.TernaryOr(thirteen)} (t| calculates the maximum of each trit)");
         WriteLine($"{thirtyseven.TernaryToString()} t| {thirteen.TernaryToString()} = {thirtyseven.TernaryOr(thirteen).TernaryToString()}");
         WriteLine($"{thirtyseven} t& {thirteen} = {thirtyseven.TernaryAnd(thirteen)} (t& calculates the minimum of each trit)");
-        WriteLine($"{thirtyseven.TernaryToString(TernaryFormat.NumberFormat, 0)} t& {thirteen.TernaryToString(TernaryFormat.NumberFormat, 0)} = {thirtyseven.TernaryAnd(thirteen).TernaryToString(TernaryFormat.NumberFormat, 0)}");
+        WriteLine($"{thirtyseven.TernaryToString(Base3Format.NumberFormat, 0)} t& {thirteen.TernaryToString(Base3Format.NumberFormat, 0)} = {thirtyseven.TernaryAnd(thirteen).TernaryToString(Base3Format.NumberFormat, 0)}");
         WriteLine($"{thirtyseven} t^ {thirteen} = {thirtyseven.TernaryXor(thirteen)} (t^ adds every trit, but up + up = down and down + down = up)");
-        WriteLine($"{thirtyseven.TernaryToString(TernaryFormat.SignFormat, 6)} t^ {thirteen.TernaryToString(TernaryFormat.SignFormat, 6)} = {thirtyseven.TernaryXor(thirteen).TernaryToString(TernaryFormat.SignFormat, 6)}");
-        WriteLine($"{thirtyseven.TernaryToString(HeptavintimalFormat.NumbersAndLettersHeptavintimalFormat, 3)} t^ {thirteen.TernaryToString(HeptavintimalFormat.NumbersAndLettersHeptavintimalFormat, 3)} = {thirtyseven.TernaryXor(thirteen).TernaryToString(HeptavintimalFormat.NumbersAndLettersHeptavintimalFormat, 3)}");
+        WriteLine($"{thirtyseven.TernaryToString(Base3Format.SignFormat, 6)} t^ {thirteen.TernaryToString(Base3Format.SignFormat, 6)} = {thirtyseven.TernaryXor(thirteen).TernaryToString(Base3Format.SignFormat, 6)}");
+        WriteLine($"{thirtyseven.TernaryToString(Base27Format.Base27AlphabetAbsoluteFormat, 3)} t^ {thirteen.TernaryToString(Base27Format.Base27AlphabetAbsoluteFormat, 3)} = {thirtyseven.TernaryXor(thirteen).TernaryToString(Base27Format.Base27AlphabetAbsoluteFormat, 3)}");
 
 
     }
