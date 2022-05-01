@@ -110,6 +110,7 @@ public static partial class BuiltInTypeExtensions
         return operand1 > operand2 ? Trit.Up : Trit.Down;
     }
 
-    public static string TernaryToString(this int target) => Formatter.FormatTrits(target.ToTrits20(), 20);
+    public static string TernaryToString(this int target, int trits=20) => Formatter.FormatTrits(target.ToTrits20(), trits);
     public static string TernaryToString(this int target, ITernaryFormat format, int trits = 20) => Formatter.FormatTrits(target.ToTrits20(), format, trits);
+    public static string TernaryToString(this int target, IHeptavintimalFormat format, int tribbles = 7) => Formatter.FormatTribbles(target.ToTrits20(), format, tribbles);
 }

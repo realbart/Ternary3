@@ -23,6 +23,9 @@ public class Ternary3Demo
         WriteLine($"{thirtyseven.TernaryToString(TernaryFormat.NumberFormat, 0)} t& {thirteen.TernaryToString(TernaryFormat.NumberFormat, 0)} = {thirtyseven.TernaryAnd(thirteen).TernaryToString(TernaryFormat.NumberFormat, 0)}");
         WriteLine($"{thirtyseven} t^ {thirteen} = {thirtyseven.TernaryXor(thirteen)} (t^ adds every trit, but up + up = down and down + down = up)");
         WriteLine($"{thirtyseven.TernaryToString(TernaryFormat.SignFormat, 6)} t^ {thirteen.TernaryToString(TernaryFormat.SignFormat, 6)} = {thirtyseven.TernaryXor(thirteen).TernaryToString(TernaryFormat.SignFormat, 6)}");
+        WriteLine($"{thirtyseven.TernaryToString(HeptavintimalFormat.NumbersAndLettersHeptavintimalFormat, 3)} t^ {thirteen.TernaryToString(HeptavintimalFormat.NumbersAndLettersHeptavintimalFormat, 3)} = {thirtyseven.TernaryXor(thirteen).TernaryToString(HeptavintimalFormat.NumbersAndLettersHeptavintimalFormat, 3)}");
+
+
     }
 
     private static void TritDemos()

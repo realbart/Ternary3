@@ -32,7 +32,15 @@ public partial struct TernaryInt32
     /// </summary>
     public override string ToString() => Formatter.FormatTrits(trits, 32);
     /// <summary>
+    /// Formats the <see cref="TernaryInt16"/> one character per Trit using the default formatter.
+    /// </summary>
+    public string ToString(int numberOfDigits) => Formatter.FormatTrits(trits, numberOfDigits);
+    /// <summary>
     /// Formats the <see cref="TernaryInt16"/> one character per Trit using a custom formatter.
     /// </summary>
-    public string ToString(ITernaryFormat format) => Formatter.FormatTrits(trits, format, 32);
+    public string ToString(ITernaryFormat format, int numberOfDigits = 32) => Formatter.FormatTrits(trits, format, numberOfDigits);
+    /// <summary>
+    /// Formats the <see cref="TernaryInt16"/> one character per Tribble (3 trits) using a custom formatter.
+    /// </summary>
+    public string ToString(IHeptavintimalFormat format, int numberOfDigits = 11) => Formatter.FormatTribbles(trits, format, numberOfDigits);
 }
