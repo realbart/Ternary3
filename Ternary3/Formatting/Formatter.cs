@@ -7,7 +7,7 @@ internal static class Formatter
         return FormatTrits(trits, Base3Format.LetterFormat, digits);
     }
 
-    internal static string FormatTrits(ulong trits, IBase27Format format, int numberOfDigits)
+    internal static string FormatTrits(ulong trits, IBase3Format format, int numberOfDigits)
     {
         var trim = numberOfDigits == 0;
         if (numberOfDigits <= 0) numberOfDigits = 32;
@@ -33,7 +33,7 @@ internal static class Formatter
         return new string(buffer);
     }
 
-    internal static string FormatTrits(uint trits, IBase27Format format, int numberOfDigits)
+    internal static string FormatTrits(uint trits, IBase3Format format, int numberOfDigits)
     {
         var trim = numberOfDigits == 0;
         if (numberOfDigits <= 0) numberOfDigits = 16;
@@ -59,7 +59,7 @@ internal static class Formatter
         return new string(buffer);
     }
 
-    internal static string FormatTribbles(ulong trits, IBase3Format format, int numberOfDigits)
+    internal static string FormatTribbles(ulong trits, IBase27Format format, int numberOfDigits)
     {
         var trim = numberOfDigits == 0;
         if (numberOfDigits <= 0) numberOfDigits = 11;
@@ -85,7 +85,7 @@ internal static class Formatter
         return new string(buffer);
     }
 
-    internal static string FormatTribbles(uint trits, IBase3Format format, int numberOfDigits)
+    internal static string FormatTribbles(uint trits, IBase27Format format, int numberOfDigits)
     {
         var trim = numberOfDigits == 0;
         if (numberOfDigits <= 0) numberOfDigits = 6;

@@ -38,10 +38,10 @@ public partial struct TernaryInt16
     /// <summary>
     /// Formats the <see cref="TernaryInt16"/> one character per Trit using a custom formatter.
     /// </summary>
-    public string ToString(IBase27Format format, int numberOfDigits = 16) => Formatter.FormatTrits(trits, format, numberOfDigits);
+    public string ToString(IBase3Format format, int numberOfDigits = 16) => Formatter.FormatTrits(trits, format, numberOfDigits);
     /// <summary>
     /// Formats the <see cref="TernaryInt16"/> one character per Tribble (3 trits) using a custom formatter.
     /// </summary>
-    public string ToString(IBase3Format format, int numberOfDigits = 6) => Formatter.FormatTribbles(trits, format, numberOfDigits);
+    public string ToString(IBase27Format format, int numberOfDigits = 6) => Formatter.FormatTribbles(trits, format, numberOfDigits);
 
 }

@@ -111,6 +111,6 @@ public static partial class BuiltInTypeExtensions
     }
 
     public static string TernaryToString(this int target, int trits=20) => Formatter.FormatTrits(target.ToTrits20(), trits);
-    public static string TernaryToString(this int target, IBase27Format format, int trits = 20) => Formatter.FormatTrits(target.ToTrits20(), format, trits);
-    public static string TernaryToString(this int target, IBase3Format format, int tribbles = 7) => Formatter.FormatTribbles(target.ToTrits20(), format, tribbles);
+    public static string TernaryToString(this int target, IBase3Format format, int trits = 20) => Formatter.FormatTrits(target.ToTrits20(), format, trits);
+    public static string TernaryToString(this int target, IBase27Format format, int tribbles = 7) => Formatter.FormatTribbles(target.ToTrits20(), format, tribbles);
 }
