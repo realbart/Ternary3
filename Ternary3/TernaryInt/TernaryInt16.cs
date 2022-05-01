@@ -3,7 +3,7 @@ using Ternary3.Formatting;
 using Ternary3.Internal;
 
 /// <summary>
-/// Represents a 16 trit signed integer
+/// Represents a 16-trit signed integer
 /// </summary>
 public partial struct TernaryInt16
 {
@@ -11,8 +11,9 @@ public partial struct TernaryInt16
 
     internal TernaryInt16(uint trits) => this.trits = trits;
 
-    public static explicit operator TernaryInt16(int value) => new TernaryInt16(value.ToTrits16());
-    public static implicit operator int(TernaryInt16 value) => value.trits.ToInt32();
+    public static implicit operator TernaryInt16(int value) => new TernaryInt16(value.ToTrits16());
+    public static implicit operator int(TernaryInt16 value) => value.trits.From16Trits();
+    public static implicit operator long(TernaryInt16 value) => value.trits.From16Trits();
 
     /// <summary>
     /// Represents the largest possible value of an <see cref="TernaryInt16"/>:
@@ -33,5 +34,5 @@ public partial struct TernaryInt16
     /// <summary>
     /// Formats the <see cref="TernaryInt16"/> one character per Trit using a custom formatter.
     /// </summary>
-    public string ToString(ITernaryFormat format) => Formatter.FormatTrits(trits, format, 16);
+    public string ToString(ITrinaryFormat format) => Formatter.FormatTrits(trits, format, 16);
 }

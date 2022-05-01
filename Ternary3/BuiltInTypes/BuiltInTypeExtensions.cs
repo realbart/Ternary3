@@ -1,6 +1,7 @@
 ﻿namespace Ternary3;
 
 using Ternary3.BuiltInTypes;
+using Ternary3.Formatting;
 using Ternary3.Internal;
 
 public static partial class BuiltInTypeExtensions
@@ -24,13 +25,13 @@ public static partial class BuiltInTypeExtensions
     {
         if (first > -MaxTrit16 && first < MaxTrit16 && second > -MaxTrit16 && second < MaxTrit16)
         {
-            return Operations.AndTrits(first.ToTrits16(), second.ToTrits16()).ToInt32();
+            return Operations.AndTrits(first.ToTrits16(), second.ToTrits16()).From16Trits();
         }
         else
         {
             first = first.ModThreePow20();
             second = second.ModThreePow20();
-            return Operations.AndTrits(first.ToTrits20(), second.ToTrits20()).ToInt32();
+            return Operations.AndTrits(first.ToTrits20(), second.ToTrits20()).From20Trits();
         }
     }
 
@@ -52,13 +53,13 @@ public static partial class BuiltInTypeExtensions
     {
         if (first > -MaxTrit16 && first < MaxTrit16 && second > -MaxTrit16 && second < MaxTrit16)
         {
-            return Operations.OrTrits(first.ToTrits16(), second.ToTrits16()).ToInt32();
+            return Operations.OrTrits(first.ToTrits16(), second.ToTrits16()).From16Trits();
         }
         else
         {
             first = first.ModThreePow20();
             second = second.ModThreePow20();
-            return Operations.OrTrits(first.ToTrits20(), second.ToTrits20()).ToInt32();
+            return Operations.OrTrits(first.ToTrits20(), second.ToTrits20()).From20Trits();
         }
     }
 
@@ -80,22 +81,35 @@ public static partial class BuiltInTypeExtensions
     {
         if (first > -MaxTrit16 && first < MaxTrit16 && second > -MaxTrit16 && second < MaxTrit16)
         {
-            return Operations.XorTrits(first.ToTrits16(), second.ToTrits16()).ToInt32();
+            return Operations.XorTrits(first.ToTrits16(), second.ToTrits16()).From16Trits();
         }
         else
         {
             first = first.ModThreePow20();
             second = second.ModThreePow20();
-            return Operations.XorTrits(first.ToTrits20(), second.ToTrits20()).ToInt32();
+            return Operations.XorTrits(first.ToTrits20(), second.ToTrits20()).From20Trits();
         }
     }
 
-    public static int Flip(this int operand) => -operand.ModThreePow20();
+    /// <summary>
+    /// Flips the trits
+    /// Example:
+    /// !UUNNDD (320) = DDNNUU (-320)
+    /// </summary>
+    /// <param name="operand"></param>
+    /// <returns></returns>
+    public static int TrinaryNot(this int operand) => -operand.ModThreePow20();
 
 
-    public static Trit Compare(this int operand1, int operand2)
+    /// <summary>
+    /// Compares two values and returns neutral if they are equal, up if the first is bigger, down if the second is bigger.
+    /// </summary>
+    public static Trit TrinaryCompare(this int operand1, int operand2)
     {
         if (operand1 == operand2) return Trit.Middle;
         return operand1 > operand2 ? Trit.Up : Trit.Down;
     }
+
+    public static string TrinaryToString(this int target) => Formatter.FormatTrits(target.ToTrits20(), 20);
+    public static string TrinaryToString(this int target, ITrinaryFormat format, int trits = 20) => Formatter.FormatTrits(target.ToTrits20(), format, trits);
 }

@@ -1,6 +1,6 @@
 ﻿namespace Ternary3.Formatting;
 
-internal class DefaultFormat : ITernaryFormat
+internal class DefaultFormat : ITrinaryFormat
 {
     public char Down => 'D';
 

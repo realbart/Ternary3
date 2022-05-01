@@ -21,7 +21,7 @@ internal static class Constants
     internal const int MaxTrit18 = 3 * MaxTrit17 + 1;
     internal const int MaxTrit19 = 3 * MaxTrit18 + 1;
     internal const int MaxTrit20 = 3 * MaxTrit19 + 1;
-    internal const long MaxTrit21 = 3l * MaxTrit20 + 1;
+    internal const long MaxTrit21 = 3L * MaxTrit20 + 1;
     internal const long MaxTrit22 = 3 * MaxTrit21 + 1;
     internal const long MaxTrit23 = 3 * MaxTrit22 + 1;
     internal const long MaxTrit24 = 3 * MaxTrit23 + 1;

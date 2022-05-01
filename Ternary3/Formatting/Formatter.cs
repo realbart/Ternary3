@@ -9,15 +9,16 @@ internal static class Formatter
         return FormatTrits(trits, defaultFormat, digits);
     }
 
-    public static string FormatTrits(ulong trits, ITernaryFormat format, int digits)
+    internal static string FormatTrits(ulong trits, ITrinaryFormat format, int digits)
     {
         const ulong mask = 0b1100000000000000_0000000000000000_0000000000000000_0000000000000000ul;
         const ulong up = 0b1000000000000000_0000000000000000_0000000000000000_0000000000000000ul;
         const ulong down = 0b0100000000000000_0000000000000000_0000000000000000_0000000000000000ul;
-
+        var pad = format.Pad && digits > 0;
+        if (digits <= 0) digits = 32;
         var builder = new StringBuilder();
 
-        trits <<= (32 - (digits << 1));
+        trits <<= (64 - (digits << 1));
 
         for (var i = 0; i < digits; i++)
         {
@@ -30,10 +31,10 @@ internal static class Formatter
             trits <<= 2;
         }
 
-        return format.Pad ? builder.ToString() : builder.ToString().TrimStart(format.Middle);
+        return pad ? builder.ToString() : builder.ToString().TrimStart(format.Middle);
     }
 
-    public static string FormatTrits(uint trits, ITernaryFormat format, int digits = 16)
+    internal static string FormatTrits(uint trits, ITrinaryFormat format, int digits = 16)
     {
         const ulong mask = 0b11000000_00000000_00000000_00000000u;
         const ulong up = 0b10000000_00000000_00000000_00000000u;
