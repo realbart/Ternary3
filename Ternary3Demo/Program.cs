@@ -8,8 +8,8 @@ public class Ternary3Demo
 {
     public static void Main()
     {
-        TritDemos();
         Int32Demos();
+        TritDemos();
     }
 
     private static void Int32Demos()
@@ -23,9 +23,7 @@ public class Ternary3Demo
         WriteLine($"{thirtyseven.TernaryToString(Base3Format.NumberFormat, 0)} t& {thirteen.TernaryToString(Base3Format.NumberFormat, 0)} = {thirtyseven.TernaryAnd(thirteen).TernaryToString(Base3Format.NumberFormat, 0)}");
         WriteLine($"{thirtyseven} t^ {thirteen} = {thirtyseven.TernaryXor(thirteen)} (t^ adds every trit, but up + up = down and down + down = up)");
         WriteLine($"{thirtyseven.TernaryToString(Base3Format.SignFormat, 6)} t^ {thirteen.TernaryToString(Base3Format.SignFormat, 6)} = {thirtyseven.TernaryXor(thirteen).TernaryToString(Base3Format.SignFormat, 6)}");
-        WriteLine($"{thirtyseven.TernaryToString(Base27Format.Base27AlphabetAbsoluteFormat, 3)} t^ {thirteen.TernaryToString(Base27Format.Base27AlphabetAbsoluteFormat, 3)} = {thirtyseven.TernaryXor(thirteen).TernaryToString(Base27Format.Base27AlphabetAbsoluteFormat, 3)}");
-
-
+        WriteLine($"{thirtyseven.TernaryToString(Base27Format.AlphabetTruncated, 3)} t^ {thirteen.TernaryToString(Base27Format.AlphabetTruncated, 3)} = {thirtyseven.TernaryXor(thirteen).TernaryToString(Base27Format.AlphabetTruncated, 3)}");
     }
 
     private static void TritDemos()
