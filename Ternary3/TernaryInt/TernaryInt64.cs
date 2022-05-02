@@ -23,4 +23,3 @@ public class TernaryInt64
     /// </summary>
     public static TernaryInt64 Parse(string s) => Parse(s.AsSpan());
 }
-}
