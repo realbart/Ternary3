@@ -1,6 +1,7 @@
 ﻿namespace Ternary3;
 using Ternary3.Formatting;
 using Ternary3.Internal;
+using Ternary3.TernaryInt;
 
 /// <summary>
 /// Represents a 16-trit signed integer
@@ -43,5 +44,15 @@ public partial struct TernaryInt16
     /// Formats the <see cref="TernaryInt16"/> one character per Tribble (3 trits) using a custom formatter.
     /// </summary>
     public string ToString(IBase27Format format, int numberOfDigits = 6) => Formatter.FormatTribbles(trits, format, numberOfDigits);
+
+    /// <summary>
+    ///  Converts the <see cref="Span{T}"/> representation of a value to a <see cref="TernaryInt16"/> instance.
+    /// </summary>
+    public static TernaryInt16 Parse(ReadOnlySpan<char> s) => new TernaryInt16(Parser.ToTrits16(s));
+
+    /// <summary>
+    ///  Converts the <see cref="string"/> representation of a value to a <see cref="TernaryInt16"/> instance.
+    /// </summary>
+    public static TernaryInt16 Parse(string s) => Parse(s.AsSpan());
 
 }

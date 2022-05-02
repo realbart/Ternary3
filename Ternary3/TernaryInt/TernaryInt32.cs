@@ -43,4 +43,14 @@ public partial struct TernaryInt32
     /// Formats the <see cref="TernaryInt16"/> one character per Tribble (3 trits) using a custom formatter.
     /// </summary>
     public string ToString(IBase27Format format, int numberOfDigits = 11) => Formatter.FormatTribbles(trits, format, numberOfDigits);
+
+    /// <summary>
+    ///  Converts the <see cref="Span{T}"/> representation of a value to a <see cref="TernaryInt16"/> instance.
+    /// </summary>
+    public static TernaryInt32 Parse(ReadOnlySpan<char> s) => new TernaryInt32(Parser.ToTrits32(s));
+
+    /// <summary>
+    ///  Converts the <see cref="string"/> representation of a value to a <see cref="TernaryInt16"/> instance.
+    /// </summary>
+    public static TernaryInt32 Parse(string s) => Parse(s.AsSpan());
 }
