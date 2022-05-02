@@ -4,6 +4,8 @@ using System;
 
 internal static class Parser
 {
+    private const string ValidDigits = "0-++0T110t11MDUUmduu";
+
     internal static (ulong high, ulong low) ToTrits64(ReadOnlySpan<char> s, int digits = 64)
     {
         s = s.Trim();
@@ -19,7 +21,7 @@ internal static class Parser
         ulong value = 0;
         foreach (var c in s)
         {
-            var index = ("0-++0T110t11MDUUmduu".IndexOf(c) & 0b11);
+            var index = ValidDigits.IndexOf(c) & 0b11;
             if (index == 0b11) throw new FormatException("Input string was not in a correct format.");
             value = (value << 2) | (byte)index;
         }
@@ -33,7 +35,7 @@ internal static class Parser
         uint value = 0;
         foreach (var c in s)
         {
-            var index = ("0-++0T110t11MDUUmduu".IndexOf(c) & 0b11);
+            var index = ValidDigits.IndexOf(c) & 0b11;
             if (index == 0b11) throw new FormatException("Input string was not in a correct format.");
             value = (value << 2) | (byte)index;
         }
