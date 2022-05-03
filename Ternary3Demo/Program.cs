@@ -22,8 +22,23 @@ public class Ternary3Demo
         WriteLine($"{thirtyseven} t& {thirteen} = {thirtyseven.TernaryAnd(thirteen)} (t& calculates the minimum of each trit)");
         WriteLine($"{thirtyseven.TernaryToString(Base3Format.NumberFormat, 0)} t& {thirteen.TernaryToString(Base3Format.NumberFormat, 0)} = {thirtyseven.TernaryAnd(thirteen).TernaryToString(Base3Format.NumberFormat, 0)}");
         WriteLine($"{thirtyseven} t^ {thirteen} = {thirtyseven.TernaryXor(thirteen)} (t^ adds every trit, but up + up = down and down + down = up)");
+        var format = Base27Format.Create("AaBbCcDdEeFfGgHhIiJjKkLlMm?");
+        for (var i = -15; i <= 15; i++)
+        {
+
+            WriteLine($"{i.TernaryToString(6)} = "
+                + $"{i.TernaryToString(Base27Format.AlphabetEuclidian, 0)} "
+                + $"{i.TernaryToString(Base27Format.AlphabetShifted, 0)} "
+                + $"{i.TernaryToString(Base27Format.AlphabetTruncated, 0)} "
+                + $"{i.TernaryToString(Base27Format.AlphanumericEuclidian, 0)} "
+                + $"{i.TernaryToString(Base27Format.AlphanumericShifted, 0)} "
+                + $"{i.TernaryToString(Base27Format.AlphanumericTruncated, 0)} "
+                + $"{i.TernaryToString(format, 0)} ({i})"
+                );
+        }
+
         WriteLine($"{thirtyseven.TernaryToString(Base3Format.SignFormat, 6)} t^ {thirteen.TernaryToString(Base3Format.SignFormat, 6)} = {thirtyseven.TernaryXor(thirteen).TernaryToString(Base3Format.SignFormat, 6)}");
-        WriteLine($"{thirtyseven.TernaryToString(Base27Format.AlphabetTruncated, 3)} t^ {thirteen.TernaryToString(Base27Format.AlphabetTruncated, 3)} = {thirtyseven.TernaryXor(thirteen).TernaryToString(Base27Format.AlphabetTruncated, 3)}");
+        WriteLine($"{thirtyseven.TernaryToString(Base27Format.AlphabetEuclidian, 3)} t^ {thirteen.TernaryToString(Base27Format.AlphabetTruncated, 3)} = {thirtyseven.TernaryXor(thirteen).TernaryToString(Base27Format.AlphabetTruncated, 3)}");
     }
 
     private static void TritDemos()
