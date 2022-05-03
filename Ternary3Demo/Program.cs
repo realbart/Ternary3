@@ -4,7 +4,7 @@ using static System.Console;
 
 namespace Ternary3Demo;
 
-public class Ternary3Demo
+public static class Ternary3Demo
 {
     public static void Main()
     {
