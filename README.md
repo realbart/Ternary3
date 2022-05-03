@@ -10,7 +10,7 @@ The Trit value type has a number of methods mathimatical ternary operations (Ter
 
 3. Extension methods on default framework value types to facilitate performing trit operations on these numbers as well. Note that performing trit operations on binary numbers involves converting them from binary to trinary and back. If you need to perform multiple ternary operations in sequence, consider using the Ternary value types.
 
-====
+--------
 
 ## Ternary3.Trit
 
@@ -65,3 +65,13 @@ At this time, the available types are:
 * Ternary3.TernaryInt32 with values from -926,510,094,425,920 to 926,510,094,425,920
 * Ternary3.TernaryInt64 with values from  -1,716,841,910,146,256,242,328,924,544,640 and 1,716,841,910,146,256,242,328,924,544,640
 
+
+Some examples code:
+
+```
+using Ternary3;
+using static Ternary3.TritValues;
+using static System.Console;
+
+var first = TernaryInt16.Parse("++00--");
+```
