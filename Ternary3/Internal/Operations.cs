@@ -5,6 +5,12 @@ using Ternary3.Internal;
 
 internal static partial class Operations
 {
+    public static uint Shift(uint a, int b)
+        => b > 0 ? a >> (b << 1) : a << (b << 1);
+
+    public static ulong Shift(ulong a, int b)
+        => b > 0 ? a >> (b << 1) : a << (b << 1);
+
     internal static uint AndTrits(uint a, uint b)
         => ((a ^ DownMask32) & (b ^ DownMask32)) ^ DownMask32;
 
