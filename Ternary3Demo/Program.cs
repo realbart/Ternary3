@@ -22,6 +22,11 @@ public class Ternary3Demo
         WriteLine($"{thirtyseven} t& {thirteen} = {thirtyseven.TernaryAnd(thirteen)} (t& calculates the minimum of each trit)");
         WriteLine($"{thirtyseven.TernaryToString(Base3Format.NumberFormat, 0)} t& {thirteen.TernaryToString(Base3Format.NumberFormat, 0)} = {thirtyseven.TernaryAnd(thirteen).TernaryToString(Base3Format.NumberFormat, 0)}");
         WriteLine($"{thirtyseven} t^ {thirteen} = {thirtyseven.TernaryXor(thirteen)} (t^ adds every trit, but up + up = down and down + down = up)");
+        WriteLine($"{thirtyseven.TernaryToString()} t^ {thirteen.TernaryToString()} = {thirtyseven.TernaryXor(thirteen).TernaryToString()} (t^ adds every trit, but up + up = down and down + down = up)");
+        WriteLine($"{thirtyseven} t<< {13} = {thirtyseven.TernaryShift(-13)} (t<< shifts trits to the left, so mmmmmd << 2 becomes mmmdmm)");
+        WriteLine($"{thirtyseven.TernaryToString()} t<< {13} = {thirtyseven.TernaryShift(-13).TernaryToString()}");
+        WriteLine($"{thirtyseven} t>> {2} = {thirtyseven.TernaryShift(2)} (t<< shifts trits to the right, so mmmdud >> 1 becomes mmmmdu)");
+        WriteLine($"{thirtyseven.TernaryToString()} t>> {2} = {thirtyseven.TernaryShift(2).TernaryToString()}");
         var format = Base27Format.Create("AaBbCcDdEeFfGgHhIiJjKkLlMm?");
         for (var i = -15; i <= 15; i++)
         {

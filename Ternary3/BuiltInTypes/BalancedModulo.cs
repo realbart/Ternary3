@@ -913,7 +913,7 @@ public static class BlancedModulo
     /// Performs a balanced modulo 3↑40 = 1.21576654590569E+19
     /// Returns a value between -6.07883272952846E+18 and 6.07883272952846E+18
     /// </summary>
-    internal static long ModThreePow40(long value)
+    public static long ModThreePow40(this long value)
     {
         const long Overflow = (long)(ulong.MaxValue - ThreePow40);
         if (value > MaxTrit40) value += Overflow;

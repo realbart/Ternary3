@@ -101,7 +101,7 @@ for (int i=21; i<40; i++)
     /// Performs a balanced modulo 3↑40 = <#=Math.Pow(3,40)#>
     /// Returns a value between -<#=Math.Pow(3,40)*.5-.5#> and <#=Math.Pow(3,40)*.5-.5#>
     /// </summary>
-    internal static long ModThreePow40(long value)
+    public static long ModThreePow40(this long value)
     {
         const long Overflow = (long)(ulong.MaxValue - ThreePow40);
         if (value > MaxTrit40) value += Overflow;
