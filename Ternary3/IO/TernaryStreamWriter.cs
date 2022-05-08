@@ -2,29 +2,40 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 internal class TernaryStreamWriter : IDisposable
 {
     private bool disposedValue;
 
     public Stream Stream { get; }
-    public Encoding Encoding { get; }
+    public IEncoder encoder { get; }
 
-    public TernaryStreamWriter(Stream stream, Encoding encoding)
+    private Queue<Trit> queue { get; } = new Queue<Trit>();
+    public TernaryStreamWriter(Stream stream, IEncoder encoder)
     {
         if (stream == null) throw new ArgumentNullException(nameof(stream));
         if (!stream.CanWrite) throw new ArgumentException("Cannot write to stream");
+        if (encoder == null) throw new ArgumentNullException(nameof(encoder));
         Stream = stream;
-        Encoding = encoding;
+        this.encoder = encoder;
+        this.encoder.Open(Stream);
     }
 
-    public void Write(Trit trit)
-    {
+    public void Write(Trit trit) => encoder.Write(trit, Stream);
 
-    }
+    public void Write(TernaryInt16 trits) => encoder.Write(trits, Stream);
+
+    public void Write(TernaryInt32 trits) => encoder.Write(trits, Stream);
+
+    public void Write(TernaryInt64 trits) => encoder.Write(trits, Stream);
+
+    public async Task WriteAsync(Trit trit) => await encoder.WriteAsync(trit, Stream);
+
+    public async Task WriteAsync(TernaryInt16 trits) => await encoder.WriteAsync(trits, Stream);
+
+    public async Task WriteAsync(TernaryInt32 trits) => await encoder.WriteAsync(trits, Stream);
+
+    public async Task WriteAsync(TernaryInt64 trits) => await encoder.WriteAsync(trits, Stream);
 
     protected virtual void Dispose(bool disposing)
     {
@@ -32,25 +43,14 @@ internal class TernaryStreamWriter : IDisposable
         {
             if (disposing)
             {
-                // TODO: dispose managed state (managed objects)
+                (encoder as IDisposable)?.Dispose();
             }
-
-            // TODO: free unmanaged resources (unmanaged objects) and override finalizer
-            // TODO: set large fields to null
             disposedValue = true;
         }
     }
 
-    // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
-    // ~TernaryStreamWriter()
-    // {
-    //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-    //     Dispose(disposing: false);
-    // }
-
     public void Dispose()
     {
-        // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
         Dispose(disposing: true);
         GC.SuppressFinalize(this);
     }

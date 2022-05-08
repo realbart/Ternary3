@@ -1,7 +1,6 @@
 ﻿namespace Ternary3;
 using Ternary3.Formatting;
 using Ternary3.Internal;
-using Ternary3.TernaryInt;
 
 /// <summary>
 /// Represents a 16-trit signed integer
@@ -58,10 +57,64 @@ public partial struct TernaryInt16
     /// <summary>
     /// Gets the nth trit (zero-based, low first)
     /// </summary>
-    public Trit this[int index] => Operations.GetTrit(trits, index);
+    public Trit this[int index]
+    {
+        get
+        {
+            if (index < 0 || index > 16) throw new ArgumentOutOfRangeException(nameof(index));
+            return Operations.GetTrit(trits, index);
+        }
+    }
 
     /// <summary>
     /// Gets the nth trit (zero-based, low first)
     /// </summary>
-    public Trit this[Index index] => Operations.GetTrit(trits, index);
+    public Trit this[Index index]
+    {
+        get
+        {
+            if (index.Value < 0 || index.Value> 16) throw new ArgumentOutOfRangeException(nameof(index));
+            return Operations.GetTrit(trits, index);
+        }
+    }
+
+    public static TernaryInt16 operator |(TernaryInt16 a, TernaryInt16 b)
+        => new TernaryInt16(Operations.OrTrits(a.trits, b.trits));
+
+    public static TernaryInt32 operator |(TernaryInt16 a, int b)
+        => new TernaryInt32(Operations.OrTrits(a.trits, Conversion.ToTrits20(b)));
+
+    public static TernaryInt32 operator |(int a, TernaryInt16 b)
+        => new TernaryInt32(Operations.OrTrits(Conversion.ToTrits20(a), b.trits));
+
+    public static TernaryInt16 operator &(TernaryInt16 a, TernaryInt16 b)
+        => new TernaryInt16(Operations.AndTrits(a.trits, b.trits));
+
+    public static TernaryInt32 operator &(TernaryInt16 a, int b)
+        => new TernaryInt32(Operations.AndTrits(a.trits, Conversion.ToTrits20(b)));
+
+    public static TernaryInt32 operator &(int a, TernaryInt16 b)
+    => new TernaryInt32(Operations.AndTrits(Conversion.ToTrits20(a), b.trits));
+
+    public static TernaryInt16 operator ^(TernaryInt16 a, TernaryInt16 b)
+        => new TernaryInt16(Operations.XorTrits(a.trits, b.trits));
+
+    public static TernaryInt32 operator ^(TernaryInt16 a, int b)
+        => new TernaryInt32(Operations.XorTrits(a.trits, Conversion.ToTrits20(b)));
+
+    public static TernaryInt32 operator ^(int a, TernaryInt16 b)
+        => new TernaryInt32(Operations.XorTrits(Conversion.ToTrits20(a), b.trits));
+
+    public static TernaryInt16 operator !(TernaryInt16 a)
+        => new TernaryInt16(Operations.FlipTrits(a.trits));
+
+    public static TernaryInt16 operator -(TernaryInt16 a)
+        => new TernaryInt16(Operations.FlipTrits(a.trits));
+
+    public static TernaryInt16 operator >>(TernaryInt16 a, int shift)
+        => new TernaryInt16(Operations.ShiftTrits(a.trits, shift));
+
+    public static TernaryInt16 operator <<(TernaryInt16 a, int shift)
+        => new TernaryInt16(Operations.ShiftTrits(a.trits, -shift));
+
 }

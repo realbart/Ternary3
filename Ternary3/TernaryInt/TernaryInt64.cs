@@ -1,10 +1,10 @@
-﻿namespace Ternary3.TernaryInt;
+﻿namespace Ternary3;
 using Ternary3.Internal;
 
 /// <summary>
 /// Represents a 64-trit signed integer
 /// </summary>
-public class TernaryInt64
+public partial struct TernaryInt64
 {
     private readonly (ulong high, ulong low) trits;
 
