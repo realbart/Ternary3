@@ -55,4 +55,13 @@ public partial struct TernaryInt16
     /// </summary>
     public static TernaryInt16 Parse(string s) => Parse(s.AsSpan());
 
+    /// <summary>
+    /// Gets the nth trit (zero-based, low first)
+    /// </summary>
+    public Trit this[int index] => Operations.GetTrit(trits, index);
+
+    /// <summary>
+    /// Gets the nth trit (zero-based, low first)
+    /// </summary>
+    public Trit this[Index index] => Operations.GetTrit(trits, index);
 }

@@ -53,4 +53,14 @@ public partial struct TernaryInt32
     ///  Converts the <see cref="string"/> representation of a value to a <see cref="TernaryInt16"/> instance.
     /// </summary>
     public static TernaryInt32 Parse(string s) => Parse(s.AsSpan());
+
+    /// <summary>
+    /// Gets the nth trit (zero-based, low first)
+    /// </summary>
+    public Trit this[int index] => Operations.GetTrit(trits, index);
+
+    /// <summary>
+    /// Gets the nth trit (zero-based, low first)
+    /// </summary>
+    public Trit this[Index index] => Operations.GetTrit(trits, index);
 }
