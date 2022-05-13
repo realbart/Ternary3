@@ -8,9 +8,10 @@ public static class Ternary3Demo
 {
     public static void Main()
     {
-        //Int32Demos();
-        //TritDemos();
+        Int32Demos();
+        TritDemos();
         TernaryInt16Demos();
+        TernaryInt32Demos();
     }
 
     private static void TernaryInt16Demos()
@@ -18,6 +19,23 @@ public static class Ternary3Demo
         WriteLine(nameof(TernaryInt16Demos));
         var eleven = (TernaryInt16)11;
         var thirtyseven = TernaryInt16.Parse("uumu");
+        WriteLine(thirtyseven);
+        WriteLine($"{thirtyseven} t| {eleven} = {thirtyseven | eleven}");
+        WriteLine($"{thirtyseven} t& {eleven} = {thirtyseven & eleven}");
+        WriteLine($"{thirtyseven} t& {eleven} = {thirtyseven & 11}");
+        WriteLine($"{thirtyseven} t& {eleven} = {37 & eleven}");
+        WriteLine($"{thirtyseven} t^ {eleven} = {thirtyseven ^ eleven}");
+        WriteLine($"{thirtyseven} << 2 = {thirtyseven << 2}");
+        WriteLine($"{thirtyseven} >> 2 = {thirtyseven >> 2}");
+        WriteLine($"t!{thirtyseven} {!thirtyseven}");
+        WriteLine($"t-{thirtyseven} {-thirtyseven}");
+    }
+
+    private static void TernaryInt32Demos()
+    {
+        WriteLine(nameof(TernaryInt32Demos));
+        var eleven = (TernaryInt32)11;
+        var thirtyseven = TernaryInt32.Parse("uumu");
         WriteLine(thirtyseven);
         WriteLine($"{thirtyseven} t| {eleven} = {thirtyseven | eleven}");
         WriteLine($"{thirtyseven} t& {eleven} = {thirtyseven & eleven}");

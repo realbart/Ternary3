@@ -1,5 +1,6 @@
 ﻿namespace Ternary3.IO;
 
+
 internal enum Encoding
 {
     /// <summary>

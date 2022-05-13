@@ -63,4 +63,48 @@ public partial struct TernaryInt32
     /// Gets the nth trit (zero-based, low first)
     /// </summary>
     public Trit this[Index index] => Operations.GetTrit(trits, index);
+
+    /// <summary>
+    /// Gets a range of trits (zero based, low first)
+    /// </summary>
+    public TernaryInt32 this[Range range] => new TernaryInt32(Operations.GetTrits(trits, range));
+
+    public static TernaryInt32 operator |(TernaryInt32 a, TernaryInt32 b)
+    => new TernaryInt32(Operations.OrTrits(a.trits, b.trits));
+
+    public static TernaryInt32 operator |(TernaryInt32 a, int b)
+        => new TernaryInt32(Operations.OrTrits(a.trits, Conversion.ToTrits20(b)));
+
+    public static TernaryInt32 operator |(int a, TernaryInt32 b)
+        => new TernaryInt32(Operations.OrTrits(Conversion.ToTrits20(a), b.trits));
+
+    public static TernaryInt32 operator &(TernaryInt32 a, TernaryInt32 b)
+        => new TernaryInt32(Operations.AndTrits(a.trits, b.trits));
+
+    public static TernaryInt32 operator &(TernaryInt32 a, int b)
+        => new TernaryInt32(Operations.AndTrits(a.trits, Conversion.ToTrits20(b)));
+
+    public static TernaryInt32 operator &(int a, TernaryInt32 b)
+    => new TernaryInt32(Operations.AndTrits(Conversion.ToTrits20(a), b.trits));
+
+    public static TernaryInt32 operator ^(TernaryInt32 a, TernaryInt32 b)
+        => new TernaryInt32(Operations.XorTrits(a.trits, b.trits));
+
+    public static TernaryInt32 operator ^(TernaryInt32 a, int b)
+        => new TernaryInt32(Operations.XorTrits(a.trits, Conversion.ToTrits20(b)));
+
+    public static TernaryInt32 operator ^(int a, TernaryInt32 b)
+        => new TernaryInt32(Operations.XorTrits(Conversion.ToTrits20(a), b.trits));
+
+    public static TernaryInt32 operator !(TernaryInt32 a)
+        => new TernaryInt32(Operations.FlipTrits(a.trits));
+
+    public static TernaryInt32 operator -(TernaryInt32 a)
+        => new TernaryInt32(Operations.FlipTrits(a.trits));
+
+    public static TernaryInt32 operator >>(TernaryInt32 a, int shift)
+        => new TernaryInt32(Operations.ShiftTrits(a.trits, shift));
+
+    public static TernaryInt32 operator <<(TernaryInt32 a, int shift)
+        => new TernaryInt32(Operations.ShiftTrits(a.trits, -shift));
 }

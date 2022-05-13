@@ -78,6 +78,11 @@ public partial struct TernaryInt16
         }
     }
 
+    /// <summary>
+    /// Gets a range of trits (zero based, low first)
+    /// </summary>
+    public TernaryInt16 this[Range range] => new TernaryInt16(Operations.GetTrits(trits, range));
+
     public static TernaryInt16 operator |(TernaryInt16 a, TernaryInt16 b)
         => new TernaryInt16(Operations.OrTrits(a.trits, b.trits));
 
@@ -116,5 +121,4 @@ public partial struct TernaryInt16
 
     public static TernaryInt16 operator <<(TernaryInt16 a, int shift)
         => new TernaryInt16(Operations.ShiftTrits(a.trits, -shift));
-
 }

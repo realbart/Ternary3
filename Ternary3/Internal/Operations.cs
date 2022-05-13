@@ -29,7 +29,7 @@ internal static partial class Operations
     internal static ulong FlipTrits(ulong trits)
         => ((trits & DownMask64) << 1) | ((trits >> 1) & DownMask64);
 
-    internal static Trit GetTrit (uint trit) => (trit & 3) switch
+    internal static Trit GetTrit(uint trit) => (trit & 3) switch
     {
         0 => Trit.Middle,
         2 => Trit.Up,
@@ -49,6 +49,22 @@ internal static partial class Operations
     internal static Trit GetTrit(ulong trits, int index) => GetTrit(trits >> (index << 1));
     internal static Trit GetTrit(ulong trits, Index index) => GetTrit(trits, index, 32);
     internal static Trit GetTrit(ulong trits, Index index, int length) => GetTrit(trits, index.GetOffset(length));
+
+    internal static uint GetTrits(uint trits, Range range) => GetTrits(trits, range, 16);
+    internal static uint GetTrits(uint trits, Range range, int totalTrits)
+    {
+        (var offset, var length) = range.GetOffsetAndLength(totalTrits);
+        var shift = 32 - (length << 1);
+        return trits << (shift - offset << 1) >> (shift);
+    }
+    internal static ulong GetTrits(ulong trits, Range range) => GetTrits(trits, range, 32);
+    internal static ulong GetTrits(ulong trits, Range range, int totalTrits)
+    {
+        (var offset, var length) = range.GetOffsetAndLength(totalTrits);
+        var shift = 64 - (length << 1);
+        return trits << (shift - offset << 1) >> (shift);
+    }
+
 
     /// <summary>
     /// Performs an Xor (<see cref="Trit"/>wise addition) on two 16-<see cref="Trit"/> values
