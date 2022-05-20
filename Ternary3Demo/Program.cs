@@ -8,10 +8,10 @@ public static class Ternary3Demo
 {
     public static void Main()
     {
-        Int32Demos();
-        TritDemos();
+        //Int32Demos();
+        //TritDemos();
         TernaryInt16Demos();
-        TernaryInt32Demos();
+        //TernaryInt32Demos();
     }
 
     private static void TernaryInt16Demos()
@@ -23,12 +23,14 @@ public static class Ternary3Demo
         WriteLine($"{thirtyseven} t| {eleven} = {thirtyseven | eleven}");
         WriteLine($"{thirtyseven} t& {eleven} = {thirtyseven & eleven}");
         WriteLine($"{thirtyseven} t& {eleven} = {thirtyseven & 11}");
-        WriteLine($"{thirtyseven} t& {eleven} = {37 & eleven}");
+        WriteLine($"{37} t& {eleven} = {37 & eleven}");
         WriteLine($"{thirtyseven} t^ {eleven} = {thirtyseven ^ eleven}");
         WriteLine($"{thirtyseven} << 2 = {thirtyseven << 2}");
         WriteLine($"{thirtyseven} >> 2 = {thirtyseven >> 2}");
         WriteLine($"t!{thirtyseven} {!thirtyseven}");
         WriteLine($"t-{thirtyseven} {-thirtyseven}");
+        WriteLine($"{thirtyseven} + {eleven} = {thirtyseven + eleven}");
+        WriteLine($"{thirtyseven} - {eleven} = {thirtyseven - eleven}");
     }
 
     private static void TernaryInt32Demos()

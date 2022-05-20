@@ -6,7 +6,7 @@ using Ternary3.Internal;
 /// </summary>
 public partial struct TernaryInt64
 {
-    private readonly (ulong high, ulong low) trits;
+    internal readonly (ulong high, ulong low) trits;
 
     public TernaryInt64((ulong high, ulong low) trits) => this.trits = trits;
 

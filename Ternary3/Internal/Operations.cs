@@ -103,4 +103,100 @@ internal static partial class Operations
         var c = c_up << 1 | c_down;
         return c;
     }
+
+    /// <summary>
+    /// Performs an addition on two numbers in their <see cref="Trit"/> representation
+    /// </summary>
+    public static uint AddTrits(uint a, uint b)
+    {
+        a ^= ((a & UpMask32) ^ UpMask32) >> 1;
+        b ^= ((b & UpMask32) ^ UpMask32) >> 1;
+        return AddTrits_Inner(a, b);
+    }
+
+    /// <summary>
+    /// Performs a substraction on two numbers in their <see cref="Trit"/> representation
+    /// </summary>
+    public static uint SubstractTrits(uint a, uint b)
+    {
+        a ^= ((a & UpMask32) ^ UpMask32) >> 1;
+        var bup = b & UpMask32;
+        b ^= (((b & DownMask32) << 1) ^ bup) | (bup >> 1);
+        return AddTrits_Inner(a, b);
+    }
+
+    private static uint AddTrits_Inner(uint a, uint b)
+    {
+        uint result = 0;
+        uint rest = 1;
+        for (var i = 0; i < 16; i++)
+        {
+            result >>= 2;
+            var p = a & 0b11;
+            var q = b & 0b11;
+            var sum = p + q + rest + 1;
+            switch (sum % 3)
+            {
+                case 2:
+                    result |= 0b01000000_00000000_0000000_00000000;
+                    break;
+                case 0:
+                    result |= 0b10000000_00000000_0000000_00000000;
+                    break;
+            }
+            rest = sum / 3;
+            a >>= 2;
+            b >>= 2;
+        }
+        return result;
+    }
+
+    /// <summary>
+    /// Performs an addition on two numbers in their <see cref="Trit"/> representation
+    /// </summary>
+    public static ulong AddTrits(ulong a, ulong b)
+    {
+        a ^= ((a & UpMask64) ^ UpMask64) >> 1;
+        b ^= ((b & UpMask64) ^ UpMask64) >> 1;
+        return AddTrits_Inner(a, b);
+    }
+
+    /// <summary>
+    /// Performs a substraction on two numbers in their <see cref="Trit"/> representation
+    /// </summary>
+    public static ulong SubstractTrits(ulong a, ulong b)
+    {
+        a ^= ((a & UpMask64) ^ UpMask64) >> 1;
+        var bup = b & UpMask64;
+        b ^= (((b & DownMask64) << 1) ^ bup) | (bup >> 1);
+        return AddTrits_Inner(a, b);
+    }
+
+    private static ulong AddTrits_Inner(ulong a, ulong b)
+    {
+        ulong result = 0;
+        ulong rest = 1;
+        for (var i = 0; i < 16; i++)
+        {
+            result >>= 2;
+            var p = a & 0b11;
+            var q = b & 0b11;
+            var sum = p + q + rest + 1;
+            switch (sum % 3)
+            {
+                case 2:
+                    result |= 0b01000000_00000000_0000000_00000000__0000000_00000000_0000000_00000000;
+                    break;
+                case 0:
+                    result |= 0b10000000_00000000_0000000_00000000__0000000_00000000_0000000_00000000;
+                    break;
+            }
+            rest = sum / 3;
+            a >>= 2;
+            b >>= 2;
+        }
+        return result;
+    }
+
+
 }
