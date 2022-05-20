@@ -120,8 +120,8 @@ internal static partial class Operations
     public static uint SubstractTrits(uint a, uint b)
     {
         a ^= ((a & UpMask32) ^ UpMask32) >> 1;
-        var bup = b & UpMask32;
-        b ^= (((b & DownMask32) << 1) ^ bup) | (bup >> 1);
+        b = FlipTrits(b);
+        b ^= ((b & UpMask32) ^ UpMask32) >> 1;
         return AddTrits_Inner(a, b);
     }
 
@@ -138,10 +138,10 @@ internal static partial class Operations
             switch (sum % 3)
             {
                 case 2:
-                    result |= 0b01000000_00000000_0000000_00000000;
+                    result |= 0b10000000_00000000_00000000_00000000;
                     break;
                 case 0:
-                    result |= 0b10000000_00000000_0000000_00000000;
+                    result |= 0b01000000_00000000_00000000_00000000;
                     break;
             }
             rest = sum / 3;
@@ -167,8 +167,8 @@ internal static partial class Operations
     public static ulong SubstractTrits(ulong a, ulong b)
     {
         a ^= ((a & UpMask64) ^ UpMask64) >> 1;
-        var bup = b & UpMask64;
-        b ^= (((b & DownMask64) << 1) ^ bup) | (bup >> 1);
+        b = FlipTrits(b);
+        b ^= ((b & UpMask64) ^ UpMask64) >> 1;
         return AddTrits_Inner(a, b);
     }
 
@@ -185,10 +185,10 @@ internal static partial class Operations
             switch (sum % 3)
             {
                 case 2:
-                    result |= 0b01000000_00000000_0000000_00000000__0000000_00000000_0000000_00000000;
+                    result |= 0b10000000_00000000_00000000_00000000__00000000_00000000_00000000_00000000;
                     break;
                 case 0:
-                    result |= 0b10000000_00000000_0000000_00000000__0000000_00000000_0000000_00000000;
+                    result |= 0b01000000_00000000_00000000_00000000__00000000_00000000_00000000_00000000;
                     break;
             }
             rest = sum / 3;
