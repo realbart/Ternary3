@@ -2,9 +2,9 @@
 using Ternary.Formatting;
 using static System.Console;
 
-namespace Ternary3Demo;
+namespace TernaryDemo;
 
-public static class Ternary3Demo
+public static class TernaryDemo
 {
     public static void Main()
     {

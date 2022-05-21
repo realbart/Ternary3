@@ -1,4 +1,4 @@
-namespace Ternary3Tests;
+namespace TernaryTests;
 
 public class TritTests
 {

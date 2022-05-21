@@ -1,6 +1,6 @@
 ﻿using Ternary.BuiltInTypes;
 
-namespace Ternary3Tests.Internal;
+namespace TernaryTests.Internal;
 
 public class BalancedModuloTests
 {

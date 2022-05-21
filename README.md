@@ -1,6 +1,6 @@
-# Ternary3
+# Ternary
 
-Ternary3 is a library that makes performing balanced ternary operations on integer values.
+Ternary is a library that makes performing balanced ternary operations on integer values.
 It contains:
 
 1. A **Trit** type representing the smalles unit in a ternary system, having a value of up (+1), middle (0) or down (-1)
@@ -12,20 +12,20 @@ The Trit value type has a number of methods mathimatical ternary operations (Ter
 
 --------
 
-## Ternary3.Trit
+## Ternary.Trit
 
-Ternary3.Trit is the smallest unit in a ternary system. It is implemented as am enum, with a signed byte as its underlying value. The reason for using an enum instead of a custom struct, is to facilitate the use of these trit values as constants.
+Ternary.Trit is the smallest unit in a ternary system. It is implemented as am enum, with a signed byte as its underlying value. The reason for using an enum instead of a custom struct, is to facilitate the use of these trit values as constants.
 
 The actual operations are implemented as extension methods.
 
 Some examples code:
 
 ```
-using Ternary3;
-using static Ternary3.TritValues;
+using Ternary;
+using static Ternary.TritValues;
 using static System.Console;
 
-const value = up; // Ternary3.TritValues.up is a constant containing the value of Ternary3.Trit.Up
+const value = up; // Ternary.TritValues.up is a constant containing the value of Ternary.Trit.Up
 
 WriteLine(up.Or(down)); // writes 'Up', because a ternary or calculates the maximum value of the two trits
 WriteLine(up.And(down)); // writes 'Down', because a ternary and calculates the minimum value of the two trits
@@ -51,9 +51,9 @@ if (TritHelper.TryParse(myTrit, out var tVal))
 }
 ```
 
-## Ternary3.BuiltInTypes
+## Ternary.BuiltInTypes
 
-The Ternary3.BuiltInTypes namespace contains various methods and extension methods that can be used to perform ternary operations on built in integer types.
+The Ternary.BuiltInTypes namespace contains various methods and extension methods that can be used to perform ternary operations on built in integer types.
 
 ## Ternary integer types
 
@@ -61,16 +61,16 @@ The Ternary integer types use an in-memory trit representation that uses two bit
 
 At this time, the available types are:
 
-* Ternary3.TernaryInt16 with values from -21,523,360 to 21,523,360
-* Ternary3.TernaryInt32 with values from -926,510,094,425,920 to 926,510,094,425,920
-* Ternary3.TernaryInt64 with values from  -1,716,841,910,146,256,242,328,924,544,640 and 1,716,841,910,146,256,242,328,924,544,640
+* Ternary.TernaryInt16 with values from -21,523,360 to 21,523,360
+* Ternary.TernaryInt32 with values from -926,510,094,425,920 to 926,510,094,425,920
+* Ternary.TernaryInt64 with values from  -1,716,841,910,146,256,242,328,924,544,640 and 1,716,841,910,146,256,242,328,924,544,640
 
 
 Some examples code:
 
 ```
-using Ternary3;
-using static Ternary3.TritValues;
+using Ternary;
+using static Ternary.TritValues;
 using static System.Console;
 
 var first = TernaryInt16.Parse("++00--");

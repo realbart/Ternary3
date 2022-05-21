@@ -1,4 +1,4 @@
-﻿namespace Ternary3Tests;
+﻿namespace TernaryTests;
 
 using Ternary;
 using Ternary.Internal;

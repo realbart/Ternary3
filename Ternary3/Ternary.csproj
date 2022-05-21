@@ -1,31 +1,38 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
+		<AssemblyVersion>0.95.0.0</AssemblyVersion>
+		<Authors>Bart Kemps, bart@kemps.eu</Authors>
+		<Copyright>(c) Copyright 2022 Bart Kemps</Copyright>
+		<Description>A collection of types and methods to perform balanced trinary arithmetic</Description>
+		<FileVersion>0.95.0.0</FileVersion>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Copyright>(c) Copyright 2022 Bart Kemps</Copyright>
-		<PackageProjectUrl>https://github.com/realbart/Ternary3/</PackageProjectUrl>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
 		<PackageIcon></PackageIcon>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<RepositoryUrl>https://github.com/realbart/Ternary3/</RepositoryUrl>
-		<PackageTags>Balanced Ternary Balanced Trinary Calculation</PackageTags>
-		<PackageVersion>1.0.0-alpha</PackageVersion>
 		<PackageLicenseFile>license.txt</PackageLicenseFile>
-		<AssemblyVersion>0.95.0.0</AssemblyVersion>
-		<FileVersion>0.95.0.0</FileVersion>
+		<PackageProjectUrl>https://github.com/realbart/Ternary/</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageTags>Balanced Ternary Trinary Calculation Maths Arithmetic</PackageTags>
+		<PackageVersion>1.0.0-alpha</PackageVersion>
+		<RepositoryUrl>https://github.com/realbart/Ternary/</RepositoryUrl>
+		<TargetFramework>net60</TargetFramework>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Compile Remove="Properties\TernaryGlobalUsings.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="Properties\TernaryGlobalUsings.cs" >
+			<Pack>True</Pack>
+			<PackagePath>/contentFiles/cs/net60/Properties</PackagePath>
+		</None>
 		<None Include="..\README.md">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
-	</ItemGroup>
-
-	<ItemGroup>
 		<None Include="..\license.txt">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
