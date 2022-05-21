@@ -1,6 +1,6 @@
-﻿namespace Ternary3;
-using Ternary3.Formatting;
-using Ternary3.Internal;
+﻿namespace Ternary;
+using Ternary.Formatting;
+using Ternary.Internal;
 
 /// <summary>
 /// Represents a 16-trit signed integer

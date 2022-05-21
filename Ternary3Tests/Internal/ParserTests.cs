@@ -1,6 +1,6 @@
 ﻿namespace Ternary3Tests.Internal;
 
-using Ternary3.Internal;
+using Ternary.Internal;
 
 public class ParserTests
 {

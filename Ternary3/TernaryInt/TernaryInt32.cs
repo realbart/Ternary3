@@ -1,7 +1,7 @@
-﻿namespace Ternary3;
+﻿namespace Ternary;
 
-using Ternary3.Formatting;
-using Ternary3.Internal;
+using Ternary.Formatting;
+using Ternary.Internal;
 
 /// <summary>
 /// Represents a 32-trit signed integer

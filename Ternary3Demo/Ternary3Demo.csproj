@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ternary3\Ternary3.csproj" />
+    <ProjectReference Include="..\Ternary3\Ternary.csproj" />
   </ItemGroup>
 
 </Project>

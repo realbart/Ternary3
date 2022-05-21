@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Ternary3.Internal;
+using Ternary.Internal;
 
 public class ConversionTests
 {

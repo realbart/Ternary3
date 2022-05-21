@@ -1,4 +1,4 @@
-﻿namespace Ternary3.Internal;
+﻿namespace Ternary.Internal;
 internal static class Constants
 {
     internal const int MaxTrit1 = 1;

@@ -1,4 +1,4 @@
-﻿namespace Ternary3.IO;
+﻿namespace Ternary.IO;
 
 using System;
 using System.Collections.Generic;

@@ -1,5 +1,5 @@
-﻿namespace Ternary3;
-using Ternary3.Internal;
+﻿namespace Ternary;
+using Ternary.Internal;
 
 /// <summary>
 /// Represents a 64-trit signed integer

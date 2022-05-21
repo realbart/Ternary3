@@ -1,4 +1,4 @@
-﻿namespace Ternary3.Internal;
+﻿namespace Ternary.Internal;
 
 using System;
 

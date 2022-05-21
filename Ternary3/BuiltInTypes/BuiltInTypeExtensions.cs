@@ -1,8 +1,8 @@
-﻿namespace Ternary3;
+﻿namespace Ternary;
 
-using Ternary3.BuiltInTypes;
-using Ternary3.Formatting;
-using Ternary3.Internal;
+using Ternary.BuiltInTypes;
+using Ternary.Formatting;
+using Ternary.Internal;
 
 public static partial class BuiltInTypeExtensions
 {

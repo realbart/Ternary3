@@ -1,4 +1,4 @@
-﻿namespace Ternary3;
+﻿namespace Ternary;
 
 /// <summary>
 /// The smallest unit in a trinary system, either balanced (-1, 0, 1) or unbalanced (0, 1, 2)

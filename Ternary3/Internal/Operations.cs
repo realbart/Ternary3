@@ -1,7 +1,7 @@
-﻿namespace Ternary3.Internal;
+﻿namespace Ternary.Internal;
 
 using System.Collections.Generic;
-using Ternary3.Internal;
+using Ternary.Internal;
 
 internal static partial class Operations
 {

@@ -1,4 +1,4 @@
-﻿namespace Ternary3.Formatting;
+﻿namespace Ternary.Formatting;
 
 internal static class Formatter
 {

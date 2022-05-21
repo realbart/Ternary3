@@ -1,6 +1,6 @@
 ﻿using System.CodeDom.Compiler;
 
-namespace Ternary3.BuiltInTypes;
+namespace Ternary.BuiltInTypes;
 
 [GeneratedCode("t4","1.0,0,0")]
 public static class BlancedModulo

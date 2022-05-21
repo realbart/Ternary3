@@ -1,4 +1,4 @@
-﻿namespace Ternary3.Formatting;
+﻿namespace Ternary.Formatting;
 
 public interface IBase27Format
 {

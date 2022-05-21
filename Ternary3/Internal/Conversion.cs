@@ -1,4 +1,4 @@
-﻿namespace Ternary3.Internal;
+﻿namespace Ternary.Internal;
 internal static partial class Conversion
 {
     internal static int From2Trits(this uint target)

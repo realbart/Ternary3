@@ -1,5 +1,5 @@
 ﻿namespace Ternary3Tests;
-using Ternary3.Internal;
+using Ternary.Internal;
 
 public class OperationsTests
 {

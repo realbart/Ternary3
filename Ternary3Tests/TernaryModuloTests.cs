@@ -1,4 +1,4 @@
-﻿using Ternary3.BuiltInTypes;
+﻿using Ternary.BuiltInTypes;
 
 namespace Ternary3Tests.Internal;
 

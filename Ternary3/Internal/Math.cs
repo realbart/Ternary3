@@ -1,4 +1,4 @@
-﻿namespace Ternary3.Internal;
+﻿namespace Ternary.Internal;
 internal static class Math
 {
     internal static int ThreePow(int exp)

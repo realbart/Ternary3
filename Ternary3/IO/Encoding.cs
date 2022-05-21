@@ -1,4 +1,4 @@
-﻿namespace Ternary3.IO;
+﻿namespace Ternary.IO;
 
 
 internal enum Encoding

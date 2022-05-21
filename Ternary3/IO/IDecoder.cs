@@ -1,4 +1,4 @@
-﻿namespace Ternary3.IO;
+﻿namespace Ternary.IO;
 
 /// <summary>
 /// Decodes <see cref="TernaryInt3"/>s from <see cref="byte"/>s.

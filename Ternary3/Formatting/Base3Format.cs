@@ -1,4 +1,4 @@
-﻿namespace Ternary3.Formatting;
+﻿namespace Ternary.Formatting;
 
 public class Base3Format : IBase3Format
 {

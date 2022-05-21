@@ -1,4 +1,4 @@
-﻿namespace Ternary3.Formatting;
+﻿namespace Ternary.Formatting;
 
 /// <summary>
 /// Defines the digits used in a Septemvigesimal or Heptavigesimal number system

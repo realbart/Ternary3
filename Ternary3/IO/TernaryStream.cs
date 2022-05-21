@@ -1,4 +1,4 @@
-﻿namespace Ternary3.IO;
+﻿namespace Ternary.IO;
 
 /// <summary>
 /// Provides a generic view of a sequence of tribbles. This is an abstract class.

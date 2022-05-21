@@ -1,6 +1,6 @@
-﻿namespace Ternary3;
+﻿namespace Ternary;
 
-using Ternary3.Internal;
+using Ternary.Internal;
 
 /// <summary>
 /// Represents a 3-trit signed integer.

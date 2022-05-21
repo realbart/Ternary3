@@ -1,6 +1,6 @@
-﻿using Ternary3.BuiltInTypes;
+﻿using Ternary.BuiltInTypes;
 
-namespace Ternary3.Internal;
+namespace Ternary.Internal;
 
 internal static partial class Conversion
 {

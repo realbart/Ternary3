@@ -1,5 +1,5 @@
-﻿using Ternary3;
-using Ternary3.Formatting;
+﻿using Ternary;
+using Ternary.Formatting;
 using static System.Console;
 
 namespace Ternary3Demo;

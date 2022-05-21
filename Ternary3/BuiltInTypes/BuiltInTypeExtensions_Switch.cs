@@ -1,6 +1,6 @@
 ﻿using System.CodeDom.Compiler;
 
-namespace Ternary3;
+namespace Ternary;
 
 [GeneratedCode("t4","1.0,0,0")]
 public static partial class BuiltInTypeExtensions

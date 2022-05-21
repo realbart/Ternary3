@@ -1,4 +1,4 @@
-﻿namespace Ternary3;
+﻿namespace Ternary;
 
 
 public static partial class TritHelper

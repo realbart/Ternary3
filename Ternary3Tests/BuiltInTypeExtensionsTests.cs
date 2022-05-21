@@ -1,7 +1,7 @@
 ﻿namespace Ternary3Tests;
 
-using Ternary3;
-using Ternary3.Internal;
+using Ternary;
+using Ternary.Internal;
 
 public class BuiltInTypeExtensionsTests
 {
