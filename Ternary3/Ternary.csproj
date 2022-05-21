@@ -25,7 +25,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="Properties\TernaryGlobalUsings.cs" >
+		<None Include="Properties\TernaryGlobalUsings.cs">
 			<Pack>True</Pack>
 			<PackagePath>/contentFiles/cs/net60/Properties</PackagePath>
 		</None>

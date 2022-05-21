@@ -17,28 +17,26 @@ public partial struct TernaryInt32
 
     /// <summary>
     /// Represents the largest possible value of an <see cref="TernaryInt16"/>:
-    /// U_UUU_UUU_UUU_UUU_UUU  This field is constant.
+    /// DDDDDDDD_DDDDDDDD_DDDDDDDD_DDDDDDDD. This field is constant.
     /// </summary>
     public const long MinValue = -MaxTrit32;
 
     /// <summary>
     /// Represents the smallest possible value of an <see cref="TernaryInt16"/>:
-    /// D_DDD_DDD_DDD_DDD_DDD  This field is constant.
+    /// UUUUUUUU_UUUUUUUU_UUUUUUUU_UUUUUUUU. This field is constant.
     /// </summary>
     public const long MaxValue = MaxTrit32;
 
     /// <summary>
     /// Formats the <see cref="TernaryInt16"/> one character per Trit using the default formatter.
     /// </summary>
-    public override string ToString() => Formatter.FormatTrits(trits, 32);
-    /// <summary>
-    /// Formats the <see cref="TernaryInt16"/> one character per Trit using the default formatter.
-    /// </summary>
-    public string ToString(int numberOfDigits) => Formatter.FormatTrits(trits, numberOfDigits);
+    public override string ToString() => Formatter.FormatTrits(trits, 0);
+    
     /// <summary>
     /// Formats the <see cref="TernaryInt16"/> one character per Trit using a custom formatter.
     /// </summary>
     public string ToString(IBase3Format format, int numberOfDigits = 32) => Formatter.FormatTrits(trits, format, numberOfDigits);
+    
     /// <summary>
     /// Formats the <see cref="TernaryInt16"/> one character per Tribble (3 trits) using a custom formatter.
     /// </summary>
@@ -68,6 +66,12 @@ public partial struct TernaryInt32
     /// Gets a range of trits (zero based, low first)
     /// </summary>
     public TernaryInt32 this[Range range] => new TernaryInt32(Operations.GetTrits(trits, range));
+
+    public static TernaryInt32 operator +(TernaryInt32 a, TernaryInt32 b)
+    => new TernaryInt32(Operations.AddTrits(a.trits, b.trits));
+
+    public static TernaryInt32 operator -(TernaryInt32 a, TernaryInt32 b)
+    => new TernaryInt32(Operations.SubstractTrits(a.trits, b.trits));
 
     public static TernaryInt32 operator |(TernaryInt32 a, TernaryInt32 b)
     => new TernaryInt32(Operations.OrTrits(a.trits, b.trits));
