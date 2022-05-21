@@ -4,7 +4,7 @@ using Ternary.Internal;
 /// <summary>
 /// Represents a 64-trit signed integer
 /// </summary>
-public partial struct TernaryInt64
+internal partial struct TernaryInt64
 {
     internal readonly (ulong high, ulong low) trits;
 

@@ -59,7 +59,7 @@ public partial struct TernaryInt16
     {
         get
         {
-            if (index < 0 || index > 16) throw new ArgumentOutOfRangeException(nameof(index));
+            if (index < 0 || index >= 16) throw new ArgumentOutOfRangeException(nameof(index));
             return Operations.GetTrit(trits, index);
         }
     }
@@ -67,19 +67,12 @@ public partial struct TernaryInt16
     /// <summary>
     /// Gets the nth trit (zero-based, low first)
     /// </summary>
-    public Trit this[Index index]
-    {
-        get
-        {
-            if (index.Value < 0 || index.Value > 16) throw new ArgumentOutOfRangeException(nameof(index));
-            return Operations.GetTrit(trits, index);
-        }
-    }
+    public Trit this[Index index] => Operations.GetTrit(trits, index, 16);
 
     /// <summary>
     /// Gets a range of trits (zero based, low first)
     /// </summary>
-    public TernaryInt16 this[Range range] => new TernaryInt16(Operations.GetTrits(trits, range));
+    public TernaryInt16 this[Range range] => new TernaryInt16(Operations.GetTrits(trits, range, 16));
 
     public static TernaryInt16 operator +(TernaryInt16 a, TernaryInt16 b)
         => new TernaryInt16(Operations.AddTrits(a.trits, b.trits));

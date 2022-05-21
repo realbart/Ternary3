@@ -31,12 +31,12 @@ public partial struct TernaryInt32
     /// Formats the <see cref="TernaryInt16"/> one character per Trit using the default formatter.
     /// </summary>
     public override string ToString() => Formatter.FormatTrits(trits, 0);
-    
+
     /// <summary>
     /// Formats the <see cref="TernaryInt16"/> one character per Trit using a custom formatter.
     /// </summary>
     public string ToString(IBase3Format format, int numberOfDigits = 32) => Formatter.FormatTrits(trits, format, numberOfDigits);
-    
+
     /// <summary>
     /// Formats the <see cref="TernaryInt16"/> one character per Tribble (3 trits) using a custom formatter.
     /// </summary>
@@ -55,17 +55,24 @@ public partial struct TernaryInt32
     /// <summary>
     /// Gets the nth trit (zero-based, low first)
     /// </summary>
-    public Trit this[int index] => Operations.GetTrit(trits, index);
+    public Trit this[int index]
+    {
+        get
+        {
+            if (index < 0 || index >= 32) throw new ArgumentOutOfRangeException(nameof(index));
+            return Operations.GetTrit(trits, index);
+        }
+    }
 
     /// <summary>
     /// Gets the nth trit (zero-based, low first)
     /// </summary>
-    public Trit this[Index index] => Operations.GetTrit(trits, index);
+    public Trit this[Index index] => Operations.GetTrit(trits, index, 32);
 
     /// <summary>
     /// Gets a range of trits (zero based, low first)
     /// </summary>
-    public TernaryInt32 this[Range range] => new TernaryInt32(Operations.GetTrits(trits, range));
+    public TernaryInt32 this[Range range] => new TernaryInt32(Operations.GetTrits(trits, range, 32));
 
     public static TernaryInt32 operator +(TernaryInt32 a, TernaryInt32 b)
     => new TernaryInt32(Operations.AddTrits(a.trits, b.trits));

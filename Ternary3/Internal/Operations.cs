@@ -1,5 +1,6 @@
 ﻿namespace Ternary.Internal;
 
+using System;
 using System.Collections.Generic;
 using Ternary.Internal;
 
@@ -44,27 +45,37 @@ internal static partial class Operations
     };
 
     internal static Trit GetTrit(uint trits, int index) => GetTrit(trits >> (index << 1));
-    internal static Trit GetTrit(uint trits, Index index) => GetTrit(trits, index, 16);
-    internal static Trit GetTrit(uint trits, Index index, int length) => GetTrit(trits, index.GetOffset(length));
-    internal static Trit GetTrit(ulong trits, int index) => GetTrit(trits >> (index << 1));
-    internal static Trit GetTrit(ulong trits, Index index) => GetTrit(trits, index, 32);
-    internal static Trit GetTrit(ulong trits, Index index, int length) => GetTrit(trits, index.GetOffset(length));
-
-    internal static uint GetTrits(uint trits, Range range) => GetTrits(trits, range, 16);
-    internal static uint GetTrits(uint trits, Range range, int totalTrits)
+    internal static Trit GetTrit(uint trits, Index index, int length)
     {
+        if (index.Value > length)
+            throw new ArgumentOutOfRangeException(nameof(index));
+        return GetTrit(trits, index.GetOffset(length));
+    }
+
+    internal static Trit GetTrit(ulong trits, int index) => GetTrit(trits >> (index << 1));
+    internal static Trit GetTrit(ulong trits, Index index, int length)
+    {
+        if (index.Value > length)
+            throw new ArgumentOutOfRangeException(nameof(index));
+        return GetTrit(trits, index.GetOffset(length));
+    }
+
+    internal static uint GetTrits(uint trits, Range range, int totalTrits)
+{
+        if (range.Start.Value > totalTrits || range.End.Value > totalTrits) 
+            throw new ArgumentOutOfRangeException(nameof(range));
         (var offset, var length) = range.GetOffsetAndLength(totalTrits);
         var shift = 32 - (length << 1);
         return trits << (shift - offset << 1) >> (shift);
     }
-    internal static ulong GetTrits(ulong trits, Range range) => GetTrits(trits, range, 32);
     internal static ulong GetTrits(ulong trits, Range range, int totalTrits)
     {
+        if (range.Start.Value > totalTrits || range.End.Value > totalTrits) 
+            throw new ArgumentOutOfRangeException(nameof(range));
         (var offset, var length) = range.GetOffsetAndLength(totalTrits);
         var shift = 64 - (length << 1);
         return trits << (shift - offset << 1) >> (shift);
     }
-
 
     /// <summary>
     /// Performs an Xor (<see cref="Trit"/>wise addition) on two 16-<see cref="Trit"/> values

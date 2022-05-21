@@ -47,6 +47,38 @@ public struct TernaryInt9
     /// </summary>
     public string ToString(IBase27Format format, int numberOfDigits = 6) => Formatter.FormatTribbles(trits, format, numberOfDigits);
 
+    /// <summary>
+    ///  Converts the <see cref="Span{T}"/> representation of a value to a <see cref="TernaryInt16"/> instance.
+    /// </summary>
+    public static TernaryInt9 Parse(ReadOnlySpan<char> s) => new TernaryInt9(Parser.ToTrits16(s, 9));
+
+    /// <summary>
+    ///  Converts the <see cref="string"/> representation of a value to a <see cref="TernaryInt16"/> instance.
+    /// </summary>
+    public static TernaryInt9 Parse(string s) => Parse(s.AsSpan());
+
+    /// <summary>
+    /// Gets the nth trit (zero-based, low first)
+    /// </summary>
+    public Trit this[int index]
+    {
+        get
+        {
+            if (index < 0 || index >= 9) throw new ArgumentOutOfRangeException(nameof(index));
+            return Operations.GetTrit(trits, index);
+        }
+    }
+
+    /// <summary>
+    /// Gets the nth trit (zero-based, low first)
+    /// </summary>
+    public Trit this[Index index] => Operations.GetTrit(trits, index, 9);
+
+    /// <summary>
+    /// Gets a range of trits (zero based, low first)
+    /// </summary>
+    public TernaryInt9 this[Range range] => new TernaryInt9(Operations.GetTrits(trits, range, 9));
+
     public static TernaryInt9 operator +(TernaryInt9 a, TernaryInt9 b)
         => CreateChecked(Operations.AddTrits(a.trits, b.trits));
 
