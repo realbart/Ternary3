@@ -3,7 +3,7 @@
 namespace Ternary.BuiltInTypes;
 
 [GeneratedCode("t4","1.0,0,0")]
-public static class BlancedModulo
+internal static class BlancedModulo
 {
     /// <summary>
     /// Performs a balanced modulo 3↑1 = 3

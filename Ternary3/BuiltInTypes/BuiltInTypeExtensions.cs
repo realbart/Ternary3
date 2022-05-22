@@ -4,6 +4,10 @@ using Ternary.BuiltInTypes;
 using Ternary.Formatting;
 using Ternary.Internal;
 
+/// <summary>
+/// Externsion methods on <see cref="int"/> and <see cref="long"/>. 
+/// When performing ternary operations on these values, they are treated like 20- and 40-trit values respectively.
+/// </summary>
 public static partial class BuiltInTypeExtensions
 {
 
@@ -196,7 +200,16 @@ public static partial class BuiltInTypeExtensions
         return operand1 > operand2 ? Trit.Up : Trit.Down;
     }
 
-    public static string TernaryToString(this int target, int trits = 20) => Formatter.FormatTrits(target.ToTrits20(), trits);
+    /// <summary>
+    /// Formats a string as a balanced trinary numer
+    /// </summary>
+    public static string TernaryToString(this int target) => Formatter.FormatTrits(target.ToTrits20(), 0);
+    /// <summary>
+    /// Formats a string as a balanced trinary numer, using the provided format
+    /// </summary>
     public static string TernaryToString(this int target, IBase3Format format, int trits = 20) => Formatter.FormatTrits(target.ToTrits20(), format, trits);
+    /// <summary>
+    /// Formats a string as a balanced heptavigesimal (27-based) numer, using the provided format
+    /// </summary>
     public static string TernaryToString(this int target, IBase27Format format, int tribbles = 7) => Formatter.FormatTribbles(target.ToTrits20(), format, tribbles);
 }
