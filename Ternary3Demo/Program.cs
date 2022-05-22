@@ -71,7 +71,7 @@ public static class TernaryDemo
         for (var i = -15; i <= 15; i++)
         {
 
-            WriteLine($"{i.TernaryToString(6)} = "
+            WriteLine($"{i.TernaryToString()} = "
                 + $"{i.TernaryToString(Base27Format.AlphabetEuclidian, 0)} "
                 + $"{i.TernaryToString(Base27Format.AlphabetShifted, 0)} "
                 + $"{i.TernaryToString(Base27Format.AlphabetTruncated, 0)} "
