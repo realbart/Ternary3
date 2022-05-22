@@ -1,14 +1,14 @@
 # Ternary
 
-Ternary is a library that makes performing balanced ternary operations on integer values.
+Ternary is a library for balanced ternary operations on integer values.
 It contains:
 
 1. A **Trit** type representing the smalles unit in a ternary system, having a value of up (+1), middle (0) or down (-1)
-The Trit value type has a number of methods mathimatical ternary operations (Ternary And, Ternary Or, Ternary Xor, Ternarry Not, Cycle and Anticycle)
+The Trit value type has a number of methods representing mathematical ternary operations (Ternary And, Ternary Or, Ternary Xor, Ternarry Not, Cycle and Anticycle)
 
-2. Value types represemting Ternary numbers consisting of a number of trits: TernaryInt16, TernaryInt32, TernaryInt64. Trit operations can also be performed on these value types.
+2. Value types representing Ternary numbers consisting of a number of trits: TernaryInt16, TernaryInt32, TernaryInt64. Trit operations can also be performed on these value types.
 
-3. Extension methods on default framework value types to facilitate performing trit operations on these numbers as well. Note that performing trit operations on binary numbers involves converting them from binary to trinary and back. If you need to perform multiple ternary operations in sequence, consider using the Ternary value types.
+3. Extension methods on default framework value types to facilitate performing trit operations on these numbers as well. Note that performing trit operations on binary numbers involves converting them from binary to ternary and back. If you need to perform multiple ternary operations in sequence, consider using the Ternary value types.
 
 ## Operations
 
