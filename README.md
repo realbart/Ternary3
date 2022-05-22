@@ -32,7 +32,7 @@ And returns the lowest of two trits
 
 Or returns the highest of two trits
 
-| Or (|)     | **Down** | **Middle** | **Up** |
+| Or         | **Down** | **Middle** | **Up** |
 |------------|----------|------------|--------|
 | **Down**   | Down     | Middle     | Up     |
 | **Middle** | Middle   | Middle     | Up     |
