@@ -16,8 +16,8 @@ Possibly with the introduction of an ITerneryComparable
 - *feature* - Big Ternaries: (operations on) ternary numbers with more than 32 trits.
   - Convert to and from long
   - Tritshifts
-  - Convert from and to binary
-  - Convert from and to decimal
+  - Convert from and to binary-based numbers
+  - Convert from and to decimal strings
 
 - *feature* - Streams: reading from and writing to (binary) data streams.
   - TernaryStream
