@@ -118,9 +118,9 @@ Types that fully utilize the underlying types are:
 
 Types that mimic true ternary types are:
 
-* Ternary.TernaryInt3 with values from -13 to 13. This type is also commonly aliased as tribble.
-* Ternary.TernaryInt9 with values from -9,841 to 9,841. This type is also commonly aliased as tryte.
-* Ternary.TernaryInt27 with values from -3,812,798,742,493 to 3,812,798,742,493. This type is also commonly aliased as trouble.
+* Ternary.TernaryInt3 with values from -13 to 13. This type is also commonly aliased as **tribble**.
+* Ternary.TernaryInt9 with values from -9,841 to 9,841. This type is also commonly aliased as **tryte**.
+* Ternary.TernaryInt27 with values from -3,812,798,742,493 to 3,812,798,742,493. This type is also commonly aliased as **trouble**.
 
 Some examples code:
 
