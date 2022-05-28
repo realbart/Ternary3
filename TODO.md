@@ -14,7 +14,7 @@ Possibly with the introduction of an ITerneryComparable
 - *feature* - Multiplication
 
 - *feature* - Big Ternaries: (operations on) ternary numbers with more than 32 trits.
-  - Convert to end from long
+  - Convert to and from long
   - Tritshifts
   - Convert from and to binary
   - Convert from and to decimal
