@@ -27,7 +27,7 @@ public struct TernaryInt9
     internal TernaryInt9(uint trits) => this.trits = trits;
 
     private static TernaryInt9 CreateChecked(uint trits)
-        => new TernaryInt9(trits ^ 0b111111_111111_111111);
+        => new TernaryInt9(trits & 0b111111_111111_111111);
 
 
     public static implicit operator TernaryInt9(int value) => new TernaryInt9(value.ToTrits9());

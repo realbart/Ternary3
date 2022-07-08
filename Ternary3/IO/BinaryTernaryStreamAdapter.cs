@@ -12,6 +12,9 @@ public class BinaryTernaryStreamAdapter : Stream
     private readonly IDecoder? decoder;
     private readonly IEncoder? encoder;
 
+    /// <summary>
+    /// Implements a Binary Stream that reads or writes bytes as tribbles to a binary stream
+    /// </summary>
     public BinaryTernaryStreamAdapter(TernaryStream ternaryStream, IEncoder encoder)
     {
         if (ternaryStream == null) throw new ArgumentNullException(nameof(ternaryStream));
@@ -22,6 +25,9 @@ public class BinaryTernaryStreamAdapter : Stream
         this.CanRead = true;
     }
 
+    /// <summary>
+    /// Implements a Binary Stream that reads or writes bytes as tribbles from a binary stream
+    /// </summary>
     public BinaryTernaryStreamAdapter(TernaryStream ternaryStream, IDecoder decoder)
     {
         if (ternaryStream == null) throw new ArgumentNullException(nameof(ternaryStream));
@@ -32,32 +38,46 @@ public class BinaryTernaryStreamAdapter : Stream
         this.CanWrite = true;
     }
 
+    /// <inheritdoc/>
     public override bool CanRead { get; }
 
+    /// <inheritdoc/>
     public override bool CanSeek => false;
 
+    /// <inheritdoc/>
     public override bool CanWrite { get; }
 
+    /// <inheritdoc/>
     public override long Length => throw new NotImplementedException();
 
-    public override long Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    /// <inheritdoc/>
+    public override long Position
+    {
+        get => throw new NotImplementedException();
+        set => throw new NotImplementedException();
+    }
 
+    /// <inheritdoc/>
     public override void Flush()
     {
         if (!CanWrite) throw new InvalidOperationException("Cannot flush a stream you cannot write to");
         throw new NotImplementedException();
     }
 
+    /// <inheritdoc/>
     public override int Read(byte[] buffer, int offset, int count)
     {
         if (!CanRead) throw new InvalidOperationException("Cannot read");
         throw new NotImplementedException();
     }
 
+    /// <inheritdoc/>
     public override long Seek(long offset, SeekOrigin origin) => throw new NotImplementedException();
 
+    /// <inheritdoc/>
     public override void SetLength(long value) => throw new NotImplementedException();
 
+    /// <inheritdoc/>
     public override void Write(byte[] buffer, int offset, int count)
     {
         if (!CanWrite) throw new InvalidOperationException("Cannot write");

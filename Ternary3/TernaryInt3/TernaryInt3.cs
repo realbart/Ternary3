@@ -25,7 +25,7 @@ public struct TernaryInt3
     /// </summary>
     public const sbyte MaxValue = MaxTrit3;
 
-    internal TernaryInt3(byte trits) => this.trits = (byte)(trits ^ 0b111111);
+    internal TernaryInt3(byte trits) => this.trits = (byte)(trits & 0b111111);
     internal TernaryInt3(uint trits) : this((byte)trits) { }
 
     private static TernaryInt3 CreateChecked(uint trits)

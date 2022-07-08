@@ -37,7 +37,7 @@ public abstract class TernaryStream: IAsyncDisposable, IDisposable
         {
             if (disposing)
             {
-                Flush();
+                if (this.CanWrite) Flush();
             }
 
             disposedValue = true;
@@ -46,7 +46,6 @@ public abstract class TernaryStream: IAsyncDisposable, IDisposable
 
     public void Dispose()
     {
-        // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
         Dispose(disposing: true);
         GC.SuppressFinalize(this);
     }
@@ -66,7 +65,6 @@ public abstract class TernaryStream: IAsyncDisposable, IDisposable
 
     public async ValueTask DisposeAsync()
     {
-        // Do not change this code. Put cleanup code in 'DisposeAsync(bool disposing)' method
         await DisposeAsync(disposing: true);
         GC.SuppressFinalize(this);
     }

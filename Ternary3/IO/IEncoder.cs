@@ -5,4 +5,6 @@
 /// </summary>
 public interface IEncoder
 {
+    void Write(Stream binaryStream, TernaryInt3[] buffer, int offset, int count);
+    void Flush(Stream binaryStream);
 }

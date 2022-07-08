@@ -8,10 +8,10 @@ public static class TernaryDemo
 {
     public static void Main()
     {
-        Int32Demos();
-        TritDemos();
         TernaryInt16Demos();
         TernaryInt32Demos();
+        Int32Demos();
+        TritDemos();
     }
 
     private static void TernaryInt16Demos()
@@ -106,11 +106,10 @@ public static class TernaryDemo
         WriteLine(tritValue.ToNullableBoolean()); // writes nothing; down, middle and up translate to false, null, true.
         WriteLine(false.ToTrit()); // writes 'Down'
 
-        WriteLine("Enter a valid Trit value (Down, Middle or Up)");
         var myTrit = "up";
         if (TritHelper.TryParse(myTrit, out var tVal))
         {
-            WriteLine($"This value is sometimes written as {tVal.Switch("-", "0", "+")}");
+            WriteLine($"{myTrit} is sometimes written as {tVal.Switch("-", "0", "+")}");
         }
     }
 }

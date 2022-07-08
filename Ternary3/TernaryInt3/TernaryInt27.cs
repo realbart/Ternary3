@@ -27,7 +27,7 @@ public struct TernaryInt27
     internal TernaryInt27(ulong trits) => this.trits = trits;
 
     private static TernaryInt27 CreateChecked(ulong trits)
-        => new TernaryInt27(trits ^ 0b111111_111111_111111__111111_111111_111111__111111_111111_111111);
+        => new TernaryInt27(trits & 0b111111_111111_111111__111111_111111_111111__111111_111111_111111);
 
     public static implicit operator TernaryInt27(int value) => new TernaryInt27(value.ToTrits20());
     public static implicit operator TernaryInt27(long value) => new TernaryInt27(value.ToTrits27());
