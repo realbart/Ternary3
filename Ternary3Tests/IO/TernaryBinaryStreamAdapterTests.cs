@@ -9,7 +9,7 @@ namespace TernaryTests.IO
         public void Write_WritesBytes()
         {
             var stream = new MemoryStream();
-            var encoder = new BytePerTernaryInt3Encoder();
+            var encoder = new BytePerTernaryInt3Encoder(BinartyTernaryEncodingFlags.Signature);
 
             var buffer = new TernaryInt3[] { -13, 0, 13 };
             using (var sut = new TernaryBinaryStreamAdapter(stream, (IEncoder)encoder))
@@ -24,7 +24,7 @@ namespace TernaryTests.IO
         public void Read_ReadsBytes()
         {
             var stream = new MemoryStream(new byte[] {243, 0, 13});
-            var encoder = new BytePerTernaryInt3Encoder();
+            var encoder = new BytePerTernaryInt3Decoder();
             var buffer = new TernaryInt3[3];
             using (var sut = new TernaryBinaryStreamAdapter(stream, (IDecoder)encoder))
             {

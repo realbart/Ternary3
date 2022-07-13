@@ -5,5 +5,6 @@
 /// </summary>
 public interface IDecoder
 {
+    void Start(Stream binaryStream);
     int Read(Stream binaryStream, TernaryInt3[] buffer, int offset, int count);
 }

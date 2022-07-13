@@ -1,6 +1,23 @@
 ﻿namespace Ternary.Internal;
 internal static class Constants
 {
+    /// <summary>
+    /// "Encoded"
+    /// This needs to be a number that doesn't occur in most encoding schemas
+    /// so it can be relied on for auto detection.
+    /// </summary>
+    internal const byte FileSignature1 = 0xfe;
+    /// <summary>
+    /// "Binary / 3Nary"
+    /// This is a pretty randomly chosen number that isn't used by
+    /// any known file format yet.
+    /// (according to https://en.wikipedia.org/wiki/List_of_file_signatures)
+    /// </summary>
+    internal const byte FileSignature2 = 0xb3;
+
+    internal const byte FileSignatureBytePerTernaryInt3 = 0x1f;
+
+
     internal const int MaxTrit1 = 1;
     internal const int MaxTrit2 = 3 * MaxTrit1 + 1;
     internal const int MaxTrit3 = 3 * MaxTrit2 + 1;
