@@ -1,7 +1,7 @@
 ﻿namespace Ternary;
 
 /// <summary>
-/// The smallest unit in a trinary system, either balanced (-1, 0, 1) or unbalanced (0, 1, 2)
+/// The smallest unit in a Ternary system, either balanced (-1, 0, 1) or unbalanced (0, 1, 2)
 /// The lowest value is always <see cref="Down"/>, het higest <see cref="Up"/>
 /// </summary>
 public enum Trit : sbyte

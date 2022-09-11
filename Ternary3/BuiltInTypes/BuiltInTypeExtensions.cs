@@ -201,11 +201,11 @@ public static partial class BuiltInTypeExtensions
     }
 
     /// <summary>
-    /// Formats a string as a balanced trinary numer
+    /// Formats a string as a balanced Ternary numer
     /// </summary>
     public static string TernaryToString(this int target) => Formatter.FormatTrits(target.ToTrits20(), 0);
     /// <summary>
-    /// Formats a string as a balanced trinary numer, using the provided format
+    /// Formats a string as a balanced Ternary numer, using the provided format
     /// </summary>
     public static string TernaryToString(this int target, IBase3Format format, int trits = 20) => Formatter.FormatTrits(target.ToTrits20(), format, trits);
     /// <summary>

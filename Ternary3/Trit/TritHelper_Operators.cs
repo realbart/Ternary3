@@ -32,17 +32,17 @@ public static partial class TritHelper
     }
 
     /// <summary>
-    /// Performs a trinary equivalent of and: selects the lowest of two trits
+    /// Performs a Ternary equivalent of and: selects the lowest of two trits
     /// </summary>
     public static Trit And(this Trit trit1, Trit trit2) => trit1 > trit2 ? trit2 : trit1;
 
     /// <summary>
-    ///  Performs a trinary equivalent of or: selects the highest of two trits
+    ///  Performs a Ternary equivalent of or: selects the highest of two trits
     /// </summary>
     public static Trit Or(this Trit trit1, Trit trit2) => trit1 < trit2 ? trit2 : trit1;
 
     /// <summary>
-    /// Performs a trinary equivalent of xor: a tritwise addition without overflow
+    /// Performs a Ternary equivalent of xor: a tritwise addition without overflow
     /// </summary>
     public static Trit Xor(this Trit trit1, Trit trit2)
     {
