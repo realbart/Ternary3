@@ -1,8 +1,4 @@
-﻿global using System;
-global using System.Collections.Generic;
-global using System.Linq;
-global using System.Text;
-global using System.Threading.Tasks;
+﻿global using Ternary;
 global using trit = Ternary.Trit;
 global using tribble = Ternary.TernaryInt3;
 global using tryte = Ternary.TernaryInt9;

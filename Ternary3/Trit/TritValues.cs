@@ -1,5 +1,8 @@
-﻿namespace Ternary3;
+﻿namespace Ternary;
 
+/// <summary>
+/// A helper class containing the names down, middle and up.
+/// </summary>
 public static class TritValues
 {
     /// <summary>

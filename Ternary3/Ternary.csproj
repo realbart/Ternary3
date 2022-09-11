@@ -1,0 +1,97 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<AssemblyVersion>0.95.0.0</AssemblyVersion>
+		<Authors>Bart Kemps, bart@kemps.eu</Authors>
+		<Copyright>(c) Copyright 2022 Bart Kemps</Copyright>
+		<Description>A collection of types and methods to perform balanced trinary arithmetic</Description>
+		<FileVersion>0.95.0.0</FileVersion>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<PackageIcon></PackageIcon>
+		<PackageLicenseFile>license.txt</PackageLicenseFile>
+		<PackageProjectUrl>https://github.com/realbart/Ternary/</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageTags>Balanced Ternary Trinary Calculation Maths Arithmetic</PackageTags>
+		<PackageVersion>1.0.0-alpha</PackageVersion>
+		<RepositoryUrl>https://github.com/realbart/Ternary/</RepositoryUrl>
+		<TargetFramework>net60</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="Properties\TernaryGlobalUsings.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="Properties\TernaryGlobalUsings.cs">
+			<Pack>True</Pack>
+			<PackagePath>/contentFiles/cs/net60/Properties</PackagePath>
+		</None>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\license.txt">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="BuiltInTypes\BalancedModulo.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>BalancedModulo.tt</DependentUpon>
+		</Compile>
+		<Compile Update="BuiltInTypes\BuiltInTypeExtensions_Switch.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>BuiltInTypeExtensions_Switch.tt</DependentUpon>
+		</Compile>
+		<Compile Update="Internal\Conversion_ToTrits.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Conversion_ToTrits.tt</DependentUpon>
+		</Compile>
+		<Compile Update="TritPartial.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>TritPartial.tt</DependentUpon>
+		</Compile>
+		<Compile Update="Trit\TritHelper_Switch.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>TritHelper_Switch.tt</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="BuiltInTypes\BuiltInTypeExtensions_Switch.tt">
+			<LastGenOutput>BuiltInTypeExtensions_Switch.cs</LastGenOutput>
+			<Generator>TextTemplatingFileGenerator</Generator>
+		</None>
+		<None Update="Internal\Conversion_ToTrits.tt">
+			<Generator>TextTemplatingFileGenerator</Generator>
+			<LastGenOutput>Conversion_ToTrits.cs</LastGenOutput>
+		</None>
+		<None Update="BuiltInTypes\BalancedModulo.tt">
+			<Generator>TextTemplatingFileGenerator</Generator>
+			<LastGenOutput>BalancedModulo.cs</LastGenOutput>
+		</None>
+		<None Update="Trit\TritHelper_Switch.tt">
+			<Generator>TextTemplatingFileGenerator</Generator>
+			<LastGenOutput>TritHelper_Switch.cs</LastGenOutput>
+		</None>
+	</ItemGroup>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="rem powershell -ExecutionPolicy Unrestricted $(ProjectDir)PostBuild.ps1 -DllName $(TargetPath) -SolutionDir $(SolutionDir) -Configuration $(Configuration)" />
+	</Target>
+
+</Project>

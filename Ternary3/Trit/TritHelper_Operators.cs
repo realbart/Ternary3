@@ -1,4 +1,4 @@
-﻿namespace Ternary3;
+﻿namespace Ternary;
 
 
 public static partial class TritHelper
@@ -19,7 +19,7 @@ public static partial class TritHelper
     /// <summary>
     /// Turns the Trit upside down.
     /// </summary>
-    public static Trit Flip(this Trit trit) => trit.Switch(Up, Middle, Down);
+    public static Trit Not(this Trit trit) => trit.Switch(Up, Middle, Down);
 
     /// <summary>
     /// Compares two trits.
@@ -44,7 +44,7 @@ public static partial class TritHelper
     /// <summary>
     /// Performs a trinary equivalent of xor: a tritwise addition without overflow
     /// </summary>
-    public static Trit XOr(this Trit trit1, Trit trit2)
+    public static Trit Xor(this Trit trit1, Trit trit2)
     {
         return trit2.Switch(trit1.AntiCycle(), trit1, trit1.Cycle());
     }

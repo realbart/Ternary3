@@ -1,0 +1,111 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+using System.CodeDom.Compiler;
+
+namespace Ternary.BuiltInTypes;
+
+[GeneratedCode("t4","1.0,0,0")]
+internal static class BlancedModulo
+{
+<#
+for (int i=1; i<20; i++)
+{
+#>
+    /// <summary>
+    /// Performs a balanced modulo 3↑<#=i#> = <#=Math.Pow(3,i)#>
+    /// Returns a value between -<#=Math.Pow(3,i)*.5-.5#> and <#=Math.Pow(3,i)*.5-.5#>
+    /// </summary>
+    public static int ModThreePow<#=i#>(this int value)
+    {
+        if (-MaxTrit<#=i#> <= value && value <= MaxTrit<#=i#>) return value;
+        return (value = ModThreePow<#=i+1#>(value)) switch
+        {
+            (< -MaxTrit<#=i#>) => value + ThreePow<#=i#>,
+            (> MaxTrit<#=i#>) => value - ThreePow<#=i#>,
+            _ => value
+        };
+    }
+
+    /// <summary>
+    /// Performs a balanced modulo 3↑<#=i#> = <#=Math.Pow(3,i)#>
+    /// Returns a value between -<#=Math.Pow(3,i)*.5-.5#> and <#=Math.Pow(3,i)*.5-.5#>
+    /// </summary>
+    public static int ModThreePow<#=i#>(this long value)
+    {
+        if (-MaxTrit<#=i#> <= value && value <= MaxTrit<#=i#>) return (int)value;
+        var v =  ModThreePow<#=i+1#>(value);
+        return (v) switch
+        {
+            (< -MaxTrit<#=i#>) => v + ThreePow<#=i#>,
+            (> MaxTrit<#=i#>) => v - ThreePow<#=i#>,
+            _ => v
+        };
+    }
+
+<#}#>
+    /// <summary>
+    /// Performs a balanced modulo 3↑20 = <#=Math.Pow(3,20)#>
+    /// Returns a value between -<#=Math.Pow(3,20)*.5-.5#> and <#=Math.Pow(3,20)*.5-.5#>
+    /// </summary>
+    public static int ModThreePow20(this int value)
+    {
+        const int Overflow =  (int)(uint.MaxValue - ThreePow20 + 1);
+        return value switch
+        {
+            (< -MaxTrit20) => value - Overflow, 
+            (> MaxTrit20) => value + Overflow,
+            _ => value
+        };
+    }
+
+    /// <summary>
+    /// Performs a balanced modulo 3↑20 = <#=Math.Pow(3,20)#>
+    /// Returns a value between -<#=Math.Pow(3,20)*.5-.5#> and <#=Math.Pow(3,20)*.5-.5#>
+    /// </summary>
+    public static int ModThreePow20(this long value)
+    {
+        return (value = ModThreePow21(value)) switch
+        {
+            (< -MaxTrit20) => (int)(value - ThreePow20),
+            (> MaxTrit20) => (int)(value + ThreePow20),
+            _ => (int)value
+        };
+    }
+
+
+<#
+for (int i=21; i<40; i++)
+{
+#>
+    /// <summary>
+    /// Performs a balanced modulo 3↑<#=i#> = <#=Math.Pow(3,i)#>
+    /// Returns a value between -<#=Math.Pow(3,i)*.5-.5#> and <#=Math.Pow(3,i)*.5-.5#>
+    /// </summary>
+    public static long ModThreePow<#=i#>(this long value)
+    {
+        if (-MaxTrit<#=i#> <= value && value <= MaxTrit<#=i#>) return value;
+        return (value = ModThreePow<#=i+1#>(value)) switch
+        {
+            (< -MaxTrit<#=i#>) => value + ThreePow<#=i#>,
+            (> MaxTrit<#=i#>) => value - ThreePow<#=i#>,
+            _ => value
+        };
+    }
+
+<#}#>
+    /// <summary>
+    /// Performs a balanced modulo 3↑40 = <#=Math.Pow(3,40)#>
+    /// Returns a value between -<#=Math.Pow(3,40)*.5-.5#> and <#=Math.Pow(3,40)*.5-.5#>
+    /// </summary>
+    public static long ModThreePow40(this long value)
+    {
+        const long Overflow = (long)(ulong.MaxValue - ThreePow40);
+        if (value > MaxTrit40) value += Overflow;
+        else if (value < -MaxTrit40) value -= Overflow;
+        return value;
+    }
+}

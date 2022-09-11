@@ -1,59 +1,113 @@
-﻿namespace Ternary3.Formatting;
+﻿namespace Ternary.Formatting;
 
 internal static class Formatter
 {
-    private static DefaultFormat defaultFormat = new DefaultFormat();
-
     public static string FormatTrits(ulong trits, int digits)
     {
-        return FormatTrits(trits, defaultFormat, digits);
+        return FormatTrits(trits, Base3Format.LetterFormat, digits);
     }
 
-    public static string FormatTrits(ulong trits, ITernaryFormat format, int digits)
+    internal static string FormatTrits(ulong trits, IBase3Format format, int numberOfDigits)
     {
-        const ulong mask = 0b1100000000000000_0000000000000000_0000000000000000_0000000000000000ul;
-        const ulong up = 0b1000000000000000_0000000000000000_0000000000000000_0000000000000000ul;
-        const ulong down = 0b0100000000000000_0000000000000000_0000000000000000_0000000000000000ul;
-
-        var builder = new StringBuilder();
-
-        trits <<= (32 - (digits << 1));
-
-        for (var i = 0; i < digits; i++)
+        var trim = numberOfDigits == 0;
+        if (numberOfDigits <= 0) numberOfDigits = 32;
+        var digits = format.Digits;
+        Span<char> buffer = stackalloc char[numberOfDigits];
+        if (trim)
         {
-            builder.Append((trits & mask) switch
+            for (var i = numberOfDigits - 1; i >= 0; i--)
             {
-                up => format.Up,
-                down => format.Down,
-                _ => format.Middle
-            });
-            trits <<= 2;
+                buffer[i] = digits[(int)(trits & 0b11)];
+                trits >>= 2;
+                if (trits == 0) return new string(buffer[i..]);
+            }
         }
-
-        return format.Pad ? builder.ToString() : builder.ToString().TrimStart(format.Middle);
+        else
+        {
+            for (var i = numberOfDigits - 1; i >= 0; i--)
+            {
+                buffer[i] = digits[(int)(trits & 0b11)];
+                trits >>= 2;
+            }
+        }
+        return new string(buffer);
     }
 
-    public static string FormatTrits(uint trits, ITernaryFormat format, int digits = 16)
+    internal static string FormatTrits(uint trits, IBase3Format format, int numberOfDigits)
     {
-        const ulong mask = 0b11000000_00000000_00000000_00000000u;
-        const ulong up = 0b10000000_00000000_00000000_00000000u;
-        const ulong down = 0b01000000_00000000_00000000_00000000u;
-
-        var builder = new StringBuilder();
-
-        trits <<= (16 - (digits << 1));
-
-        for (var i = 0; i < digits; i++)
+        var trim = numberOfDigits == 0;
+        if (numberOfDigits <= 0) numberOfDigits = 16;
+        var digits = format.Digits;
+        Span<char> buffer = stackalloc char[numberOfDigits];
+        if (trim)
         {
-            builder.Append((trits & mask) switch
+            for (var i = numberOfDigits - 1; i >= 0; i--)
             {
-                up => format.Up,
-                down => format.Down,
-                _ => format.Middle
-            });
-            trits <<= 2;
+                buffer[i] = digits[(int)(trits & 0b11)];
+                trits >>= 2;
+                if (trits == 0) return new string(buffer[i..]);
+            }
         }
+        else
+        {
+            for (var i = numberOfDigits - 1; i >= 0; i--)
+            {
+                buffer[i] = digits[(int)(trits & 0b11)];
+                trits >>= 2;
+            }
+        }
+        return new string(buffer);
+    }
 
-        return format.Pad ? builder.ToString() : builder.ToString().TrimStart(format.Middle);
+    internal static string FormatTribbles(ulong trits, IBase27Format format, int numberOfDigits)
+    {
+        var trim = numberOfDigits == 0;
+        if (numberOfDigits <= 0) numberOfDigits = 11;
+        var digits = format.Digits;
+        Span<char> buffer = stackalloc char[numberOfDigits];
+        if (trim)
+        {
+            for (var i = numberOfDigits - 1; i >= 0; i--)
+            {
+                buffer[i] = digits[(int)(trits & 0b111111)];
+                trits >>= 6;
+                if (trits == 0) return new string(buffer[i..]);
+            }
+        }
+        else
+        {
+            for (var i = numberOfDigits - 1; i >= 0; i--)
+            {
+                buffer[i] = digits[(int)(trits & 0b111111)];
+                trits >>= 6;
+            }
+        }
+        return new string(buffer);
+    }
+
+    internal static string FormatTribbles(uint trits, IBase27Format format, int numberOfDigits)
+    {
+        var trim = numberOfDigits == 0;
+        if (numberOfDigits <= 0) numberOfDigits = 6;
+        var digits = format.Digits;
+        Span<char> buffer = stackalloc char[numberOfDigits];
+        if (trim)
+        {
+            for (var i = numberOfDigits - 1; i >= 0; i--)
+            {
+                buffer[i] = digits[(int)(trits & 0b111111)];
+                trits >>= 6;
+                if (trits == 0) return new string(buffer[i..]);
+            }
+        }
+        else
+        {
+            for (var i = numberOfDigits - 1; i >= 0; i--)
+            {
+                buffer[i] = digits[(int)(trits & 0b111111)];
+                trits >>= 6;
+            }
+        }
+        return new string(buffer);
     }
 }

@@ -1,27 +1,16 @@
-﻿namespace Ternary3.Internal;
+﻿namespace Ternary.Internal;
 
+using System;
 using System.Collections.Generic;
-using Ternary3.Internal;
+using Ternary.Internal;
 
 internal static partial class Operations
 {
-    internal static int RoundTo20Trits(int value)
-    {
-        // Overflow. Throws out of bounds in checked context.
-        // 2^32 - 3^20 = 808182895
-        if (value > MaxTrit20) value += 808182895;
-        else if (value < -MaxTrit20) value -= 808182895;
-        return value;
-    }
+    public static uint ShiftTrits(uint a, int b)
+        => b > 0 ? a >> (b << 1) : a << (-b << 1);
 
-    internal static long RoundTo40Trits(long value)
-    {
-        // Overflow. Throws out of bounds in checked context.
-        // 2^64 - 3^40 = 6289078614652622815
-        if (value > MaxTrit40) value += 6289078614652622815;
-        else if (value < -MaxTrit40) value -= 6289078614652622815;
-        return value;
-    }
+    public static ulong ShiftTrits(ulong a, int b)
+        => b > 0 ? a >> (b << 1) : a << (-b << 1);
 
     internal static uint AndTrits(uint a, uint b)
         => ((a ^ DownMask32) & (b ^ DownMask32)) ^ DownMask32;
@@ -35,12 +24,58 @@ internal static partial class Operations
     internal static ulong OrTrits(ulong a, ulong b)
         => ((a ^ DownMask64) | (b ^ DownMask64)) ^ DownMask64;
 
-    internal static uint NotTrits(uint trits)
-        => ((trits & DownMask32) << 1) | ((trits & UpMask32) >> 1);
+    internal static uint FlipTrits(uint trits)
+        => ((trits & DownMask32) << 1) | ((trits >> 1) & DownMask32);
 
-    internal static ulong NotTrits(ulong trits)
-        => ((trits & DownMask64) << 1) | ((trits & UpMask64) >> 1);
+    internal static ulong FlipTrits(ulong trits)
+        => ((trits & DownMask64) << 1) | ((trits >> 1) & DownMask64);
 
+    internal static Trit GetTrit(uint trit) => (trit & 3) switch
+    {
+        0 => Trit.Middle,
+        2 => Trit.Up,
+        _ => Trit.Down
+    };
+
+    internal static Trit GetTrit(ulong trit) => (trit & 3) switch
+    {
+        0 => Trit.Middle,
+        2 => Trit.Up,
+        _ => Trit.Down
+    };
+
+    internal static Trit GetTrit(uint trits, int index) => GetTrit(trits >> (index << 1));
+    internal static Trit GetTrit(uint trits, Index index, int length)
+    {
+        if (index.Value > length)
+            throw new ArgumentOutOfRangeException(nameof(index));
+        return GetTrit(trits, index.GetOffset(length));
+    }
+
+    internal static Trit GetTrit(ulong trits, int index) => GetTrit(trits >> (index << 1));
+    internal static Trit GetTrit(ulong trits, Index index, int length)
+    {
+        if (index.Value > length)
+            throw new ArgumentOutOfRangeException(nameof(index));
+        return GetTrit(trits, index.GetOffset(length));
+    }
+
+    internal static uint GetTrits(uint trits, Range range, int totalTrits)
+{
+        if (range.Start.Value > totalTrits || range.End.Value > totalTrits) 
+            throw new ArgumentOutOfRangeException(nameof(range));
+        (var offset, var length) = range.GetOffsetAndLength(totalTrits);
+        var shift = 32 - (length << 1);
+        return trits << (shift - offset << 1) >> (shift);
+    }
+    internal static ulong GetTrits(ulong trits, Range range, int totalTrits)
+    {
+        if (range.Start.Value > totalTrits || range.End.Value > totalTrits) 
+            throw new ArgumentOutOfRangeException(nameof(range));
+        (var offset, var length) = range.GetOffsetAndLength(totalTrits);
+        var shift = 64 - (length << 1);
+        return trits << (shift - offset << 1) >> (shift);
+    }
 
     /// <summary>
     /// Performs an Xor (<see cref="Trit"/>wise addition) on two 16-<see cref="Trit"/> values
@@ -80,23 +115,99 @@ internal static partial class Operations
         return c;
     }
 
-    internal static Trit GetTrit(uint a, Index index)
-        => (Trit)((((a >> (index.GetOffset(16) << 1)) & 3) ^ 1) - 1);
-
-    internal static Trit GetTrit(ulong a, Index index)
-        => (Trit)((((a >> (index.GetOffset(32) << 1)) & 3) ^ 1) - 1);
-
-    internal static uint GetTrits(uint a, Range range)
+    /// <summary>
+    /// Performs an addition on two numbers in their <see cref="Trit"/> representation
+    /// </summary>
+    public static uint AddTrits(uint a, uint b)
     {
-        var start = range.Start.GetOffset(16) << 1;
-        var end = range.End.GetOffset(16) << 1;
-        return (a << (32 - end)) >> (start + end);
+        a ^= ((a & UpMask32) ^ UpMask32) >> 1;
+        b ^= ((b & UpMask32) ^ UpMask32) >> 1;
+        return AddTrits_Inner(a, b);
     }
 
-    internal static ulong GetTrits(ulong a, Range range)
+    /// <summary>
+    /// Performs a substraction on two numbers in their <see cref="Trit"/> representation
+    /// </summary>
+    public static uint SubstractTrits(uint a, uint b)
     {
-        var start = range.Start.GetOffset(32) << 1;
-        var end = range.End.GetOffset(32) << 1;
-        return (a << (64 - end)) >> (start + end);
+        a ^= ((a & UpMask32) ^ UpMask32) >> 1;
+        b = FlipTrits(b);
+        b ^= ((b & UpMask32) ^ UpMask32) >> 1;
+        return AddTrits_Inner(a, b);
     }
+
+    private static uint AddTrits_Inner(uint a, uint b)
+    {
+        uint result = 0;
+        uint rest = 1;
+        for (var i = 0; i < 16; i++)
+        {
+            result >>= 2;
+            var p = a & 0b11;
+            var q = b & 0b11;
+            var sum = p + q + rest + 1;
+            switch (sum % 3)
+            {
+                case 2:
+                    result |= 0b10000000_00000000_00000000_00000000;
+                    break;
+                case 0:
+                    result |= 0b01000000_00000000_00000000_00000000;
+                    break;
+            }
+            rest = sum / 3;
+            a >>= 2;
+            b >>= 2;
+        }
+        return result;
+    }
+
+    /// <summary>
+    /// Performs an addition on two numbers in their <see cref="Trit"/> representation
+    /// </summary>
+    public static ulong AddTrits(ulong a, ulong b)
+    {
+        a ^= ((a & UpMask64) ^ UpMask64) >> 1;
+        b ^= ((b & UpMask64) ^ UpMask64) >> 1;
+        return AddTrits_Inner(a, b);
+    }
+
+    /// <summary>
+    /// Performs a substraction on two numbers in their <see cref="Trit"/> representation
+    /// </summary>
+    public static ulong SubstractTrits(ulong a, ulong b)
+    {
+        a ^= ((a & UpMask64) ^ UpMask64) >> 1;
+        b = FlipTrits(b);
+        b ^= ((b & UpMask64) ^ UpMask64) >> 1;
+        return AddTrits_Inner(a, b);
+    }
+
+    private static ulong AddTrits_Inner(ulong a, ulong b)
+    {
+        ulong result = 0;
+        ulong rest = 1;
+        for (var i = 0; i < 16; i++)
+        {
+            result >>= 2;
+            var p = a & 0b11;
+            var q = b & 0b11;
+            var sum = p + q + rest + 1;
+            switch (sum % 3)
+            {
+                case 2:
+                    result |= 0b10000000_00000000_00000000_00000000__00000000_00000000_00000000_00000000;
+                    break;
+                case 0:
+                    result |= 0b01000000_00000000_00000000_00000000__00000000_00000000_00000000_00000000;
+                    break;
+            }
+            rest = sum / 3;
+            a >>= 2;
+            b >>= 2;
+        }
+        return result;
+    }
+
+
 }
