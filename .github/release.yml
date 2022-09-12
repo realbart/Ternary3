@@ -2,4 +2,4 @@ changelog:
   exclude:
     labels:
     authors:
-      realbart
+      - realbart
