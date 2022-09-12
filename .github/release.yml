@@ -4,4 +4,5 @@ changelog:
       - ignore-for-release
     authors:
       - tvdatahub
+      - realbart
 #see https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes
