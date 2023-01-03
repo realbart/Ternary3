@@ -58,7 +58,7 @@ public class BytePerTernaryInt4EncoderTests
     [Theory]
     [InlineData(false, "-13,0,13", "540ABF")]
     [InlineData(true, "-13,0,13", "FC24540ABF")]
-    public void TernaryToBinaryStreamAdapter_BytePerTernaryInt4Encoder_ShouldWriteExpectedData(bool writeEncodingHeader, string ternaryData, string expectedBinaryData)
+    public void Write_BytePerTernaryInt4Encoder_ShouldWriteExpectedData(bool writeEncodingHeader, string ternaryData, string expectedBinaryData)
     {
         var tribbles = ternaryData.Split(",").Select(s => (TernaryInt3)int.Parse(s)).ToArray();
         var memoryStream = new MemoryStream();
@@ -66,6 +66,50 @@ public class BytePerTernaryInt4EncoderTests
         using (var ternaryStream = new TernaryToBinaryStreamAdapter(memoryStream, encoder, writeEncodingHeader))
         {
             ternaryStream.Write(tribbles, 0, tribbles.Length);
+        }
+
+        // Assert
+        var actual = Convert.ToHexString(memoryStream.ToArray());
+        actual.Should().Be(expectedBinaryData);
+    }
+
+    [Theory]
+    [InlineData(false, "-13,0,13", "540ABF")]
+    [InlineData(true, "-13,0,13", "FC24540ABF")]
+    public void Write_BytePerTernaryInt4Encoder_WithMultipleWritesShouldWriteExpectedData(bool writeEncodingHeader, string ternaryData, string expectedBinaryData)
+    {
+        var tribbles = ternaryData.Split(",").Select(s => (TernaryInt3)int.Parse(s)).ToArray();
+        var memoryStream = new MemoryStream();
+        var encoder = new BytePerTernaryInt4Encoder();
+        using (var ternaryStream = new TernaryToBinaryStreamAdapter(memoryStream, encoder, writeEncodingHeader))
+        {
+            foreach (var t in tribbles)
+            {
+                ternaryStream.Write(new[] { t }, 0, 1);
+
+            }
+        }
+
+        // Assert
+        var actual = Convert.ToHexString(memoryStream.ToArray());
+        actual.Should().Be(expectedBinaryData);
+    }
+
+    [Theory]
+    [InlineData(false, "-13,0,13", "5703AB")]
+    [InlineData(true, "-13,0,13", "FC245703AB")]
+    public void Write_BytePerTernaryInt4Encoder_WithMultipleFlushesShouldWriteExpectedData(bool writeEncodingHeader, string ternaryData, string expectedBinaryData)
+    {
+        var tribbles = ternaryData.Split(",").Select(s => (TernaryInt3)int.Parse(s)).ToArray();
+        var memoryStream = new MemoryStream();
+        var encoder = new BytePerTernaryInt4Encoder();
+        using (var ternaryStream = new TernaryToBinaryStreamAdapter(memoryStream, encoder, writeEncodingHeader))
+        {
+            foreach (var t in tribbles)
+            {
+                ternaryStream.Write(new[] { t }, 0, 1);
+                ternaryStream.Flush();
+            }
         }
 
         // Assert
