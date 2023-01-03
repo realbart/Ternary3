@@ -51,6 +51,5 @@ public class BytePerTernaryInt4Encoder : IEncoder
         overflowByte = (overflowByte << (8 - numberOfOverflowBits)) | (0b111111 >> (numberOfOverflowBits - 2));
         binaryStream.WriteByte((byte)overflowByte);
         numberOfOverflowBits = 0;
-        overflowByte = 0;
     }
 }
