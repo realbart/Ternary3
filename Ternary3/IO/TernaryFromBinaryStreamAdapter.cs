@@ -1,66 +1,58 @@
 ﻿namespace Ternary.IO;
 
-using System;
-using System.IO;
-
 /// <summary>
-/// Reads ternary data from a binary stream
+/// Encodes <see cref="TernaryInt3"/>s to <see cref="byte"/>s.
 /// </summary>
-public class TernaryFromBinaryStreamAdapter : TernaryStream
+public abstract class TernaryFromBinaryStreamAdapter : TernaryStream
 {
     private bool started;
-    private readonly Stream binaryStream;
-    private readonly IDecoder decoder;
-
     /// <summary>
-    /// Reads ternary data from a binary stream
+    /// The inner binary stream the data is read from.
     /// </summary>
-    public TernaryFromBinaryStreamAdapter(Stream binaryStream, IDecoder decoder, bool expectEncodingHeader)
-    {
-        if (binaryStream == null) throw new ArgumentNullException(nameof(binaryStream));
-        if (!binaryStream.CanRead) throw new ArgumentException("Cannot read from binary stream", nameof(binaryStream));
-        if (decoder == null) throw new ArgumentNullException(nameof(decoder));
-
-        this.binaryStream = binaryStream;
-        this.decoder = decoder;
-        ExpectEncodingHeader = expectEncodingHeader;
-    }
-
-    /// <inheritdoc/>
-    public override bool CanRead => this.binaryStream.CanRead;
-
-    /// <inheritdoc/>
-    public override bool CanWrite => false;
+    protected readonly Stream BinaryStream;
 
     /// <summary>
-    /// A boolean indicating if a header marking the encoding type should be read from the output stream
+    /// boolean indicating the headers should be read on first read.
     /// </summary>
     public bool ExpectEncodingHeader { get; }
 
-    /// <inheritdoc/>
-    protected override void Dispose(bool disposing)
+    /// <summary>
+    /// Encodes <see cref="TernaryInt3"/>s to <see cref="byte"/>s.
+    /// </summary>
+    protected TernaryFromBinaryStreamAdapter(Stream binaryStream, bool expectEncodingHeader)
     {
-        if (disposing)
-        {
-            this.binaryStream.Dispose();
-            base.Dispose(disposing);
-        }
+        this.BinaryStream = binaryStream;
+        this.ExpectEncodingHeader = expectEncodingHeader;
     }
 
-    /// <inheritdoc/>
-    public override void Flush() => throw new InvalidOperationException("Cannot flush reader");
+    ///<inheritdoc/>
+    public override bool CanRead => BinaryStream.CanRead;
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Prepares the decoder for decodeing <see cref="TernaryInt3"/>s.
+    /// </summary>
+    protected abstract void StartInner();
+
+    /// <summary>
+    /// Decpdes a sequence of <see cref="TernaryInt3"/>s from  a stream.
+    /// </summary>
+    protected abstract int ReadInner(TernaryInt3[] buffer, int offset, int count);
+
+    ///<inheritDoc/>
     public override int Read(TernaryInt3[] buffer, int offset, int count)
     {
+        if (buffer is null) throw new ArgumentNullException(nameof(buffer));
         if (!started)
         {
-            this.decoder.Start(this.binaryStream, ExpectEncodingHeader);
             started = true;
+            StartInner();
         }
-        return this.decoder.Read(this.binaryStream, buffer, offset, count);
+        return ReadInner(buffer, offset, count);
     }
 
-    /// <inheritdoc/>
-    public override void Write(TernaryInt3[] buffer, int offset, int count) => throw new InvalidOperationException("Cannot write to reader.");
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+        BinaryStream.Dispose();
+    }
 }

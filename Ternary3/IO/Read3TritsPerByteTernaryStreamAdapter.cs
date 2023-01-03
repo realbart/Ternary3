@@ -5,14 +5,21 @@ using System.IO;
 /// <summary>
 /// Decodes quickly using one byte ber TernaryInt3
 /// </summary>
-public class BytePerTernaryInt3Decoder : IDecoder
+public class Read3TritsPerByteTernaryStreamAdapter : TernaryFromBinaryStreamAdapter
 {
-    ///<inheritdoc/>
-    public void Start(Stream binaryStream, bool expectEncodingHeader)
+    /// <summary>
+    /// Decodes quickly using one byte ber TernaryInt3
+    /// </summary>
+    public Read3TritsPerByteTernaryStreamAdapter(Stream binaryStream, bool expectEncodingHeader):base(binaryStream, expectEncodingHeader)
     {
-        if (!expectEncodingHeader) return;
+    }
+
+    ///<inheritdoc/>
+    protected override void StartInner()
+    {
+        if (!ExpectEncodingHeader) return;
         var encodingHeader = new byte[2];
-        var bytesRead = binaryStream.Read(encodingHeader, 0, 2);
+        var bytesRead = BinaryStream.Read(encodingHeader, 0, 2);
         // If there are not enough bytes available, throw an exception
         if (bytesRead < 2)
         {
@@ -26,12 +33,12 @@ public class BytePerTernaryInt3Decoder : IDecoder
     }
 
     ///<inheritdoc/>
-    public int Read(Stream binaryStream, TernaryInt3[] buffer, int offset, int count)
+    protected override int ReadInner(TernaryInt3[] buffer, int offset, int count)
     {
         var read = 0;
         while (read < count)
         {
-            var b = binaryStream.ReadByte();
+            var b = BinaryStream.ReadByte();
             if (b < 0) break;
             if (TernaryInt3.TryConvert((byte)((b ^ 0b11) << 6 | b >> 2), out var tribble))
             {
