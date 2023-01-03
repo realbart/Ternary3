@@ -74,6 +74,16 @@ public struct TernaryInt3
     }
 
     /// <summary>
+    /// Converts an internal representation byte to a <see cref="TernaryInt3"/>
+    /// </summary>
+    internal static bool TryConvert(byte trits, out TernaryInt3 result)
+    {
+        var @return = ((trits & 0b11000000) | (trits & 0b00010101 & ((trits & 0b101010) >> 1))) == 0;
+        result = @return ? new TernaryInt3(trits) : 0;
+        return @return;
+    }
+
+    /// <summary>
     /// Gets the nth trit (zero-based, low first)
     /// </summary>
     public Trit this[Index index] => Operations.GetTrit(trits, index, 3);

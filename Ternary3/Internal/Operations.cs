@@ -208,6 +208,4 @@ internal static partial class Operations
         }
         return result;
     }
-
-
 }

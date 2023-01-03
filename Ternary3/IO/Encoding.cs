@@ -1,7 +1,7 @@
 ﻿namespace Ternary.IO;
 
 
-internal enum Encoding
+internal enum Encoding: ushort
 {
     /// <summary>
     /// When reading, Looks at the first two bytes of a stream to determine if the excoding is described there.
@@ -25,6 +25,12 @@ internal enum Encoding
     /// </summary>
     FiveTritsPerByteSilent = 2,
 
+    /// <summary>
+    /// Binary Encoded Ternary/Trits; two bits per trit. 01 = down, 00 = middle, 10 = up.
+    /// Every Int3 is padded with a zero trit. (This essentially writes the underlying values)
+    /// When writing, the BE3-marker FC23 is written as the first two file bytes
+    /// </summary>
+    ThreeTritsPerByte = 0xfc23,
     /// <summary>
     /// Binary Encoded Ternary/Trits; two bits per trit. 01 = down, 00 = middle, 10 = up.
     /// The Final byte is padded with ones.
