@@ -31,8 +31,9 @@ public class BytePerTernaryInt3Decoder : IDecoder
         var read = 0;
         while (read < count)
         {
-            var b = (byte)binaryStream.ReadByte();
-            if (TernaryInt3.TryConvert(b, out var tribble))
+            var b = binaryStream.ReadByte();
+            if (b < 0) break;
+            if (TernaryInt3.TryConvert((byte)((b ^ 0b11) << 6 | b >> 2), out var tribble))
             {
                 buffer[offset + read] = tribble;
                 read++;

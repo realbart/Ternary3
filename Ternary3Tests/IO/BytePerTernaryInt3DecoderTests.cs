@@ -5,11 +5,11 @@ using System.IO;
 using System.Linq;
 using Ternary.IO;
 
-public class TernaryFromBinaryStreamAdapterTests
+public class BytePerTernaryInt3DecoderTests
 {
     [Theory]
-    [InlineData(false, "15002A", "-13,0,13")]
-    [InlineData(true, "FC2315002A", "-13,0,13")]
+    [InlineData(false, "5703AB", "-13,0,13")]
+    [InlineData(true, "FC235703AB", "-13,0,13")]
     public void TernaryFromBinaryStreamAdapter_Read_ShouldReadExpectedData(bool expectEncodingHeader, string binaryData, string expectedTernaryData)
     {
         var binaryBytes = Convert.FromHexString(binaryData);
