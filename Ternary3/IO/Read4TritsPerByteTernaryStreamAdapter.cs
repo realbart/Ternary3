@@ -1,6 +1,7 @@
 ﻿namespace Ternary.IO;
 
 using System.IO;
+using System.Runtime.InteropServices;
 
 /// <summary>
 /// Decodes quickly using one byte ber TernaryInt4
@@ -38,27 +39,27 @@ public class Read4TritsPerByteTernaryStreamAdapter : TernaryFromBinaryStreamAdap
     ///<inheritdoc/>
     protected override int ReadInner(TernaryInt3[] buffer, int offset, int count)
     {
-        var destinationIndex = offset;
-        while (count-- > 0)
-        {
-            int b;
-            if (numberOfOverflowBits > 0)
+        for (var index = 0; index < count; index++) {
+            if (numberOfOverflowBits == 6)
             {
-                b = BinaryStream.ReadByte();
-                if (b == -1) break;
-                buffer[destinationIndex++] = (TernaryInt3)((overflowByte << (8 - numberOfOverflowBits)) | (b >> numberOfOverflowBits));
-                overflowByte = b;
-                numberOfOverflowBits = (numberOfOverflowBits + 6) % 8;
+                if (TernaryInt3.TryConvert((byte)(overflowByte), out var tribble))
+                {
+                    buffer[index] = tribble;
+                    numberOfOverflowBits = 0;
+                    continue;
+                }
+                throw new InvalidDataException();
             }
-            else
+            var b = BinaryStream.ReadByte();
+            if (b == -1)
             {
-                b = BinaryStream.ReadByte();
-                if (b == -1) break;
-                buffer[destinationIndex++] = (TernaryInt3)(b >> 2);
-                overflowByte = b;
-                numberOfOverflowBits = (numberOfOverflowBits + 6) % 8;
+                return numberOfOverflowBits == 0 ? index : throw new EndOfStreamException();
             }
+            // merge overflow bits with the first bits from b.
+            // try parse and add to buffer
+            // check if the remaining bits are (padded) ones.
+            // set the overflowByte and numberOfOverflowBits
         }
-        return destinationIndex - offset;
-    }
+        return count;
+    } 
 }
