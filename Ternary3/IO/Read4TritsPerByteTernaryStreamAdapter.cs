@@ -14,7 +14,7 @@ public class Read4TritsPerByteTernaryStreamAdapter : TernaryFromBinaryStreamAdap
     /// <summary>
     /// Decodes quickly using one byte ber TernaryInt4
     /// </summary>
-    public Read4TritsPerByteTernaryStreamAdapter(Stream binaryStream, bool expectEncodingHeader): base(binaryStream, expectEncodingHeader)
+    public Read4TritsPerByteTernaryStreamAdapter(Stream binaryStream, bool expectEncodingHeader) : base(binaryStream, expectEncodingHeader)
     {
     }
 
@@ -39,27 +39,25 @@ public class Read4TritsPerByteTernaryStreamAdapter : TernaryFromBinaryStreamAdap
     ///<inheritdoc/>
     protected override int ReadInner(TernaryInt3[] buffer, int offset, int count)
     {
-        for (var index = 0; index < count; index++) {
+        for (var index = 0; index < count; index++)
+        {
             if (numberOfOverflowBits == 6)
             {
-                if (TernaryInt3.TryConvert((byte)(overflowByte), out var tribble))
-                {
-                    buffer[index] = tribble;
-                    numberOfOverflowBits = 0;
-                    continue;
-                }
-                throw new InvalidDataException();
+                if (!TernaryInt3.TryConvert((byte)(overflowByte), out buffer[index]))
+                    throw new InvalidDataException("The input stream contained a value that could not be converted to aTernaryInt3");
+                numberOfOverflowBits = 0;
+                continue;
             }
             var b = BinaryStream.ReadByte();
-            if (b == -1)
-            {
-                return numberOfOverflowBits == 0 ? index : throw new EndOfStreamException();
-            }
-            // merge overflow bits with the first bits from b.
-            // try parse and add to buffer
-            // check if the remaining bits are (padded) ones.
-            // set the overflowByte and numberOfOverflowBits
+            if (b == -1) return numberOfOverflowBits == 0 ? index : throw new EndOfStreamException("The input stream ended with an incomplete TernaryInt3");
+            overflowByte = ((b >> (numberOfOverflowBits + 2)) | (overflowByte << (6 - numberOfOverflowBits))) & 0b111111;
+            if (!TernaryInt3.TryConvert((byte)overflowByte, out buffer[index]))
+                throw new InvalidDataException("The input stream contained a value that could not be converted to aTernaryInt3");
+            numberOfOverflowBits += 2;
+            overflowByte = b;
+            var padbits = 0b111111 << numberOfOverflowBits >> 6;
+            if ((overflowByte & padbits) == padbits) numberOfOverflowBits = 0;
         }
         return count;
-    } 
+    }
 }

@@ -13,20 +13,6 @@ internal enum Encoding: ushort
 
     /// <summary>
     /// Binary Encoded Ternary/Trits; two bits per trit. 01 = down, 00 = middle, 10 = up.
-    /// The final byte is padded with ones.
-    /// No BE3-marker code is used.
-    /// </summary>
-    FourTritsPerByteSilent = 1,
-
-    /// <summary>
-    /// Binary Encoded Ternary/Trits; five trits per byte. 0 = ddddd, 242 = uuuuu.
-    /// The final byte is padded with m-values.
-    /// No BE3-marker code is used.
-    /// </summary>
-    FiveTritsPerByteSilent = 2,
-
-    /// <summary>
-    /// Binary Encoded Ternary/Trits; two bits per trit. 01 = down, 00 = middle, 10 = up.
     /// Every Int3 is padded with a zero trit. (This essentially writes the underlying values)
     /// When writing, the BE3-marker FC23 is written as the first two file bytes
     /// </summary>
